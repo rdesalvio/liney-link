@@ -1,0 +1,45 @@
+name: Update Daily Puzzles
+
+on:
+  schedule:
+    # Run daily at 2 AM UTC to ensure new puzzle is ready
+    - cron: '0 2 * * *'
+  workflow_dispatch:  # Allow manual trigger
+
+jobs:
+  update-puzzles:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+        
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+        
+    - name: Generate new puzzles
+      run: |
+        # Generate puzzles for next 30 days to ensure we're always ahead
+        python3 generate_monthly_puzzles.py
+        
+    - name: Check for changes
+      id: changes
+      run: |
+        git diff --quiet docs/puzzles/ || echo "changes=true" >> $GITHUB_OUTPUT
+        
+    - name: Commit and push changes
+      if: steps.changes.outputs.changes == 'true'
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add docs/puzzles/
+        git add docs/puzzle_index.json
+        git commit -m "🎯 Add new daily puzzles - $(date +'%Y-%m-%d')"
+        git push

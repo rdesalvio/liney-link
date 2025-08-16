@@ -32,6 +32,9 @@ class LineyLinkGame {
         this.linematesLink = document.getElementById('linematesLink');
         this.linematestooltip = document.getElementById('linematestooltip');
         this.tooltipClose = document.getElementById('tooltipClose');
+        this.howToPlayBtn = document.getElementById('howToPlayBtn');
+        this.howToPlayModal = document.getElementById('howToPlayModal');
+        this.howToPlayClose = document.getElementById('howToPlayClose');
     }
 
     async loadGameData() {
@@ -107,6 +110,9 @@ class LineyLinkGame {
         
         // Setup linemates tooltip
         this.setupLinematesTooltip();
+        
+        // Setup how-to-play modal
+        this.setupHowToPlayModal();
         
         // Hide suggestions when clicking outside
         document.addEventListener('click', (e) => {
@@ -399,12 +405,14 @@ class LineyLinkGame {
         const year = String(today.getFullYear()).slice(-2);
         const dateStr = `${month}/${day}/${year}`;
         
-        // Error display
-        const errorDisplay = this.wrongGuesses === 0 ? 'Perfect' : `${this.wrongGuesses} errors`;
+        // Error display with emoji
+        const perfectGame = this.wrongGuesses === 0;
+        const errorEmoji = perfectGame ? '🎯' : '❌';
+        const errorDisplay = perfectGame ? 'Perfect' : `${this.wrongGuesses} errors`;
         
         // Build share text with player chain
         const chainStr = playerNames.join(' → ');
-        const shareText = `Liney Link ${dateStr}\n${chainLength} players - ${errorDisplay}\n\n${chainStr}\n\n${window.location.host}`;
+        const shareText = `Liney ${dateStr}\n${chainLength} players - ${errorDisplay} ${errorEmoji}\n\n${chainStr}\n\n${window.location.host}`;
         
         if (navigator.clipboard) {
             navigator.clipboard.writeText(shareText).then(() => {
@@ -528,8 +536,14 @@ class LineyLinkGame {
         const year = String(today.getFullYear()).slice(-2);
         const dateStr = `${month}/${day}/${year}`;
         
+        // Check if any successful links were made (more than just the two target players)
+        const hasLinks = this.playerChain.length > 2;
+        const linksDisplay = hasLinks ? 
+            this.playerChain.map(p => p.name).join(' → ') : 
+            'No links found';
+        
         // Build share text for failure
-        const shareText = `Liney Link ${dateStr}\nFailed - 3 errors\n\n${window.location.host}`;
+        const shareText = `Liney ${dateStr}\nFailed - 3 errors ❌\n\n${linksDisplay}\n\n${window.location.host}`;
         
         if (navigator.clipboard) {
             navigator.clipboard.writeText(shareText).then(() => {
@@ -621,6 +635,27 @@ class LineyLinkGame {
         this.linematestooltip.addEventListener('click', (e) => {
             if (e.target === this.linematestooltip) {
                 this.linematestooltip.classList.remove('show');
+            }
+        });
+    }
+
+    setupHowToPlayModal() {
+        // Open modal on button click
+        this.howToPlayBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            this.howToPlayModal.classList.add('show');
+        });
+
+        // Close modal on X button click
+        this.howToPlayClose.addEventListener('click', () => {
+            this.howToPlayModal.classList.remove('show');
+        });
+
+        // Close on background click
+        this.howToPlayModal.addEventListener('click', (e) => {
+            if (e.target === this.howToPlayModal) {
+                this.howToPlayModal.classList.remove('show');
             }
         });
     }

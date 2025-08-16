@@ -9,15 +9,7 @@ import socketserver
 import os
 import sys
 
-def find_free_port(start_port=8080):
-    """Find a free port starting from start_port"""
-    for port in range(start_port, start_port + 100):
-        try:
-            with socketserver.TCPServer(("", port), None) as test_server:
-                return port
-        except OSError:
-            continue
-    raise RuntimeError("No free ports found")
+PORT = 8080
 
 class MyHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
     def end_headers(self):
@@ -28,12 +20,6 @@ class MyHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
 
 if __name__ == "__main__":
     os.chdir(os.path.dirname(os.path.abspath(__file__)))
-    
-    try:
-        PORT = find_free_port(8080)
-    except RuntimeError:
-        print("❌ Could not find a free port")
-        sys.exit(1)
     
     with socketserver.TCPServer(("", PORT), MyHTTPRequestHandler) as httpd:
         print(f"🌐 Local server running at http://localhost:{PORT}")

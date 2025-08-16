@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Liney Link - Hockey Player Connection Game</title>
+    <title>Liney - Hockey Player Connection Game</title>
     <style>
         * {
             margin: 0;
@@ -30,20 +30,120 @@
         .header {
             text-align: center;
             margin-bottom: 30px;
+            position: relative;
         }
 
         .title {
             color: white;
-            font-size: 2.5rem;
-            font-weight: bold;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            font-size: 3.5rem;
+            font-weight: 900;
+            letter-spacing: 2px;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.5), 0 0 20px rgba(137, 180, 250, 0.3);
             margin-bottom: 10px;
+            text-transform: uppercase;
         }
 
         .subtitle {
             color: rgba(255,255,255,0.9);
             font-size: 1rem;
             font-weight: 500;
+            margin-bottom: 15px;
+        }
+
+        .how-to-play {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            width: 24px;
+            height: 24px;
+            background: rgba(137, 180, 250, 0.2);
+            border: 1px solid #89b4fa;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: #89b4fa;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .how-to-play:hover {
+            background: rgba(137, 180, 250, 0.3);
+            transform: scale(1.1);
+        }
+
+        .how-to-play-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 3000;
+            padding: 20px;
+        }
+
+        .how-to-play-modal.show {
+            display: flex;
+        }
+
+        .how-to-play-content {
+            background: #1e1e2e;
+            border: 2px solid #45475a;
+            border-radius: 20px;
+            padding: 30px;
+            max-width: 500px;
+            width: 100%;
+            position: relative;
+            animation: modalSlideIn 0.3s ease-out;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+        }
+
+        .how-to-play-close {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 24px;
+            color: #6c7086;
+            cursor: pointer;
+            transition: color 0.2s ease;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .how-to-play-close:hover {
+            color: #f38ba8;
+        }
+
+        .how-to-play-content h3 {
+            color: #89b4fa;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+
+        .how-to-play-content p {
+            color: #cdd6f4;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        .how-to-play-content ol {
+            color: #cdd6f4;
+            padding-left: 20px;
+            margin-bottom: 15px;
+        }
+
+        .how-to-play-content li {
+            margin-bottom: 8px;
+            line-height: 1.5;
         }
 
         .linemates-link {
@@ -557,7 +657,12 @@
             }
             
             .title {
-                font-size: 2rem;
+                font-size: 2.5rem;
+            }
+            
+            .how-to-play {
+                top: 10px;
+                right: 10px;
             }
             
             .game-area {
@@ -593,8 +698,9 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1 class="title">Liney Link</h1>
-            <p class="subtitle">Connect hockey players through common <span class="linemates-link" id="linematesLink">linemates</span></p>
+            <div class="how-to-play" id="howToPlayBtn">i</div>
+            <h1 class="title">Liney</h1>
+            <p class="subtitle">Connect the dots between NHL players via common <span class="linemates-link" id="linematesLink">linemates</span></p>
             <div class="guess-counter" id="guessCounter">
                 <span class="guess-text">Wrong guesses: </span>
                 <span class="guess-count" id="guessCount">0</span>
@@ -647,6 +753,27 @@
                 <li>Have played 600+ minutes together at <strong>any</strong> strength on the same team at the same time</li>
                 <li>Play the same position, i.e. forwards are not considered linemates with defensemen</li>
             </ul>
+        </div>
+    </div>
+
+    <div class="how-to-play-modal" id="howToPlayModal">
+        <div class="how-to-play-content">
+            <div class="how-to-play-close" id="howToPlayClose">×</div>
+            <h3>How to Play</h3>
+            <p><strong>Goal:</strong> Connect two NHL players through their common linemates.</p>
+            <p><strong>Rules:</strong></p>
+            <ol>
+                <li>You start with two target players who need to be connected</li>
+                <li>Add players who are linemates with anyone already in your chain</li>
+                <li>Each new player must be connected to at least one player in your current chain</li>
+                <li>You win when you create a continuous path from the first to the last player</li>
+                <li>You have 3 wrong guesses before the game ends</li>
+            </ol>
+            <p><strong>Tips:</strong></p>
+            <ol>
+                <li>Look for players who played on the same team as your target players</li>
+                <li>Remember that forwards and defensemen cannot be linemates</li>
+            </ol>
         </div>
     </div>
 

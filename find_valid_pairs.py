@@ -1,6 +1,6 @@
 import json
 import os
-from collections import defaultdict, deque
+from collections import deque
 import random
 
 player_linkage_folder = "player_linkages"
@@ -61,6 +61,44 @@ def find_shortest_path(start_player, end_player, linkages):
     
     return None
 
+def is_relevant_player(player_id, verbose=False):
+    """Check if player meets relevance criteria: 3+ NHL seasons and 40+ avg points"""
+    try:
+        with open(f"{player_info_folder}/{player_id}.json") as f:
+            player_data = json.load(f)
+        
+        nhl_seasons = []
+        for season in player_data.get('seasonTotals', []):
+            # Only count NHL seasons
+            if season.get('leagueAbbrev') == 'NHL':
+                goals = season.get('goals', 0)
+                assists = season.get('assists', 0)
+                points = goals + assists
+                nhl_seasons.append(points)
+        
+        # Must have at least 3 NHL seasons
+        if len(nhl_seasons) < 3:
+            if verbose:
+                player_name = f"{player_data.get('firstName', {}).get('default', '')} {player_data.get('lastName', {}).get('default', '')}"
+                print(f"  {player_name}: Only {len(nhl_seasons)} NHL seasons")
+            return False
+        
+        # Must average at least 40 points per season
+        avg_points = sum(nhl_seasons) / len(nhl_seasons)
+        if avg_points < 40:
+            if verbose:
+                player_name = f"{player_data.get('firstName', {}).get('default', '')} {player_data.get('lastName', {}).get('default', '')}"
+                print(f"  {player_name}: {len(nhl_seasons)} NHL seasons, {avg_points:.1f} avg points")
+            return False
+        
+        if verbose:
+            player_name = f"{player_data.get('firstName', {}).get('default', '')} {player_data.get('lastName', {}).get('default', '')}"
+            print(f"  ✓ {player_name}: {len(nhl_seasons)} NHL seasons, {avg_points:.1f} avg points")
+        
+        return True
+    except:
+        return False
+
 def find_interesting_pairs(max_pairs=100):
     """Find pairs of players who were never teammates but are connected"""
     
@@ -79,9 +117,22 @@ def find_interesting_pairs(max_pairs=100):
     
     print(f"Loaded {len(linkages)} players with linkages")
     
+    # Filter for relevant players only
+    print("Filtering for relevant players (3+ NHL seasons, 40+ avg points)...")
+    relevant_players = []
+    for player_id in linkages.keys():
+        if is_relevant_player(player_id):
+            relevant_players.append(player_id)
+    
+    print(f"Found {len(relevant_players)} relevant players out of {len(linkages)} total")
+    
+    if len(relevant_players) < 2:
+        print("Not enough relevant players found!")
+        return []
+    
     # Find pairs that were never teammates
     valid_pairs = []
-    players = list(linkages.keys())
+    players = relevant_players
     
     print("Finding valid pairs...")
     attempts = 0

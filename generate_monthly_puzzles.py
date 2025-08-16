@@ -44,7 +44,7 @@ def generate_monthly_puzzles(days=60):
     
     # Get all interesting pairs first
     print("🔍 Finding interesting player pairs...")
-    all_pairs = find_interesting_pairs(max_pairs=200)
+    all_pairs = find_interesting_pairs(max_pairs=300)  # Increased since we're being more selective
     if not all_pairs:
         print("❌ No suitable pairs found!")
         return

@@ -1,0 +1,123 @@
+{
+  "total_players": 1050,
+  "total_connections": 2819,
+  "generation_time": "0:02:54.294989",
+  "seasons_processed": [
+    "20122013",
+    "20132014",
+    "20142015",
+    "20152016",
+    "20162017",
+    "20172018",
+    "20182019",
+    "20192020",
+    "20202021",
+    "20212022",
+    "20222023",
+    "20232024",
+    "20242025"
+  ],
+  "games_processed": 17744,
+  "top_connected_players": [
+    {
+      "playerId": 8475168,
+      "connectivity_score": 19,
+      "total_minutes": 24451.39
+    },
+    {
+      "playerId": 8473533,
+      "connectivity_score": 19,
+      "total_minutes": 28469.96
+    },
+    {
+      "playerId": 8475170,
+      "connectivity_score": 19,
+      "total_minutes": 30628.89
+    },
+    {
+      "playerId": 8475158,
+      "connectivity_score": 18,
+      "total_minutes": 26384.91
+    },
+    {
+      "playerId": 8475169,
+      "connectivity_score": 18,
+      "total_minutes": 19249.760000000002
+    },
+    {
+      "playerId": 8474141,
+      "connectivity_score": 18,
+      "total_minutes": 31536.98
+    },
+    {
+      "playerId": 8475768,
+      "connectivity_score": 18,
+      "total_minutes": 26065.190000000002
+    },
+    {
+      "playerId": 8473422,
+      "connectivity_score": 18,
+      "total_minutes": 20613.95
+    },
+    {
+      "playerId": 8476419,
+      "connectivity_score": 18,
+      "total_minutes": 18317.37
+    },
+    {
+      "playerId": 8475913,
+      "connectivity_score": 18,
+      "total_minutes": 24789.14
+    },
+    {
+      "playerId": 8473449,
+      "connectivity_score": 17,
+      "total_minutes": 20285.19
+    },
+    {
+      "playerId": 8476468,
+      "connectivity_score": 17,
+      "total_minutes": 22728.69
+    },
+    {
+      "playerId": 8475794,
+      "connectivity_score": 17,
+      "total_minutes": 28008.02
+    },
+    {
+      "playerId": 8475692,
+      "connectivity_score": 17,
+      "total_minutes": 28985.39
+    },
+    {
+      "playerId": 8475784,
+      "connectivity_score": 17,
+      "total_minutes": 22310.55
+    },
+    {
+      "playerId": 8475172,
+      "connectivity_score": 17,
+      "total_minutes": 21720.98
+    },
+    {
+      "playerId": 8474564,
+      "connectivity_score": 17,
+      "total_minutes": 33001.42
+    },
+    {
+      "playerId": 8473986,
+      "connectivity_score": 17,
+      "total_minutes": 29840.95
+    },
+    {
+      "playerId": 8475799,
+      "connectivity_score": 17,
+      "total_minutes": 21810.16
+    },
+    {
+      "playerId": 8475166,
+      "connectivity_score": 16,
+      "total_minutes": 32221.16
+    }
+  ]
+}

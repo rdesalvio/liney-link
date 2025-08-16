@@ -107,7 +107,7 @@ def find_interesting_pairs(max_pairs=100):
         # Check if there's a path between them
         path = find_shortest_path(player_a, player_b, linkages)
         
-        if path and 2 <= len(path) <= 6:  # Good path length for a puzzle
+        if path and 2 <= len(path) <= 4:  # Good path length for a puzzle
             valid_pairs.append({
                 'player_a': player_a,
                 'player_b': player_b,

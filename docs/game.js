@@ -492,10 +492,11 @@ class LineyLinkGame {
     }
 
     updateGuessCounter() {
-        this.guessCount.textContent = this.wrongGuesses;
+        const remaining = this.maxWrongGuesses - this.wrongGuesses;
+        this.guessCount.textContent = remaining;
         
-        // Add danger class if close to max
-        if (this.wrongGuesses >= this.maxWrongGuesses - 1) {
+        // Add danger class if only 1 guess remaining
+        if (remaining <= 1) {
             this.guessCount.classList.add('danger');
         }
     }

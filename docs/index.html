@@ -702,9 +702,8 @@
             <h1 class="title">Liney</h1>
             <p class="subtitle">Connect the dots between NHL players via common <span class="linemates-link" id="linematesLink">linemates</span></p>
             <div class="guess-counter" id="guessCounter">
-                <span class="guess-text">Wrong guesses: </span>
-                <span class="guess-count" id="guessCount">0</span>
-                <span class="guess-total"> / 3</span>
+                <span class="guess-text">Guesses remaining: </span>
+                <span class="guess-count" id="guessCount">3</span>
             </div>
         </div>
 
@@ -725,7 +724,7 @@
                     >
                     <div class="suggestions" id="suggestions"></div>
                 </div>
-                <button class="add-button" id="addButton" disabled>Add Linkage</button>
+                <button class="add-button" id="addButton" disabled>Add Liney</button>
                 <div class="error-message" id="errorMessage"></div>
             </div>
         </div>
@@ -752,6 +751,7 @@
             <ul>
                 <li>Have played 600+ minutes together at <strong>any</strong> strength on the same team at the same time</li>
                 <li>Play the same position, i.e. forwards are not considered linemates with defensemen</li>
+                <li>NHL shift data only goes back to the <strong>2012-2013 season</strong></li>
             </ul>
         </div>
     </div>

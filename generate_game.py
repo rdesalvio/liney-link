@@ -7,6 +7,10 @@ player_linkage_folder = "player_linkages"
 player_info_folder = "players"
 
 def wereEverTeamates(first_player, second_player):
+    """
+    Check if two players were ever teammates during overlapping seasons.
+    Returns True only if they played for the same team in the same season.
+    """
     first_player_season_totals = first_player.get("seasonTotals", [])
     second_player_season_totals = second_player.get("seasonTotals", [])
 
@@ -25,7 +29,7 @@ def wereEverTeamates(first_player, second_player):
         if season_year and team_name:
             second_season_teams.add((season_year, team_name))
 
-    # Check if there's any intersection (same season and team)
+    # Check if there's any intersection (same season AND same team)
     return len(first_season_teams.intersection(second_season_teams)) > 0
 
 def get_player_info(playerId):
@@ -90,8 +94,8 @@ def find_all_paths(start_player, end_player, max_length=10):
             else:
                 queue.append((next_player, new_path))
     
-    # Sort paths by length (longest first)
-    all_paths.sort(key=len, reverse=True)
+    # Sort paths by length (shortest first for daily puzzle accessibility)
+    all_paths.sort(key=len, reverse=False)
     
     return all_paths
 

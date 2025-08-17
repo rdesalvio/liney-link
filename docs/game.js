@@ -37,6 +37,7 @@ class LineyLinkGame {
         this.howToPlayModal = document.getElementById('howToPlayModal');
         this.howToPlayClose = document.getElementById('howToPlayClose');
         this.debugButton = document.getElementById('debugButton');
+        this.searchClear = document.getElementById('searchClear');
         this.difficultyToggle = document.getElementById('difficultyToggle');
         this.difficultyText = document.getElementById('difficultyText');
         this.easyLabel = document.querySelector('.easy-label');
@@ -128,6 +129,7 @@ class LineyLinkGame {
         });
         this.debugButton.addEventListener('click', () => this.loadRandomDay());
         this.difficultyToggle.addEventListener('change', () => this.handleDifficultyChange());
+        this.searchClear.addEventListener('click', () => this.clearSearchInput());
         
         // Setup linemates tooltip
         this.setupLinematesTooltip();
@@ -174,7 +176,7 @@ class LineyLinkGame {
         this.hardLabel.classList.toggle('active', isHard);
         
         // Update description
-        this.difficultyText.textContent = isHard ? '2+ player connections' : '1 player connection';
+        this.difficultyText.textContent = isHard ? 'Minimum 2+ players' : 'Minimum 1 player';
         
         // Ensure toggle is in correct position
         this.difficultyToggle.checked = isHard;
@@ -182,6 +184,14 @@ class LineyLinkGame {
 
     handleSearchInput(e) {
         const query = e.target.value.trim();
+        
+        // Show/hide clear button based on input content
+        if (e.target.value.length > 0) {
+            this.searchClear.classList.add('show');
+        } else {
+            this.searchClear.classList.remove('show');
+        }
+        
         if (query.length < 2) {
             this.hideSuggestions();
             this.selectedPlayer = null;
@@ -204,6 +214,18 @@ class LineyLinkGame {
         } else if (e.key === 'Escape') {
             this.hideSuggestions();
         }
+    }
+
+    clearSearchInput() {
+        this.searchInput.value = '';
+        this.searchClear.classList.remove('show');
+        this.selectedPlayer = null;
+        this.updateAddButton();
+        this.hideSuggestions();
+        this.clearError();
+        
+        // Focus back on the input after clearing
+        this.searchInput.focus();
     }
 
     showSuggestions(query) {
@@ -605,6 +627,7 @@ class LineyLinkGame {
 
     clearInput() {
         this.searchInput.value = '';
+        this.searchClear.classList.remove('show');
         this.selectedPlayer = null;
         this.updateAddButton();
         this.hideSuggestions();

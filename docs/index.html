@@ -523,7 +523,7 @@
 
         .search-input {
             width: 100%;
-            padding: 15px 20px;
+            padding: 15px 45px 15px 20px;
             border: 2px solid #45475a;
             border-radius: 25px;
             font-size: 1rem;
@@ -531,6 +531,37 @@
             transition: border-color 0.3s ease;
             background: #313244;
             color: #cdd6f4;
+        }
+        
+        .search-clear {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: #45475a;
+            color: #cdd6f4;
+            border: none;
+            cursor: pointer;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: bold;
+            transition: all 0.2s ease;
+            padding: 0;
+            line-height: 1;
+        }
+        
+        .search-clear.show {
+            display: flex;
+        }
+        
+        .search-clear:hover {
+            background: #6c7086;
+            transform: translateY(-50%) scale(1.1);
         }
 
         .search-input:focus {
@@ -817,6 +848,7 @@
                         autocomplete="off"
                         disabled
                     >
+                    <button class="search-clear" id="searchClear" aria-label="Clear search">×</button>
                     <div class="suggestions" id="suggestions"></div>
                 </div>
                 <button class="add-button" id="addButton" disabled>Add Player</button>
@@ -867,8 +899,8 @@
             </ol>
             <p><strong>Difficulty Modes:</strong></p>
             <ul>
-                <li><strong>Easy Mode:</strong> Puzzles require exactly 1 player to complete the chain</li>
-                <li><strong>Hard Mode:</strong> Puzzles require 2+ players to complete the chain</li>
+                <li><strong>Easy Mode:</strong> Puzzles can be solved in 1 player, with opporutinity for more</li>
+                <li><strong>Hard Mode:</strong> Puzzles require 2+ players to solve</li>
             </ul>
             <p>Use the toggle at the top to switch between Easy and Hard mode for today's puzzle! But be careful, attempts are shared between both modes.</p>
         </div>

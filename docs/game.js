@@ -122,11 +122,10 @@ class LineyLinkGame {
         
         // Fix iOS keyboard white space issue
         this.searchInput.addEventListener('blur', () => {
-            // Scroll to top to reset viewport after keyboard dismissal
+            // Force viewport to recalculate after keyboard dismissal
             setTimeout(() => {
+                window.scrollTo(0, 1);
                 window.scrollTo(0, 0);
-                document.body.scrollTop = 0;
-                document.documentElement.scrollTop = 0;
             }, 100);
         });
         

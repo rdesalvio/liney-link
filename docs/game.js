@@ -955,7 +955,7 @@ class LineyLinkGame {
         }
         
         this.modalScore.innerHTML = `
-            <strong style="color: #f38ba8;">Game Over!</strong><br><br>
+            <strong style="color: #f38ba8;">Try again tomorrow.</strong><br><br>
             You've used all 3 attempts.<br>
             The puzzle was to connect:<br><br>
             <strong>${this.playerNames.get(this.targetPlayers.start)} → ${this.playerNames.get(this.targetPlayers.end)}</strong>
@@ -964,7 +964,7 @@ class LineyLinkGame {
         
         // Change modal title for failure
         const modalTitle = this.completionModal.querySelector('.modal-title');
-        modalTitle.textContent = '💀 Better luck next time!';
+        modalTitle.textContent = 'Game Over!';
         modalTitle.style.color = '#f38ba8';
         
         // Allow sharing for all failures

@@ -91,6 +91,10 @@ def is_relevant_player(player_id, verbose=False):
                 print(f"  {player_name}: {len(nhl_seasons)} NHL seasons, {avg_points:.1f} avg points")
             return False
         
+        # temporary measure to only get players from last 5 seasons
+        if player_data.get('seasonTotals')[-1].get("season") < 20192020:
+            return False
+        
         if verbose:
             player_name = f"{player_data.get('firstName', {}).get('default', '')} {player_data.get('lastName', {}).get('default', '')}"
             print(f"  ✓ {player_name}: {len(nhl_seasons)} NHL seasons, {avg_points:.1f} avg points")

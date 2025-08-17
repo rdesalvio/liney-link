@@ -35,6 +35,7 @@ class LineyLinkGame {
         this.howToPlayBtn = document.getElementById('howToPlayBtn');
         this.howToPlayModal = document.getElementById('howToPlayModal');
         this.howToPlayClose = document.getElementById('howToPlayClose');
+        this.searchClear = document.getElementById('searchClear');
     }
 
     async loadGameData() {
@@ -99,6 +100,7 @@ class LineyLinkGame {
         this.searchInput.addEventListener('input', (e) => this.handleSearchInput(e));
         this.searchInput.addEventListener('keydown', (e) => this.handleKeyDown(e));
         this.addButton.addEventListener('click', () => this.addLinkage());
+        this.searchClear.addEventListener('click', () => this.clearSearchInput());
         this.shareButton.addEventListener('click', () => {
             if (this.gameFailed) {
                 this.shareFailure();
@@ -129,6 +131,14 @@ class LineyLinkGame {
 
     handleSearchInput(e) {
         const query = e.target.value.trim();
+        
+        // Show/hide clear button based on input
+        if (e.target.value.length > 0) {
+            this.searchClear.classList.add('show');
+        } else {
+            this.searchClear.classList.remove('show');
+        }
+        
         if (query.length < 2) {
             this.hideSuggestions();
             this.selectedPlayer = null;
@@ -137,6 +147,15 @@ class LineyLinkGame {
         }
 
         this.showSuggestions(query);
+    }
+    
+    clearSearchInput() {
+        this.searchInput.value = '';
+        this.searchClear.classList.remove('show');
+        this.hideSuggestions();
+        this.selectedPlayer = null;
+        this.updateAddButton();
+        this.searchInput.focus();
     }
 
     handleKeyDown(e) {
@@ -236,38 +255,282 @@ class LineyLinkGame {
             return { isValid: false, error: 'Player is already in the chain!' };
         }
 
-        // Find all players this new player connects to in the current chain
-        const connectedToPlayers = [];
-        for (let i = 0; i < this.playerChain.length; i++) {
-            const chainPlayer = this.playerChain[i];
-            if (this.arePlayersLinked(playerId, chainPlayer.id)) {
-                connectedToPlayers.push({ player: chainPlayer, index: i });
-            }
-        }
-
-        if (connectedToPlayers.length === 0) {
-            // Wrong guess - increment counter
-            this.wrongGuesses++;
-            this.updateGuessCounter();
+        // Chain grows inward from two target players
+        // Find the "innermost" connection points where new players can be added
+        
+        // If only 2 players (both targets), new player connects to either
+        if (this.playerChain.length === 2) {
+            const leftTarget = this.playerChain[0];
+            const rightTarget = this.playerChain[1];
             
-            if (this.wrongGuesses >= this.maxWrongGuesses) {
-                this.failGame();
+            const connectsToLeft = this.arePlayersLinked(playerId, leftTarget.id);
+            const connectsToRight = this.arePlayersLinked(playerId, rightTarget.id);
+            
+            if (!connectsToLeft && !connectsToRight) {
+                this.wrongGuesses++;
+                this.updateGuessCounter();
+                
+                if (this.wrongGuesses >= this.maxWrongGuesses) {
+                    this.failGame();
+                }
+                
+                return { 
+                    isValid: false, 
+                    error: `${this.selectedPlayer.name} must connect to either ${leftTarget.name} or ${rightTarget.name}!` 
+                };
             }
             
+            // Insert in the middle between the two targets
             return { 
-                isValid: false, 
-                error: `${this.selectedPlayer.name} is not connected to any player in the chain!` 
+                isValid: true, 
+                insertionIndex: 1,
+                connectedTo: connectsToLeft && connectsToRight ? 'both' : (connectsToLeft ? 'left' : 'right')
             };
         }
-
-        // Find the best insertion point
-        let insertionInfo = this.findBestInsertionPoint(connectedToPlayers);
         
-        return { 
-            isValid: true, 
-            insertionIndex: insertionInfo.index,
-            connectedTo: insertionInfo.connectedTo
-        };
+        // For chains with more than 2 players, we need to find the "inner ends"
+        // where new players can be added. The chain grows inward from both sides.
+        
+        let leftConnectionIndex, rightConnectionIndex;
+        
+        if (this.playerChain.length === 3) {
+            // Special handling for 3-player chains
+            // Need to check where the gap is and insert accordingly
+            const leftTarget = this.playerChain[0];
+            const middlePlayer = this.playerChain[1]; 
+            const rightTarget = this.playerChain[2];
+            
+            // Check where the gap is
+            const leftToMiddleConnected = this.arePlayersLinked(leftTarget.id, middlePlayer.id);
+            const middleToRightConnected = this.arePlayersLinked(middlePlayer.id, rightTarget.id);
+            
+            console.log(`DEBUG: 3-player chain state:`);
+            console.log(`  ${leftTarget.name} -> ${leftToMiddleConnected ? 'connected' : 'GAP'} -> ${middlePlayer.name} -> ${middleToRightConnected ? 'connected' : 'GAP'} -> ${rightTarget.name}`);
+            
+            const connectsToLeftTarget = this.arePlayersLinked(playerId, leftTarget.id);
+            const connectsToMiddle = this.arePlayersLinked(playerId, middlePlayer.id);
+            const connectsToRightTarget = this.arePlayersLinked(playerId, rightTarget.id);
+            
+            console.log(`DEBUG: ${this.selectedPlayer.name} connects to: Left=${connectsToLeftTarget}, Middle=${connectsToMiddle}, Right=${connectsToRightTarget}`);
+            
+            // Determine valid connection points based on gaps and existing connections
+            let insertionIndex;
+            let connectedTo;
+            
+            if (!leftToMiddleConnected && !middleToRightConnected) {
+                // Two gaps - middle player is isolated
+                if (connectsToLeftTarget) {
+                    insertionIndex = 1; // Insert after left
+                    connectedTo = 'left';
+                } else if (connectsToRightTarget) {
+                    insertionIndex = 2; // Insert before right
+                    connectedTo = 'right';
+                } else if (connectsToMiddle) {
+                    // Can connect to middle - choose based on which target we also connect to
+                    if (connectsToLeftTarget) {
+                        insertionIndex = 1;
+                    } else {
+                        insertionIndex = 2;
+                    }
+                    connectedTo = 'middle';
+                } else {
+                    // No valid connection
+                    this.wrongGuesses++;
+                    this.updateGuessCounter();
+                    if (this.wrongGuesses >= this.maxWrongGuesses) {
+                        this.failGame();
+                    }
+                    return { 
+                        isValid: false, 
+                        error: `${this.selectedPlayer.name} must connect to either ${leftTarget.name}, ${middlePlayer.name}, or ${rightTarget.name}!` 
+                    };
+                }
+            } else if (!leftToMiddleConnected) {
+                // Gap between left and middle
+                // Middle and right are connected
+                // Valid connection points: left target OR middle player (but not right if middle is already connected to it)
+                
+                if (connectsToLeftTarget) {
+                    insertionIndex = 1; // Bridge the gap from left side
+                    connectedTo = 'left';
+                } else if (connectsToMiddle) {
+                    // Insert before middle to bridge the gap
+                    insertionIndex = 1;
+                    connectedTo = 'middle';
+                } else {
+                    this.wrongGuesses++;
+                    this.updateGuessCounter();
+                    if (this.wrongGuesses >= this.maxWrongGuesses) {
+                        this.failGame();
+                    }
+                    return { 
+                        isValid: false, 
+                        error: `${this.selectedPlayer.name} must connect to either ${leftTarget.name} or ${middlePlayer.name}!` 
+                    };
+                }
+            } else if (!middleToRightConnected) {
+                // Gap between middle and right
+                // Left and middle are connected
+                // Valid connection points: middle player OR right target
+                
+                if (connectsToMiddle) {
+                    insertionIndex = 2; // Insert after middle
+                    connectedTo = 'middle';
+                } else if (connectsToRightTarget) {
+                    insertionIndex = 2; // Bridge the gap from right side
+                    connectedTo = 'right';
+                } else {
+                    this.wrongGuesses++;
+                    this.updateGuessCounter();
+                    if (this.wrongGuesses >= this.maxWrongGuesses) {
+                        this.failGame();
+                    }
+                    return { 
+                        isValid: false, 
+                        error: `${this.selectedPlayer.name} must connect to either ${middlePlayer.name} or ${rightTarget.name}!` 
+                    };
+                }
+            } else {
+                // No gaps - chain is complete
+                return { 
+                    isValid: false, 
+                    error: `The chain is already complete!` 
+                };
+            }
+            
+            console.log(`DEBUG: Inserting at index ${insertionIndex}`);
+            
+            return { 
+                isValid: true, 
+                insertionIndex: insertionIndex,
+                connectedTo: connectedTo
+            };
+        } else {
+            // For longer chains, find the connection points by looking for gaps
+            // A gap exists where consecutive players are not connected
+            const connectionPoints = [];
+            
+            // Check for gaps in the chain and identify connection points
+            for (let i = 0; i < this.playerChain.length - 1; i++) {
+                const currentPlayer = this.playerChain[i];
+                const nextPlayer = this.playerChain[i + 1];
+                
+                if (!this.arePlayersLinked(currentPlayer.id, nextPlayer.id)) {
+                    // Gap found - both players on either side are connection points
+                    connectionPoints.push({
+                        player: currentPlayer,
+                        index: i,
+                        side: 'left'
+                    });
+                    connectionPoints.push({
+                        player: nextPlayer,
+                        index: i + 1,
+                        side: 'right'
+                    });
+                }
+            }
+            
+            // If no gaps, the chain is complete
+            if (connectionPoints.length === 0) {
+                this.wrongGuesses++;
+                this.updateGuessCounter();
+                
+                if (this.wrongGuesses >= this.maxWrongGuesses) {
+                    this.failGame();
+                }
+                
+                return { 
+                    isValid: false, 
+                    error: `The chain is already complete!` 
+                };
+            }
+            
+            // Check if the new player connects to any of the connection points
+            console.log(`DEBUG: Connection points found:`, connectionPoints.map(cp => `${cp.player.name} (index ${cp.index}, ${cp.side} side)`));
+            
+            const validConnections = connectionPoints.filter(cp => {
+                // First check if the new player connects to this connection point
+                if (!this.arePlayersLinked(playerId, cp.player.id)) {
+                    console.log(`DEBUG: ${this.selectedPlayer.name} does NOT connect to ${cp.player.name}`);
+                    return false;
+                }
+                
+                console.log(`DEBUG: ${this.selectedPlayer.name} DOES connect to ${cp.player.name} (${cp.side} side)`);
+                
+                // Check if this connection point is already "occupied"
+                const playerIndex = cp.index;
+                
+                if (cp.side === 'left') {
+                    // We would insert after this player, check if there's already a player there
+                    const nextIndex = playerIndex + 1;
+                    if (nextIndex < this.playerChain.length) {
+                        const nextPlayer = this.playerChain[nextIndex];
+                        // If there's already a connection here, this slot is occupied
+                        if (this.arePlayersLinked(cp.player.id, nextPlayer.id)) {
+                            console.log(`DEBUG: ${cp.player.name} left slot occupied by ${nextPlayer.name}`);
+                            return false;
+                        }
+                    }
+                } else {
+                    // We would insert before this player, check if there's already a player there
+                    const prevIndex = playerIndex - 1;
+                    if (prevIndex >= 0) {
+                        const prevPlayer = this.playerChain[prevIndex];
+                        // If there's already a connection here, this slot is occupied
+                        if (this.arePlayersLinked(cp.player.id, prevPlayer.id)) {
+                            console.log(`DEBUG: ${cp.player.name} right slot occupied by ${prevPlayer.name}`);
+                            return false;
+                        }
+                    }
+                }
+                
+                console.log(`DEBUG: ${cp.player.name} slot is available`);
+                return true;
+            });
+            
+            if (validConnections.length === 0) {
+                this.wrongGuesses++;
+                this.updateGuessCounter();
+                
+                if (this.wrongGuesses >= this.maxWrongGuesses) {
+                    this.failGame();
+                }
+                
+                const connectionNames = connectionPoints.map(cp => cp.player.name);
+                const uniqueNames = [...new Set(connectionNames)];
+                const namesDisplay = uniqueNames.join(' or ');
+                
+                return { 
+                    isValid: false, 
+                    error: `${this.selectedPlayer.name} must connect to either ${namesDisplay}!` 
+                };
+            }
+            
+            // Choose the best connection point and determine proper insertion
+            let chosenConnection = validConnections[0];
+            let insertionIndex;
+            
+            // Simple insertion logic: insert next to the connection point to bridge gaps
+            chosenConnection = validConnections[0];
+            
+            if (chosenConnection.side === 'right') {
+                // Right side of gap - insert before this player to bridge the gap
+                insertionIndex = chosenConnection.index;
+            } else {
+                // Left side of gap - insert after this player to bridge the gap  
+                insertionIndex = chosenConnection.index + 1;
+            }
+            
+            console.log(`DEBUG: Inserting player at index ${insertionIndex}, connecting to ${chosenConnection.player.name} (${chosenConnection.side} side of gap)`);
+            console.log(`DEBUG: Current chain:`, this.playerChain.map(p => p.name));
+            console.log(`DEBUG: Valid connections:`, validConnections.map(vc => `${vc.player.name} (${vc.side})`));
+            
+            return { 
+                isValid: true, 
+                insertionIndex: insertionIndex,
+                connectedTo: chosenConnection.side
+            };
+        }
     }
 
     arePlayersLinked(playerId1, playerId2) {
@@ -276,28 +539,6 @@ class LineyLinkGame {
         return connections && connections.has(playerId2);
     }
 
-    findBestInsertionPoint(connectedToPlayers) {
-        // If connected to start or end, prioritize those positions
-        const startIndex = 0;
-        const endIndex = this.playerChain.length - 1;
-        
-        for (const conn of connectedToPlayers) {
-            if (conn.index === startIndex) {
-                return { index: 1, connectedTo: 'start' }; // Insert after start
-            }
-            if (conn.index === endIndex) {
-                return { index: endIndex, connectedTo: 'end' }; // Insert before end
-            }
-        }
-        
-        // Otherwise, insert next to the first connected player
-        const firstConnection = connectedToPlayers[0];
-        return { 
-            index: firstConnection.index + 1, 
-            connectedTo: 'middle',
-            connectedPlayer: firstConnection.player 
-        };
-    }
 
     insertPlayerInChain(player, insertionIndex) {
         const newPlayer = { ...player, isTarget: false };
@@ -537,11 +778,8 @@ class LineyLinkGame {
         const year = String(today.getFullYear()).slice(-2);
         const dateStr = `${month}/${day}/${year}`;
         
-        // Check if any successful links were made (more than just the two target players)
-        const hasLinks = this.playerChain.length > 2;
-        const linksDisplay = hasLinks ? 
-            this.playerChain.map(p => p.name).join(' → ') : 
-            'No links found';
+        // For failed games, don't show partial progress - just show "No links found"
+        const linksDisplay = 'No links found';
         
         // Build share text for failure
         const shareText = `Liney ${dateStr}\nFailed - 3 errors ❌\n\n${linksDisplay}\n\n${window.location.host}`;
@@ -563,10 +801,13 @@ class LineyLinkGame {
     removePlayer(playerId) {
         if (this.gameComplete || this.gameFailed) return;
         
-        // Find and remove the player from chain (keep target players)
-        this.playerChain = this.playerChain.filter(player => 
-            player.isTarget || player.id !== playerId
-        );
+        // Find the index of the player to remove
+        const playerIndex = this.playerChain.findIndex(player => player.id === playerId);
+        if (playerIndex === -1 || this.playerChain[playerIndex].isTarget) return;
+        
+        // Determine which players to remove based on position
+        // The chain grows inward, so removal cascades inward
+        this.cascadeRemoval(playerIndex);
         
         this.renderPlayerChain();
         this.clearInput();
@@ -575,6 +816,67 @@ class LineyLinkGame {
         if (this.isPuzzleComplete()) {
             this.completePuzzle();
         }
+    }
+
+    cascadeRemoval(removedIndex) {
+        // Rule: When removing a player, also remove all players further from the target (toward the gap)
+        // Keep only players closer to the target than the removed player
+        
+        const leftTarget = this.playerChain[0];
+        const rightTarget = this.playerChain[this.playerChain.length - 1];
+        
+        // Find the gap (where there's no connection)
+        let gapIndex = -1;
+        for (let i = 0; i < this.playerChain.length - 1; i++) {
+            if (!this.arePlayersLinked(this.playerChain[i].id, this.playerChain[i + 1].id)) {
+                gapIndex = i; // Gap is between i and i+1
+                break;
+            }
+        }
+        
+        const playersToKeep = [];
+        
+        // Always keep targets
+        playersToKeep.push(leftTarget);
+        
+        if (gapIndex === -1) {
+            // No gap - chain is complete, just remove the one player
+            for (let i = 1; i < this.playerChain.length - 1; i++) {
+                if (i !== removedIndex) {
+                    playersToKeep.push(this.playerChain[i]);
+                }
+            }
+        } else {
+            // There's a gap - determine what to keep based on position
+            if (removedIndex <= gapIndex) {
+                // Removed player is in left segment (connected to left target)
+                // Keep only players BEFORE the removed player (closer to left target)
+                for (let i = 1; i < removedIndex; i++) {
+                    playersToKeep.push(this.playerChain[i]);
+                }
+                // Also keep the right segment (everything after the gap)
+                for (let i = gapIndex + 1; i < this.playerChain.length - 1; i++) {
+                    playersToKeep.push(this.playerChain[i]);
+                }
+            } else {
+                // Removed player is in right segment (connected to right target)
+                // Keep the left segment (everything before the gap)
+                for (let i = 1; i <= gapIndex; i++) {
+                    playersToKeep.push(this.playerChain[i]);
+                }
+                // Keep only players AFTER the removed player (closer to right target)
+                for (let i = removedIndex + 1; i < this.playerChain.length - 1; i++) {
+                    playersToKeep.push(this.playerChain[i]);
+                }
+            }
+        }
+        
+        playersToKeep.push(rightTarget);
+        
+        console.log(`DEBUG: Removed player at index ${removedIndex}, gap at ${gapIndex}`);
+        console.log(`DEBUG: Keeping players:`, playersToKeep.map(p => p.name));
+        
+        this.playerChain = playersToKeep;
     }
 
     setupLinematesTooltip() {

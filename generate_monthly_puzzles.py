@@ -11,7 +11,7 @@ from datetime import datetime, timedelta
 from pathlib import Path
 
 # Import existing modules
-from find_valid_pairs import find_interesting_pairs
+from find_valid_pairs import find_easy_pairs, find_hard_pairs
 import random
 
 def generate_monthly_puzzles(days=60):
@@ -42,56 +42,87 @@ def generate_monthly_puzzles(days=60):
         shutil.copytree("web_data", web_data_dir)
         print("✓ Copied web_data directory")
     
-    # Get all interesting pairs first
-    print("🔍 Finding interesting player pairs...")
-    all_pairs = find_interesting_pairs(max_pairs=300)  # Increased since we're being more selective
-    if not all_pairs:
-        print("❌ No suitable pairs found!")
+    # Get easy and hard pairs separately
+    print("🔍 Finding easy player pairs (path length 3)...")
+    easy_pairs = find_easy_pairs(max_pairs=150)
+    print(f"✓ Found {len(easy_pairs)} easy pairs")
+    
+    print("🔍 Finding hard player pairs (path length 4+)...")
+    hard_pairs = find_hard_pairs(max_pairs=150)
+    print(f"✓ Found {len(hard_pairs)} hard pairs")
+    
+    if not easy_pairs or not hard_pairs:
+        print("❌ Not enough suitable pairs found for both difficulties!")
         return
-    random.shuffle(all_pairs)  # Randomize order
-    print(f"✓ Found {len(all_pairs)} interesting pairs")
+    
+    random.shuffle(easy_pairs)
+    random.shuffle(hard_pairs)
     
     # Generate puzzles for each day
     start_date = datetime.now().date()
     puzzle_index = {}
     
     # Limit days to available pairs
-    actual_days = min(days, len(all_pairs))
+    actual_days = min(days, len(easy_pairs), len(hard_pairs))
     print(f"📊 Generating {actual_days} days of puzzles...")
     
     for day_offset in range(actual_days):
         current_date = start_date + timedelta(days=day_offset)
         date_str = current_date.strftime("%Y-%m-%d")
         
-        print(f"📅 Generating puzzle for {date_str}...")
+        print(f"📅 Generating puzzles for {date_str}...")
         
         try:
-            # Pick a pair for this day
-            pair_info = all_pairs[day_offset]
-            player_a, player_b = pair_info['player_a'], pair_info['player_b']
+            # Pick pairs for this day (easy and hard)
+            easy_pair = easy_pairs[day_offset]
+            hard_pair = hard_pairs[day_offset]
             
-            # Create puzzle data
-            puzzle_data = {
-                "playerA": player_a,
-                "playerB": player_b,
-                "date": date_str
+            # Create easy puzzle data
+            easy_puzzle_data = {
+                "playerA": easy_pair['player_a'],
+                "playerB": easy_pair['player_b'],
+                "date": date_str,
+                "difficulty": "easy",
+                "pathLength": easy_pair['path_length']
             }
             
-            # Save individual puzzle file
-            puzzle_file = puzzles_dir / f"{date_str}.json"
-            with open(puzzle_file, 'w') as f:
-                json.dump(puzzle_data, f)
+            # Create hard puzzle data
+            hard_puzzle_data = {
+                "playerA": hard_pair['player_a'],
+                "playerB": hard_pair['player_b'],
+                "date": date_str,
+                "difficulty": "hard",
+                "pathLength": hard_pair['path_length']
+            }
+            
+            # Save individual puzzle files
+            easy_puzzle_file = puzzles_dir / f"{date_str}-easy.json"
+            hard_puzzle_file = puzzles_dir / f"{date_str}-hard.json"
+            
+            with open(easy_puzzle_file, 'w') as f:
+                json.dump(easy_puzzle_data, f)
+            with open(hard_puzzle_file, 'w') as f:
+                json.dump(hard_puzzle_data, f)
             
             # Add to index
             puzzle_index[date_str] = {
-                "playerA": player_a,
-                "playerB": player_b
+                "easy": {
+                    "playerA": easy_pair['player_a'],
+                    "playerB": easy_pair['player_b'],
+                    "pathLength": easy_pair['path_length']
+                },
+                "hard": {
+                    "playerA": hard_pair['player_a'],
+                    "playerB": hard_pair['player_b'],
+                    "pathLength": hard_pair['path_length']
+                }
             }
             
-            print(f"✓ Generated puzzle: {player_a} → {player_b}")
+            print(f"✓ Generated easy puzzle: {easy_pair['player_a']} → {easy_pair['player_b']} (length {easy_pair['path_length']})")
+            print(f"✓ Generated hard puzzle: {hard_pair['player_a']} → {hard_pair['player_b']} (length {hard_pair['path_length']})")
             
         except Exception as e:
-            print(f"❌ Error generating puzzle for {date_str}: {e}")
+            print(f"❌ Error generating puzzles for {date_str}: {e}")
             continue
     
     # Save puzzle index
@@ -153,10 +184,10 @@ def update_game_js_for_static_hosting(docs_dir):
             const [playersResponse, connectionsResponse, gameResponse] = await Promise.all([
                 fetch('./web_data/players.json'),
                 fetch('./web_data/connections.json'),
-                fetch(`./puzzles/${today}.json`).catch(() => {
+                fetch(`./puzzles/${today}-easy.json`).catch(() => {
                     // Fallback to a default puzzle if today's doesn't exist
                     console.warn(`No puzzle found for ${today}, using fallback`);
-                    return fetch('./puzzles/2024-12-16.json'); // Use first available puzzle as fallback
+                    return fetch('./puzzles/2025-08-16-easy.json'); // Use first available puzzle as fallback
                 })
             ]);
 

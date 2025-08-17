@@ -1,242 +1,722 @@
 {
   "2025-08-16": {
-    "playerA": 8478420,
-    "playerB": 8448208
+    "easy": {
+      "playerA": 8476453,
+      "playerB": 8471675,
+      "pathLength": 3
+    },
+    "hard": {
+      "playerA": 8469454,
+      "playerB": 8473604,
+      "pathLength": 6
+    }
   },
   "2025-08-17": {
-    "playerA": 8477492,
-    "playerB": 8471685
+    "easy": {
+      "playerA": 8478402,
+      "playerB": 8470612,
+      "pathLength": 3
+    },
+    "hard": {
+      "playerA": 8469454,
+      "playerB": 8471675,
+      "pathLength": 5
+    }
   },
   "2025-08-18": {
-    "playerA": 8474141,
-    "playerB": 8480801
+    "easy": {
+      "playerA": 8477934,
+      "playerB": 8479318,
+      "pathLength": 3
+    },
+    "hard": {
+      "playerA": 8482078,
+      "playerB": 8473548,
+      "pathLength": 4
+    }
   },
   "2025-08-19": {
-    "playerA": 8479407,
-    "playerB": 8477956
+    "easy": {
+      "playerA": 8479314,
+      "playerB": 8476456,
+      "pathLength": 3
+    },
+    "hard": {
+      "playerA": 8474564,
+      "playerB": 8480801,
+      "pathLength": 4
+    }
   },
   "2025-08-20": {
-    "playerA": 8475166,
-    "playerB": 8479343
+    "easy": {
+      "playerA": 8475166,
+      "playerB": 8482078,
+      "pathLength": 3
+    },
+    "hard": {
+      "playerA": 8478444,
+      "playerB": 8480018,
+      "pathLength": 4
+    }
   },
   "2025-08-21": {
-    "playerA": 8471214,
-    "playerB": 8478403
+    "easy": {
+      "playerA": 8477946,
+      "playerB": 8471215,
+      "pathLength": 3
+    },
+    "hard": {
+      "playerA": 8478403,
+      "playerB": 8478483,
+      "pathLength": 4
+    }
   },
   "2025-08-22": {
-    "playerA": 8471214,
-    "playerB": 8480801
+    "easy": {
+      "playerA": 8475166,
+      "playerB": 8478550,
+      "pathLength": 3
+    },
+    "hard": {
+      "playerA": 8479407,
+      "playerB": 8473604,
+      "pathLength": 5
+    }
   },
   "2025-08-23": {
-    "playerA": 8478550,
-    "playerB": 8475166
+    "easy": {
+      "playerA": 8476456,
+      "playerB": 8478403,
+      "pathLength": 3
+    },
+    "hard": {
+      "playerA": 8482116,
+      "playerB": 8477956,
+      "pathLength": 6
+    }
   },
   "2025-08-24": {
-    "playerA": 8471675,
-    "playerB": 8477946
+    "easy": {
+      "playerA": 8476456,
+      "playerB": 8477956,
+      "pathLength": 3
+    },
+    "hard": {
+      "playerA": 8480893,
+      "playerB": 8477492,
+      "pathLength": 5
+    }
   },
   "2025-08-25": {
-    "playerA": 8467329,
-    "playerB": 8473994
+    "easy": {
+      "playerA": 8479407,
+      "playerB": 8478010,
+      "pathLength": 3
+    },
+    "hard": {
+      "playerA": 8479318,
+      "playerB": 8471214,
+      "pathLength": 4
+    }
   },
   "2025-08-26": {
-    "playerA": 8477493,
-    "playerB": 8471214
+    "easy": {
+      "playerA": 8476456,
+      "playerB": 8477956,
+      "pathLength": 3
+    },
+    "hard": {
+      "playerA": 8474141,
+      "playerB": 8475784,
+      "pathLength": 4
+    }
   },
   "2025-08-27": {
-    "playerA": 8478550,
-    "playerB": 8475784
+    "easy": {
+      "playerA": 8470595,
+      "playerB": 8474141,
+      "pathLength": 3
+    },
+    "hard": {
+      "playerA": 8475166,
+      "playerB": 8478444,
+      "pathLength": 4
+    }
   },
   "2025-08-28": {
-    "playerA": 8477493,
-    "playerB": 8478550
+    "easy": {
+      "playerA": 8471685,
+      "playerB": 8478444,
+      "pathLength": 3
+    },
+    "hard": {
+      "playerA": 8480018,
+      "playerB": 8477946,
+      "pathLength": 4
+    }
   },
   "2025-08-29": {
-    "playerA": 8480027,
-    "playerB": 8479314
+    "easy": {
+      "playerA": 8481559,
+      "playerB": 8471685,
+      "pathLength": 3
+    },
+    "hard": {
+      "playerA": 8480801,
+      "playerB": 8478427,
+      "pathLength": 5
+    }
   },
   "2025-08-30": {
-    "playerA": 8476453,
-    "playerB": 8481559
+    "easy": {
+      "playerA": 8475166,
+      "playerB": 8478402,
+      "pathLength": 3
+    },
+    "hard": {
+      "playerA": 8473604,
+      "playerB": 8479407,
+      "pathLength": 5
+    }
   },
   "2025-08-31": {
-    "playerA": 8470595,
-    "playerB": 8473548
+    "easy": {
+      "playerA": 8473604,
+      "playerB": 8473548,
+      "pathLength": 3
+    },
+    "hard": {
+      "playerA": 8479420,
+      "playerB": 8482116,
+      "pathLength": 6
+    }
   },
   "2025-09-01": {
-    "playerA": 8479407,
-    "playerB": 8478550
+    "easy": {
+      "playerA": 8477946,
+      "playerB": 8475166,
+      "pathLength": 3
+    },
+    "hard": {
+      "playerA": 8448208,
+      "playerB": 8478010,
+      "pathLength": 5
+    }
   },
   "2025-09-02": {
-    "playerA": 8473604,
-    "playerB": 8471215
+    "easy": {
+      "playerA": 8478420,
+      "playerB": 8473548,
+      "pathLength": 3
+    },
+    "hard": {
+      "playerA": 8480801,
+      "playerB": 8470612,
+      "pathLength": 4
+    }
   },
   "2025-09-03": {
-    "playerA": 8479343,
-    "playerB": 8482078
+    "easy": {
+      "playerA": 8471685,
+      "playerB": 8481559,
+      "pathLength": 3
+    },
+    "hard": {
+      "playerA": 8479420,
+      "playerB": 8471685,
+      "pathLength": 5
+    }
   },
   "2025-09-04": {
-    "playerA": 8470595,
-    "playerB": 8473548
+    "easy": {
+      "playerA": 8477492,
+      "playerB": 8479314,
+      "pathLength": 3
+    },
+    "hard": {
+      "playerA": 8477934,
+      "playerB": 8478439,
+      "pathLength": 4
+    }
   },
   "2025-09-05": {
-    "playerA": 8482078,
-    "playerB": 8481559
+    "easy": {
+      "playerA": 8474564,
+      "playerB": 8477934,
+      "pathLength": 3
+    },
+    "hard": {
+      "playerA": 8470595,
+      "playerB": 8479318,
+      "pathLength": 4
+    }
   },
   "2025-09-06": {
-    "playerA": 8467329,
-    "playerB": 8473994
+    "easy": {
+      "playerA": 8476453,
+      "playerB": 8478444,
+      "pathLength": 3
+    },
+    "hard": {
+      "playerA": 8473604,
+      "playerB": 8448208,
+      "pathLength": 5
+    }
   },
   "2025-09-07": {
-    "playerA": 8477946,
-    "playerB": 8475166
+    "easy": {
+      "playerA": 8478420,
+      "playerB": 8478483,
+      "pathLength": 3
+    },
+    "hard": {
+      "playerA": 8473512,
+      "playerB": 8480018,
+      "pathLength": 4
+    }
   },
   "2025-09-08": {
-    "playerA": 8480018,
-    "playerB": 8477493
+    "easy": {
+      "playerA": 8470612,
+      "playerB": 8478402,
+      "pathLength": 3
+    },
+    "hard": {
+      "playerA": 8480893,
+      "playerB": 8479337,
+      "pathLength": 5
+    }
   },
   "2025-09-09": {
-    "playerA": 8478403,
-    "playerB": 8473604
+    "easy": {
+      "playerA": 8476456,
+      "playerB": 8476346,
+      "pathLength": 3
+    },
+    "hard": {
+      "playerA": 8482116,
+      "playerB": 8480893,
+      "pathLength": 5
+    }
   },
   "2025-09-10": {
-    "playerA": 8474564,
-    "playerB": 8477956
+    "easy": {
+      "playerA": 8473548,
+      "playerB": 8478420,
+      "pathLength": 3
+    },
+    "hard": {
+      "playerA": 8480893,
+      "playerB": 8470612,
+      "pathLength": 6
+    }
   },
   "2025-09-11": {
-    "playerA": 8478864,
-    "playerB": 8478427
+    "easy": {
+      "playerA": 8478427,
+      "playerB": 8479314,
+      "pathLength": 3
+    },
+    "hard": {
+      "playerA": 8478420,
+      "playerB": 8476346,
+      "pathLength": 4
+    }
   },
   "2025-09-12": {
-    "playerA": 8480018,
-    "playerB": 8476346
+    "easy": {
+      "playerA": 8478427,
+      "playerB": 8477956,
+      "pathLength": 3
+    },
+    "hard": {
+      "playerA": 8480801,
+      "playerB": 8480893,
+      "pathLength": 5
+    }
   },
   "2025-09-13": {
-    "playerA": 8476456,
-    "playerB": 8471214
+    "easy": {
+      "playerA": 8473512,
+      "playerB": 8482078,
+      "pathLength": 3
+    },
+    "hard": {
+      "playerA": 8478444,
+      "playerB": 8477493,
+      "pathLength": 5
+    }
   },
   "2025-09-14": {
-    "playerA": 8476453,
-    "playerB": 8479407
+    "easy": {
+      "playerA": 8477946,
+      "playerB": 8471675,
+      "pathLength": 3
+    },
+    "hard": {
+      "playerA": 8471685,
+      "playerB": 8478864,
+      "pathLength": 4
+    }
   },
   "2025-09-15": {
-    "playerA": 8480018,
-    "playerB": 8476346
+    "easy": {
+      "playerA": 8481559,
+      "playerB": 8480018,
+      "pathLength": 3
+    },
+    "hard": {
+      "playerA": 8479337,
+      "playerB": 8471685,
+      "pathLength": 5
+    }
   },
   "2025-09-16": {
-    "playerA": 8466378,
-    "playerB": 8474141
+    "easy": {
+      "playerA": 8480018,
+      "playerB": 8479407,
+      "pathLength": 3
+    },
+    "hard": {
+      "playerA": 8471685,
+      "playerB": 8478420,
+      "pathLength": 4
+    }
   },
   "2025-09-17": {
-    "playerA": 8462042,
-    "playerB": 8471214
+    "easy": {
+      "playerA": 8477956,
+      "playerB": 8479407,
+      "pathLength": 3
+    },
+    "hard": {
+      "playerA": 8477933,
+      "playerB": 8471215,
+      "pathLength": 4
+    }
   },
   "2025-09-18": {
-    "playerA": 8479407,
-    "playerB": 8478420
+    "easy": {
+      "playerA": 8480018,
+      "playerB": 8471685,
+      "pathLength": 3
+    },
+    "hard": {
+      "playerA": 8477956,
+      "playerB": 8469454,
+      "pathLength": 4
+    }
   },
   "2025-09-19": {
-    "playerA": 8480018,
-    "playerB": 8475784
+    "easy": {
+      "playerA": 8477933,
+      "playerB": 8448208,
+      "pathLength": 3
+    },
+    "hard": {
+      "playerA": 8471675,
+      "playerB": 8482116,
+      "pathLength": 5
+    }
   },
   "2025-09-20": {
-    "playerA": 8477934,
-    "playerB": 8481559
+    "easy": {
+      "playerA": 8476456,
+      "playerB": 8480027,
+      "pathLength": 3
+    },
+    "hard": {
+      "playerA": 8469454,
+      "playerB": 8481559,
+      "pathLength": 4
+    }
   },
   "2025-09-21": {
-    "playerA": 8471685,
-    "playerB": 8479407
+    "easy": {
+      "playerA": 8479337,
+      "playerB": 8480018,
+      "pathLength": 3
+    },
+    "hard": {
+      "playerA": 8480893,
+      "playerB": 8477933,
+      "pathLength": 4
+    }
   },
   "2025-09-22": {
-    "playerA": 8478439,
-    "playerB": 8476346
+    "easy": {
+      "playerA": 8474564,
+      "playerB": 8478444,
+      "pathLength": 3
+    },
+    "hard": {
+      "playerA": 8478402,
+      "playerB": 8478864,
+      "pathLength": 5
+    }
   },
   "2025-09-23": {
-    "playerA": 8480018,
-    "playerB": 8475784
+    "easy": {
+      "playerA": 8478420,
+      "playerB": 8474564,
+      "pathLength": 3
+    },
+    "hard": {
+      "playerA": 8470595,
+      "playerB": 8477946,
+      "pathLength": 4
+    }
   },
   "2025-09-24": {
-    "playerA": 8478439,
-    "playerB": 8480801
+    "easy": {
+      "playerA": 8476346,
+      "playerB": 8475784,
+      "pathLength": 3
+    },
+    "hard": {
+      "playerA": 8476346,
+      "playerB": 8478439,
+      "pathLength": 4
+    }
   },
   "2025-09-25": {
-    "playerA": 8466378,
-    "playerB": 8473548
+    "easy": {
+      "playerA": 8479314,
+      "playerB": 8476456,
+      "pathLength": 3
+    },
+    "hard": {
+      "playerA": 8477492,
+      "playerB": 8471685,
+      "pathLength": 4
+    }
   },
   "2025-09-26": {
-    "playerA": 8477934,
-    "playerB": 8479407
+    "easy": {
+      "playerA": 8479407,
+      "playerB": 8477956,
+      "pathLength": 3
+    },
+    "hard": {
+      "playerA": 8478444,
+      "playerB": 8477933,
+      "pathLength": 4
+    }
   },
   "2025-09-27": {
-    "playerA": 8480018,
-    "playerB": 8477946
+    "easy": {
+      "playerA": 8471215,
+      "playerB": 8470612,
+      "pathLength": 3
+    },
+    "hard": {
+      "playerA": 8471685,
+      "playerB": 8477956,
+      "pathLength": 4
+    }
   },
   "2025-09-28": {
-    "playerA": 8477933,
-    "playerB": 8448208
+    "easy": {
+      "playerA": 8478427,
+      "playerB": 8471685,
+      "pathLength": 3
+    },
+    "hard": {
+      "playerA": 8477493,
+      "playerB": 8477956,
+      "pathLength": 4
+    }
   },
   "2025-09-29": {
-    "playerA": 8479318,
-    "playerB": 8471214
+    "easy": {
+      "playerA": 8474564,
+      "playerB": 8478420,
+      "pathLength": 3
+    },
+    "hard": {
+      "playerA": 8479407,
+      "playerB": 8478420,
+      "pathLength": 4
+    }
   },
   "2025-09-30": {
-    "playerA": 8471215,
-    "playerB": 8448208
+    "easy": {
+      "playerA": 8479407,
+      "playerB": 8476456,
+      "pathLength": 3
+    },
+    "hard": {
+      "playerA": 8478439,
+      "playerB": 8479343,
+      "pathLength": 4
+    }
   },
   "2025-10-01": {
-    "playerA": 8475784,
-    "playerB": 8478550
+    "easy": {
+      "playerA": 8478444,
+      "playerB": 8475784,
+      "pathLength": 3
+    },
+    "hard": {
+      "playerA": 8477934,
+      "playerB": 8476453,
+      "pathLength": 4
+    }
   },
   "2025-10-02": {
-    "playerA": 8477946,
-    "playerB": 8473512
+    "easy": {
+      "playerA": 8479343,
+      "playerB": 8471215,
+      "pathLength": 3
+    },
+    "hard": {
+      "playerA": 8480801,
+      "playerB": 8471214,
+      "pathLength": 4
+    }
   },
   "2025-10-03": {
-    "playerA": 8474141,
-    "playerB": 8476453
+    "easy": {
+      "playerA": 8473604,
+      "playerB": 8482078,
+      "pathLength": 3
+    },
+    "hard": {
+      "playerA": 8480801,
+      "playerB": 8478483,
+      "pathLength": 4
+    }
   },
   "2025-10-04": {
-    "playerA": 8477946,
-    "playerB": 8479407
+    "easy": {
+      "playerA": 8480018,
+      "playerB": 8478420,
+      "pathLength": 3
+    },
+    "hard": {
+      "playerA": 8471214,
+      "playerB": 8473512,
+      "pathLength": 4
+    }
   },
   "2025-10-05": {
-    "playerA": 8471215,
-    "playerB": 8479420
+    "easy": {
+      "playerA": 8473512,
+      "playerB": 8482078,
+      "pathLength": 3
+    },
+    "hard": {
+      "playerA": 8448208,
+      "playerB": 8471214,
+      "pathLength": 5
+    }
   },
   "2025-10-06": {
-    "playerA": 8477493,
-    "playerB": 8474141
+    "easy": {
+      "playerA": 8477956,
+      "playerB": 8478427,
+      "pathLength": 3
+    },
+    "hard": {
+      "playerA": 8477492,
+      "playerB": 8470595,
+      "pathLength": 4
+    }
   },
   "2025-10-07": {
-    "playerA": 8479337,
-    "playerB": 8476456
+    "easy": {
+      "playerA": 8478420,
+      "playerB": 8471214,
+      "pathLength": 3
+    },
+    "hard": {
+      "playerA": 8478483,
+      "playerB": 8482116,
+      "pathLength": 4
+    }
   },
   "2025-10-08": {
-    "playerA": 8479407,
-    "playerB": 8470612
+    "easy": {
+      "playerA": 8481559,
+      "playerB": 8474564,
+      "pathLength": 3
+    },
+    "hard": {
+      "playerA": 8482078,
+      "playerB": 8478864,
+      "pathLength": 6
+    }
   },
   "2025-10-09": {
-    "playerA": 8474141,
-    "playerB": 8471215
+    "easy": {
+      "playerA": 8482116,
+      "playerB": 8478439,
+      "pathLength": 3
+    },
+    "hard": {
+      "playerA": 8473604,
+      "playerB": 8471214,
+      "pathLength": 4
+    }
   },
   "2025-10-10": {
-    "playerA": 8479314,
-    "playerB": 8479407
+    "easy": {
+      "playerA": 8477956,
+      "playerB": 8480012,
+      "pathLength": 3
+    },
+    "hard": {
+      "playerA": 8479318,
+      "playerB": 8477956,
+      "pathLength": 5
+    }
   },
   "2025-10-11": {
-    "playerA": 8480018,
-    "playerB": 8477956
+    "easy": {
+      "playerA": 8480018,
+      "playerB": 8479407,
+      "pathLength": 3
+    },
+    "hard": {
+      "playerA": 8478403,
+      "playerB": 8473994,
+      "pathLength": 4
+    }
   },
   "2025-10-12": {
-    "playerA": 8479318,
-    "playerB": 8473994
+    "easy": {
+      "playerA": 8473604,
+      "playerB": 8479343,
+      "pathLength": 3
+    },
+    "hard": {
+      "playerA": 8477934,
+      "playerB": 8476453,
+      "pathLength": 4
+    }
   },
   "2025-10-13": {
-    "playerA": 8482078,
-    "playerB": 8481559
+    "easy": {
+      "playerA": 8476346,
+      "playerB": 8477933,
+      "pathLength": 3
+    },
+    "hard": {
+      "playerA": 8476346,
+      "playerB": 8474564,
+      "pathLength": 5
+    }
   },
   "2025-10-14": {
-    "playerA": 8471215,
-    "playerB": 8482078
+    "easy": {
+      "playerA": 8479314,
+      "playerB": 8478420,
+      "pathLength": 3
+    },
+    "hard": {
+      "playerA": 8477492,
+      "playerB": 8477956,
+      "pathLength": 4
+    }
   }
 }

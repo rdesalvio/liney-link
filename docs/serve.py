@@ -9,7 +9,7 @@ import socketserver
 import os
 import sys
 
-PORT = 8090
+PORT = 8092
 
 class MyHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
     def end_headers(self):

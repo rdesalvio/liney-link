@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Liney - NHL Line Combination Game</title>
+    <title>Liney - Hockey Player Connection Game</title>
+    <link rel="icon" href="data:,"  />
     <style>
         * {
             margin: 0;
@@ -291,6 +292,83 @@
             }
         }
 
+        .difficulty-toggle {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .difficulty-switch {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 8px;
+        }
+
+        .difficulty-label {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #6c7086;
+            transition: color 0.3s ease;
+        }
+
+        .difficulty-label.active {
+            color: #89b4fa;
+        }
+
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 24px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #45475a;
+            transition: 0.3s;
+            border-radius: 24px;
+            border: 2px solid #6c7086;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 16px;
+            width: 16px;
+            left: 2px;
+            bottom: 2px;
+            background-color: #cdd6f4;
+            transition: 0.3s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background-color: #89b4fa;
+            border-color: #89b4fa;
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(24px);
+        }
+
+        .difficulty-description {
+            font-size: 0.8rem;
+            color: #a6adc8;
+            font-style: italic;
+        }
+
         .guess-counter {
             margin-top: 15px;
             padding: 8px 16px;
@@ -445,7 +523,7 @@
 
         .search-input {
             width: 100%;
-            padding: 15px 45px 15px 20px;
+            padding: 15px 20px;
             border: 2px solid #45475a;
             border-radius: 25px;
             font-size: 1rem;
@@ -453,37 +531,6 @@
             transition: border-color 0.3s ease;
             background: #313244;
             color: #cdd6f4;
-        }
-        
-        .search-clear {
-            position: absolute;
-            right: 12px;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            background: #45475a;
-            color: #cdd6f4;
-            border: none;
-            cursor: pointer;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            font-size: 14px;
-            font-weight: bold;
-            transition: all 0.2s ease;
-            padding: 0;
-            line-height: 1;
-        }
-        
-        .search-clear.show {
-            display: flex;
-        }
-        
-        .search-clear:hover {
-            background: #6c7086;
-            transform: translateY(-50%) scale(1.1);
         }
 
         .search-input:focus {
@@ -643,7 +690,6 @@
             color: #11111b;
         }
 
-
         .debug-button {
             background: linear-gradient(135deg, #f38ba8 0%, #fab387 100%);
             color: #11111b;
@@ -735,8 +781,23 @@
             <div class="how-to-play" id="howToPlayBtn">i</div>
             <h1 class="title">Liney</h1>
             <p class="subtitle">Connect the dots between NHL players via common <span class="linemates-link" id="linematesLink">linemates</span></p>
+            
+            <div class="difficulty-toggle">
+                <div class="difficulty-switch">
+                    <span class="difficulty-label easy-label">Easy</span>
+                    <label class="switch">
+                        <input type="checkbox" id="difficultyToggle">
+                        <span class="slider"></span>
+                    </label>
+                    <span class="difficulty-label hard-label">Hard</span>
+                </div>
+                <div class="difficulty-description">
+                    <span id="difficultyText">3 player connection</span>
+                </div>
+            </div>
+            
             <div class="guess-counter" id="guessCounter">
-                <span class="guess-text">Guesses remaining: </span>
+                <span class="guess-text">Attempts remaining: </span>
                 <span class="guess-count" id="guessCount">3</span>
             </div>
         </div>
@@ -756,10 +817,9 @@
                         autocomplete="off"
                         disabled
                     >
-                    <button class="search-clear" id="searchClear" aria-label="Clear search">×</button>
                     <div class="suggestions" id="suggestions"></div>
                 </div>
-                <button class="add-button" id="addButton" disabled>Add Liney</button>
+                <button class="add-button" id="addButton" disabled>Add Linkage</button>
                 <div class="error-message" id="errorMessage"></div>
             </div>
         </div>
@@ -786,7 +846,6 @@
             <ul>
                 <li>Have played 600+ minutes together at <strong>any</strong> strength on the same team at the same time</li>
                 <li>Play the same position, i.e. forwards are not considered linemates with defensemen</li>
-                <li>NHL shift data only goes back to the <strong>2012-2013 season</strong></li>
             </ul>
         </div>
     </div>
@@ -804,6 +863,12 @@
                 <li>You win when you create a continuous path from the first to the last player</li>
                 <li>You have 3 wrong guesses before the game ends</li>
             </ol>
+            <p><strong>Difficulty Modes:</strong></p>
+            <ul>
+                <li><strong>Easy Mode:</strong> Puzzles require exactly 3 players to complete (shortest possible connection)</li>
+                <li><strong>Hard Mode:</strong> Puzzles require 4 or more players to complete (longer, more challenging connections)</li>
+            </ul>
+            <p>Use the toggle at the top to switch between Easy and Hard mode for today's puzzle!</p>
         </div>
     </div>
 

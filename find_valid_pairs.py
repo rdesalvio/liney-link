@@ -103,8 +103,13 @@ def is_relevant_player(player_id, verbose=False):
     except:
         return False
 
-def find_interesting_pairs(max_pairs=100):
-    """Find pairs of players who were never teammates but are connected"""
+def find_interesting_pairs(max_pairs=100, difficulty="mixed"):
+    """Find pairs of players who were never teammates but are connected
+    
+    Args:
+        max_pairs: Maximum number of pairs to find
+        difficulty: "easy" (path length 3), "hard" (path length 4+), or "mixed"
+    """
     
     print("Loading all player team histories...")
     player_teams = load_all_player_teams()
@@ -162,7 +167,16 @@ def find_interesting_pairs(max_pairs=100):
         # Check if there's a path between them
         path = find_shortest_path(player_a, player_b, linkages)
         
-        if path and 2 <= len(path) <= 4:  # Good path length for a puzzle
+        # Check path length based on difficulty
+        valid_path = False
+        if difficulty == "easy" and path and len(path) == 3:
+            valid_path = True
+        elif difficulty == "hard" and path and len(path) >= 4:
+            valid_path = True
+        elif difficulty == "mixed" and path and 2 <= len(path) <= 4:
+            valid_path = True
+            
+        if valid_path:
             valid_pairs.append({
                 'player_a': player_a,
                 'player_b': player_b,
@@ -180,6 +194,14 @@ def find_interesting_pairs(max_pairs=100):
         json.dump(valid_pairs, f, indent=2)
     
     return valid_pairs
+
+def find_easy_pairs(max_pairs=50):
+    """Find easy puzzle pairs (path length exactly 3)"""
+    return find_interesting_pairs(max_pairs=max_pairs, difficulty="easy")
+
+def find_hard_pairs(max_pairs=50):
+    """Find hard puzzle pairs (path length 4 or more)"""
+    return find_interesting_pairs(max_pairs=max_pairs, difficulty="hard")
 
 def get_player_name(player_id):
     """Get player name for display"""

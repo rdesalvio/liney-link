@@ -27,13 +27,6 @@ def generate_monthly_puzzles(days=60):
     puzzles_dir = docs_dir / "puzzles"
     puzzles_dir.mkdir(exist_ok=True)
     
-    # Copy static files to docs directory
-    static_files = ["index.html", "game.js"]
-    for file in static_files:
-        if os.path.exists(file):
-            shutil.copy2(file, docs_dir / file)
-            print(f"✓ Copied {file}")
-    
     # Copy web_data directory structure
     web_data_dir = docs_dir / "web_data"
     if os.path.exists("web_data"):

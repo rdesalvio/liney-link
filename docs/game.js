@@ -8,6 +8,12 @@ class LineyLinkGame {
         this.attemptsRemaining = 3;
         this.maxWrongGuesses = 3;
         
+        // Store attempts separately for each mode
+        this.attemptsByMode = {
+            easy: 3,
+            hard: 3
+        };
+        
         // Data containers - will be loaded securely
         this.playerNames = new Map();
         this.connections = new Map();
@@ -17,6 +23,55 @@ class LineyLinkGame {
         this.setupEventListeners(); // Set up event listeners once
         this.updateDifficultyUI(); // Initialize difficulty UI
         this.loadGameData();
+    }
+    
+    loadGameState(puzzleDate) {
+        const dateToUse = puzzleDate || this.currentPuzzleDate || new Date().toISOString().split('T')[0];
+        const storageKey = `liney_${dateToUse}_${this.currentDifficulty}`;
+        
+        const savedState = localStorage.getItem(storageKey);
+        if (savedState) {
+            const state = JSON.parse(savedState);
+            
+            // Validate that saved state matches current target players
+            const savedChain = state.playerChain || [];
+            if (savedChain.length >= 2) {
+                const savedStart = savedChain[0]?.id;
+                const savedEnd = savedChain[savedChain.length - 1]?.id;
+                
+                // If saved target players don't match current puzzle, don't load this state
+                if (savedStart !== this.targetPlayers.start || savedEnd !== this.targetPlayers.end) {
+                    console.log('Saved state target players don\'t match current puzzle, not loading');
+                    return false;
+                }
+            }
+            
+            this.playerChain = savedChain;
+            this.attemptsRemaining = state.attemptsRemaining !== undefined ? state.attemptsRemaining : 3;
+            this.gameComplete = state.completed || false;
+            this.gameFailed = state.failed || false;
+            // Update the mode-specific attempts tracker
+            this.attemptsByMode[this.currentDifficulty] = this.attemptsRemaining;
+            return true;
+        }
+        return false;
+    }
+
+    saveGameState() {
+        const puzzleDate = this.currentPuzzleDate || new Date().toISOString().split('T')[0];
+        const storageKey = `liney_${puzzleDate}_${this.currentDifficulty}`;
+        
+        const state = {
+            playerChain: this.playerChain,
+            attemptsRemaining: this.attemptsRemaining,
+            completed: this.gameComplete,
+            failed: this.gameFailed,
+            timestamp: Date.now()
+        };
+        
+        localStorage.setItem(storageKey, JSON.stringify(state));
+        // Also update the mode-specific attempts tracker
+        this.attemptsByMode[this.currentDifficulty] = this.attemptsRemaining;
     }
 
     initializeElements() {
@@ -88,6 +143,13 @@ class LineyLinkGame {
             this.targetPlayers.start = gameData.playerA;
             this.targetPlayers.end = gameData.playerB;
             
+            // Check for saved game state
+            const hasLoadedState = this.loadGameState(puzzleDate);
+            if (!hasLoadedState) {
+                // No saved state, use the stored attempts for this mode
+                this.attemptsRemaining = this.attemptsByMode[this.currentDifficulty];
+            }
+            
             this.initializeGame();
             
         } catch (error) {
@@ -97,23 +159,30 @@ class LineyLinkGame {
     }
 
     initializeGame() {
-        // Initialize player chain with target players
-        this.playerChain = [
-            { 
-                id: this.targetPlayers.start, 
-                name: this.playerNames.get(this.targetPlayers.start),
-                isTarget: true 
-            },
-            { 
-                id: this.targetPlayers.end, 
-                name: this.playerNames.get(this.targetPlayers.end),
-                isTarget: true 
-            }
-        ];
+        // If no saved chain or chain is empty, initialize with target players
+        if (!this.playerChain || this.playerChain.length === 0) {
+            this.playerChain = [
+                { 
+                    id: this.targetPlayers.start, 
+                    name: this.playerNames.get(this.targetPlayers.start),
+                    isTarget: true 
+                },
+                { 
+                    id: this.targetPlayers.end, 
+                    name: this.playerNames.get(this.targetPlayers.end),
+                    isTarget: true 
+                }
+            ];
+        }
 
         this.renderPlayerChain();
         this.enableInput();
         this.updateGuessCounter(); // Ensure counter is properly initialized
+        
+        // If game is already complete/failed, show "View Results" button instead of game
+        if (this.gameComplete || this.gameFailed) {
+            this.showViewResultsButton();
+        }
     }
 
     setupEventListeners() {
@@ -175,6 +244,13 @@ class LineyLinkGame {
                 this.hideSuggestions();
             }
         });
+        
+        // Close completion modal when clicking outside
+        this.completionModal.addEventListener('click', (e) => {
+            if (e.target === this.completionModal) {
+                this.completionModal.style.display = 'none';
+            }
+        });
     }
 
     enableInput() {
@@ -184,20 +260,47 @@ class LineyLinkGame {
 
     handleDifficultyChange() {
         const isHard = this.difficultyToggle.checked;
+        const previousMode = this.currentDifficulty;
+        
+        // Save current game state for the previous mode if there's meaningful progress
+        // (more than just the initial target players, or game is complete/failed, or attempts used)
+        const hasProgress = this.playerChain.length > 2 || this.gameComplete || this.gameFailed || this.attemptsRemaining < 3;
+        if (hasProgress) {
+            this.saveGameState();
+        }
+        
+        // Update attempts tracking for the previous mode
+        this.attemptsByMode[previousMode] = this.attemptsRemaining;
+        
+        // Switch to the new mode
         this.currentDifficulty = isHard ? 'hard' : 'easy';
         
         // Update UI
         this.updateDifficultyUI();
         
-        // Store current attempts to preserve across difficulty change
-        const preservedAttempts = this.attemptsRemaining;
+        // Clear any view results button
+        const viewResultsBtn = document.getElementById('viewResultsBtn');
+        if (viewResultsBtn) {
+            viewResultsBtn.remove();
+        }
+        
+        // Clear modal
+        this.completionModal.style.display = 'none';
+        
+        // Clear search input and selection
+        this.clearInput();
+        
+        // Reset game state variables for the new mode (these will be overridden if saved state exists)
+        this.gameComplete = false;
+        this.gameFailed = false;
+        this.playerChain = [];
+        this.selectedPlayer = null;
+        
+        // Load attempts for the new mode (this will be overridden if saved state exists)
+        this.attemptsRemaining = this.attemptsByMode[this.currentDifficulty];
         
         // Reload the game with new difficulty
-        this.loadGameData().then(() => {
-            // Restore attempts after reload
-            this.attemptsRemaining = preservedAttempts;
-            this.updateGuessCounter();
-        });
+        this.loadGameData();
     }
 
     updateDifficultyUI() {
@@ -333,6 +436,7 @@ class LineyLinkGame {
 
         // Add player to chain
         this.insertPlayerInChain(this.selectedPlayer, validation.insertionIndex);
+        this.saveGameState();
         
         // Check if puzzle is complete
         if (this.isPuzzleComplete()) {
@@ -361,6 +465,7 @@ class LineyLinkGame {
             // Wrong guess - decrement attempts
             this.attemptsRemaining--;
             this.updateGuessCounter();
+            this.saveGameState();
             
             if (this.attemptsRemaining <= 0) {
                 this.attemptsRemaining = 0; // Ensure it doesn't go below 0
@@ -422,6 +527,12 @@ class LineyLinkGame {
     }
 
     isPuzzleComplete() {
+        // Must have at least one non-target player to be considered complete
+        const hasNonTargetPlayer = this.playerChain.some(player => !player.isTarget);
+        if (!hasNonTargetPlayer) {
+            return false;
+        }
+        
         // Check if there's a complete chain from first to last player
         for (let i = 0; i < this.playerChain.length - 1; i++) {
             const currentPlayer = this.playerChain[i];
@@ -472,6 +583,7 @@ class LineyLinkGame {
         this.gameComplete = true;
         this.updateAddButton();
         this.searchInput.disabled = true;
+        this.saveGameState();
         this.showConfetti();
         this.showCompletionModal();
     }
@@ -498,6 +610,14 @@ class LineyLinkGame {
     showCompletionModal() {
         const chainLength = this.playerChain.length;
         const playerNames = this.playerChain.map(p => p.name);
+        
+        // Reset modal title to success state (in case it was changed by failure modal)
+        const modalTitle = this.completionModal.querySelector('.modal-title');
+        modalTitle.textContent = '🎉 Puzzle Complete!';
+        modalTitle.style.color = '#a6e3a1';
+        
+        // Reset share button text
+        this.shareButton.textContent = 'Copy Score';
         
         this.modalScore.innerHTML = `
             <strong>Your Solution (${chainLength} players):</strong><br><br>
@@ -712,11 +832,61 @@ class LineyLinkGame {
             this.guessCount.classList.add('danger');
         }
     }
+    
+    showViewResultsButton() {
+        // Hide the game area and show a "View Results" button
+        this.searchInput.disabled = true;
+        this.updateAddButton();
+        
+        // Clear the player chain display
+        this.playersChain.innerHTML = `
+            <div style="display: flex; flex-direction: column; align-items: center; gap: 20px;">
+                <div style="color: #a6adc8; font-size: 1.1rem;">
+                    ${this.gameComplete ? '✅ Puzzle Complete!' : '❌ Puzzle Failed'}
+                </div>
+                <button id="viewResultsBtn" style="
+                    background: linear-gradient(135deg, #89b4fa 0%, #cba6f7 100%);
+                    color: #11111b;
+                    border: none;
+                    border-radius: 25px;
+                    padding: 15px 30px;
+                    font-size: 1.1rem;
+                    font-weight: 600;
+                    cursor: pointer;
+                    transition: transform 0.2s ease, box-shadow 0.2s ease;
+                ">View Results</button>
+            </div>
+        `;
+        
+        // Add event listener to the button
+        const viewResultsBtn = document.getElementById('viewResultsBtn');
+        if (viewResultsBtn) {
+            viewResultsBtn.addEventListener('click', () => {
+                if (this.gameComplete) {
+                    this.showCompletionModal();
+                } else {
+                    this.showFailureModal();
+                }
+            });
+            
+            // Add hover effect
+            viewResultsBtn.addEventListener('mouseenter', () => {
+                viewResultsBtn.style.transform = 'translateY(-2px)';
+                viewResultsBtn.style.boxShadow = '0 5px 15px rgba(137, 180, 250, 0.4)';
+            });
+            
+            viewResultsBtn.addEventListener('mouseleave', () => {
+                viewResultsBtn.style.transform = 'translateY(0)';
+                viewResultsBtn.style.boxShadow = 'none';
+            });
+        }
+    }
 
     failGame() {
         this.gameFailed = true;
         this.searchInput.disabled = true;
         this.updateAddButton();
+        this.saveGameState();
         
         // Show failure modal
         this.showFailureModal();
@@ -802,6 +972,7 @@ class LineyLinkGame {
         
         this.renderPlayerChain();
         this.clearInput();
+        this.saveGameState();
         
         // Check if puzzle is complete after removal
         if (this.isPuzzleComplete()) {

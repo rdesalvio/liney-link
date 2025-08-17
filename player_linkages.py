@@ -171,7 +171,7 @@ def main():
                 print(f"  Error processing {game_file}: {e}")
     
     print(f"\nProcessed {total_files} total games")
-    print("Filtering connections with 500+ minutes...")
+    print("Filtering connections with 600+ minutes...")
     
     # Filter for 500+ minutes and prepare output
     player_linkages = {}
@@ -181,7 +181,7 @@ def main():
         valid_connections = []
         
         for connected_player, data in connections.items():
-            if data['minutes'] >= 500:
+            if data['minutes'] >= 600:
                 valid_connections.append({
                     'playerId': connected_player,
                     'minutes': round(data['minutes'], 2),

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Liney - Hockey Player Connection Game</title>
+    <title>Liney - Find The Common Linemate</title>
     <link rel="icon" href="data:,"  />
     <style>
         * {
@@ -780,7 +780,7 @@
         <div class="header">
             <div class="how-to-play" id="howToPlayBtn">i</div>
             <h1 class="title">Liney</h1>
-            <p class="subtitle">Connect the dots between NHL players via common <span class="linemates-link" id="linematesLink">linemates</span></p>
+            <p class="subtitle">Find the common <span class="linemates-link" id="linematesLink">linemates</span> between players</p>
             
             <div class="difficulty-toggle">
                 <div class="difficulty-switch">
@@ -792,7 +792,7 @@
                     <span class="difficulty-label hard-label">Hard</span>
                 </div>
                 <div class="difficulty-description">
-                    <span id="difficultyText">3 player connection</span>
+                    <span id="difficultyText">1 player connection</span>
                 </div>
             </div>
             
@@ -819,7 +819,7 @@
                     >
                     <div class="suggestions" id="suggestions"></div>
                 </div>
-                <button class="add-button" id="addButton" disabled>Add Linkage</button>
+                <button class="add-button" id="addButton" disabled>Add Player</button>
                 <div class="error-message" id="errorMessage"></div>
             </div>
         </div>
@@ -844,9 +844,10 @@
             <h3>What are linemates?</h3>
             <p>2 players are considered linemates if they:</p>
             <ul>
-                <li>Have played 600+ minutes together at <strong>any</strong> strength on the same team at the same time</li>
-                <li>Play the same position, i.e. forwards are not considered linemates with defensemen</li>
+                <li>Have played 600+ minutes together(Roughly 10 games) at <strong>any</strong> strength on the same team at the same time</li>
+                <li>Play the same position(i.e., forwards are not considered linemates with defensemen)</li>
             </ul>
+            <p><strong>NOTE</strong>: NHL shift data only goes back to the <strong>2012-2013 season</strong> so there is a hard cutoff there.</p>
         </div>
     </div>
 
@@ -857,18 +858,19 @@
             <p><strong>Goal:</strong> Connect two NHL players through their common linemates.</p>
             <p><strong>Rules:</strong></p>
             <ol>
-                <li>You start with two target players who need to be connected</li>
-                <li>Add players who are linemates with anyone already in your chain</li>
-                <li>Each new player must be connected to at least one player in your current chain</li>
-                <li>You win when you create a continuous path from the first to the last player</li>
+                <li>You start with two players who need to be connected</li>
+                <li>You play by adding players who were linemates</li>
+                <li>If your pick also links to the <em>other</em> end, the chain is complete.</li>
+                <li>If not, your pick becomes the new middle and you keep building from there.</li>
+                <li>You win when you create a continuous chain between the original players</li>
                 <li>You have 3 wrong guesses before the game ends</li>
             </ol>
             <p><strong>Difficulty Modes:</strong></p>
             <ul>
-                <li><strong>Easy Mode:</strong> Puzzles require exactly 3 players to complete (shortest possible connection)</li>
-                <li><strong>Hard Mode:</strong> Puzzles require 4 or more players to complete (longer, more challenging connections)</li>
+                <li><strong>Easy Mode:</strong> Puzzles require exactly 1 player to complete the chain</li>
+                <li><strong>Hard Mode:</strong> Puzzles require 2+ players to complete the chain</li>
             </ul>
-            <p>Use the toggle at the top to switch between Easy and Hard mode for today's puzzle!</p>
+            <p>Use the toggle at the top to switch between Easy and Hard mode for today's puzzle! But be careful, attempts are shared between both modes.</p>
         </div>
     </div>
 

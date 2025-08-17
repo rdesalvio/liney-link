@@ -174,7 +174,7 @@ class LineyLinkGame {
         this.hardLabel.classList.toggle('active', isHard);
         
         // Update description
-        this.difficultyText.textContent = isHard ? '4+ player connection' : '3 player connection';
+        this.difficultyText.textContent = isHard ? '2+ player connections' : '1 player connection';
         
         // Ensure toggle is in correct position
         this.difficultyToggle.checked = isHard;
@@ -462,14 +462,37 @@ class LineyLinkGame {
         const year = String(today.getFullYear()).slice(-2);
         const dateStr = `${month}/${day}/${year}`;
         
-        // Error display with emoji
-        const perfectGame = this.attemptsRemaining === 3;
-        const errorEmoji = perfectGame ? '🎯' : '❌';
-        const errorDisplay = perfectGame ? 'Perfect' : `${3 - this.attemptsRemaining} errors`;
+        // Build emoji grid representation
+        const difficultyText = this.currentDifficulty === 'hard' ? 'Hard' : 'Easy';
+        const errorsCount = 3 - this.attemptsRemaining;
         
-        // Build share text with player chain
-        const chainStr = playerNames.join(' → ');
-        const shareText = `Liney ${dateStr}\n${chainLength} players - ${errorDisplay} ${errorEmoji}\n\n${chainStr}\n\n${window.location.host}`;
+        // Create rows for each attempt
+        let emojiGrid = '';
+        
+        // Add failed attempts (red X between locks)
+        for (let i = 0; i < errorsCount; i++) {
+            emojiGrid += '🔒❌🔒\n';
+        }
+        
+        // Add successful completion (chain between locks)
+        if (this.currentDifficulty === 'easy') {
+            // Easy mode: single chain emoji
+            emojiGrid += '🔒⛓️🔒';
+        } else {
+            // Hard mode: number of chain emojis equals number of players used
+            const chainEmojis = '⛓️'.repeat(chainLength);
+            emojiGrid += `🔒${chainEmojis}🔒`;
+        }
+        
+        // Build share text
+        let shareContent = `Liney ${dateStr} (${difficultyText})\n\n${emojiGrid}`;
+        
+        if (this.currentDifficulty === 'hard') {
+            const chainStr = playerNames.join(' → ');
+            shareContent += `\n\n${chainStr}`;
+        }
+        
+        const shareText = `${shareContent}\n\n${window.location.host}`;
         
         if (navigator.clipboard) {
             navigator.clipboard.writeText(shareText).then(() => {
@@ -640,16 +663,19 @@ class LineyLinkGame {
     }
 
     showFailureModal() {
-        // Find the shortest solution
-        const solution = this.findShortestSolution();
-        
         let solutionHtml = '';
-        if (solution && solution.length > 0) {
-            const solutionNames = solution.map(playerId => {
-                return this.playerNames.get(playerId) || `Player ${playerId}`;
-            });
-            solutionHtml = `<br><br><strong>Shortest Solution (${solutionNames.length} players):</strong><br>
-                <span style="color: #a6e3a1;">${solutionNames.join(' → ')}</span>`;
+        
+        // Only show solution for hard mode
+        if (this.currentDifficulty === 'hard') {
+            const solution = this.findShortestSolution();
+            
+            if (solution && solution.length > 0) {
+                const solutionNames = solution.map(playerId => {
+                    return this.playerNames.get(playerId) || `Player ${playerId}`;
+                });
+                solutionHtml = `<br><br><strong>Shortest Solution (${solutionNames.length} players):</strong><br>
+                    <span style="color: #a6e3a1;">${solutionNames.join(' → ')}</span>`;
+            }
         }
         
         this.modalScore.innerHTML = `
@@ -682,14 +708,16 @@ class LineyLinkGame {
         const year = String(today.getFullYear()).slice(-2);
         const dateStr = `${month}/${day}/${year}`;
         
-        // Check if any successful links were made (more than just the two target players)
-        const hasLinks = this.playerChain.length > 2;
-        const linksDisplay = hasLinks ? 
-            this.playerChain.map(p => p.name).join(' → ') : 
-            'No links found';
+        const difficultyText = this.currentDifficulty === 'hard' ? 'Hard' : 'Easy';
         
-        // Build share text for failure
-        const shareText = `Liney ${dateStr}\nFailed - 3 errors ❌\n\n${linksDisplay}\n\n${window.location.host}`;
+        // Build emoji grid for failure (3 failed attempts)
+        let emojiGrid = '';
+        for (let i = 0; i < 3; i++) {
+            emojiGrid += '🔒❌🔒';
+            if (i < 2) emojiGrid += '\n'; // Add newline except for last row
+        }
+        
+        const shareText = `Liney ${dateStr} (${difficultyText})\n\n${emojiGrid}\n\n${window.location.host}`;
         
         if (navigator.clipboard) {
             navigator.clipboard.writeText(shareText).then(() => {

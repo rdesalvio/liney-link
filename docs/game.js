@@ -716,6 +716,7 @@ class LineyLinkGame {
 
     clearInput() {
         this.searchInput.value = '';
+        this.searchClear.classList.remove('show');  // Hide the X button
         this.selectedPlayer = null;
         this.updateAddButton();
         this.hideSuggestions();

@@ -26,7 +26,6 @@ class LineyLinkGame {
         this.completionModal = document.getElementById('completionModal');
         this.modalScore = document.getElementById('modalScore');
         this.shareButton = document.getElementById('shareButton');
-        this.newGameButton = document.getElementById('newGameButton');
         this.confetti = document.getElementById('confetti');
         this.guessCount = document.getElementById('guessCount');
         this.linematesLink = document.getElementById('linematesLink');
@@ -36,6 +35,7 @@ class LineyLinkGame {
         this.howToPlayModal = document.getElementById('howToPlayModal');
         this.howToPlayClose = document.getElementById('howToPlayClose');
         this.searchClear = document.getElementById('searchClear');
+        this.debugButton = document.getElementById('debugButton');
     }
 
     async loadGameData() {
@@ -108,7 +108,7 @@ class LineyLinkGame {
                 this.shareScore();
             }
         });
-        this.newGameButton.addEventListener('click', () => this.startNewGame());
+        this.debugButton.addEventListener('click', () => this.loadRandomDay());
         
         // Setup linemates tooltip
         this.setupLinematesTooltip();
@@ -633,6 +633,9 @@ class LineyLinkGame {
         `;
         
         this.completionModal.style.display = 'flex';
+        
+        // Show debug button for completed games
+        this.debugButton.style.display = 'inline-block';
     }
 
     shareScore() {
@@ -714,6 +717,56 @@ class LineyLinkGame {
         }
     }
 
+    async loadRandomDay() {
+        try {
+            // Generate a random date within the available puzzle range
+            const startDate = new Date('2025-8-16'); // Base date
+            const randomDays = Math.floor(Math.random() * 60); // Random day within 60 days
+            const randomDate = new Date(startDate);
+            randomDate.setDate(startDate.getDate() + randomDays);
+            
+            const randomDateStr = randomDate.toISOString().split('T')[0];
+            
+            // Try to load the random date's puzzle
+            const gameResponse = await fetch(`./puzzles/${randomDateStr}.json`);
+            
+            if (gameResponse.ok) {
+                const gameData = await gameResponse.json();
+                
+                // Update the target players
+                this.targetPlayers = {
+                    start: gameData.playerA,
+                    end: gameData.playerB
+                };
+                
+                // Reset the game state
+                this.playerChain = [
+                    { id: this.targetPlayers.start, name: this.playerNames.get(this.targetPlayers.start), isTarget: true },
+                    { id: this.targetPlayers.end, name: this.playerNames.get(this.targetPlayers.end), isTarget: true }
+                ];
+                this.wrongGuesses = 0;
+                this.gameCompleted = false;
+                this.gameFailed = false;
+                
+                // Close modal and update UI
+                this.completionModal.style.display = 'none';
+                this.renderPlayerChain();
+                this.updateGuessCounter();
+                this.clearInput();
+                this.enableInput();
+                
+                console.log(`Loaded random puzzle for ${randomDateStr}: ${this.playerNames.get(this.targetPlayers.start)} → ${this.playerNames.get(this.targetPlayers.end)}`);
+            } else {
+                // Fallback to reload if specific date not found
+                window.location.reload();
+            }
+        } catch (error) {
+            console.error('Error loading random day:', error);
+            // Fallback: just reload the page
+            window.location.reload();
+        }
+    }
+
     clearInput() {
         this.searchInput.value = '';
         this.searchClear.classList.remove('show');  // Hide the X button
@@ -753,11 +806,24 @@ class LineyLinkGame {
     }
 
     showFailureModal() {
+        // Find the shortest solution
+        const solution = this.findShortestSolution();
+        
+        let solutionHtml = '';
+        if (solution && solution.length > 0) {
+            const solutionNames = solution.map(playerId => {
+                return this.playerNames.get(playerId) || `Player ${playerId}`;
+            });
+            solutionHtml = `<br><br><strong>Shortest Solution (${solutionNames.length} players):</strong><br>
+                <span style="color: #a6e3a1;">${solutionNames.join(' → ')}</span>`;
+        }
+        
         this.modalScore.innerHTML = `
             <strong style="color: #f38ba8;">Game Over!</strong><br><br>
             You've used all 3 wrong guesses.<br>
             The puzzle was to connect:<br><br>
             <strong>${this.playerNames.get(this.targetPlayers.start)} → ${this.playerNames.get(this.targetPlayers.end)}</strong>
+            ${solutionHtml}
         `;
         
         // Change modal title for failure
@@ -769,6 +835,45 @@ class LineyLinkGame {
         this.shareButton.textContent = 'Share Result';
         
         this.completionModal.style.display = 'flex';
+        
+        // Show debug button for failed games too
+        this.debugButton.style.display = 'inline-block';
+    }
+    
+    findShortestSolution() {
+        // BFS to find shortest path between the two target players
+        const startId = this.targetPlayers.start;
+        const endId = this.targetPlayers.end;
+        
+        if (!startId || !endId) return null;
+        
+        const visited = new Set();
+        const queue = [[startId]]; // Array of paths
+        visited.add(startId);
+        
+        while (queue.length > 0) {
+            const path = queue.shift();
+            const currentId = path[path.length - 1];
+            
+            // Check if we reached the target
+            if (currentId === endId) {
+                return path;
+            }
+            
+            // Get connections for current player
+            const connections = this.connections.get(currentId.toString());
+            if (connections) {
+                for (const nextId of connections) {
+                    const nextIdNum = parseInt(nextId);
+                    if (!visited.has(nextIdNum)) {
+                        visited.add(nextIdNum);
+                        queue.push([...path, nextIdNum]);
+                    }
+                }
+            }
+        }
+        
+        return null; // No path found
     }
 
     shareFailure() {

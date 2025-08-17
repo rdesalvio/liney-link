@@ -627,7 +627,7 @@
             flex-wrap: wrap;
         }
 
-        .share-button, .new-game-button {
+        .share-button, .debug-button {
             border: none;
             border-radius: 25px;
             padding: 12px 24px;
@@ -643,12 +643,15 @@
             color: #11111b;
         }
 
-        .new-game-button {
-            background: linear-gradient(135deg, #89b4fa 0%, #cba6f7 100%);
+
+        .debug-button {
+            background: linear-gradient(135deg, #f38ba8 0%, #fab387 100%);
             color: #11111b;
+            font-size: 0.9rem;
+            min-width: 160px;
         }
 
-        .share-button:hover, .new-game-button:hover {
+        .share-button:hover, .debug-button:hover {
             transform: translateY(-2px);
         }
 
@@ -714,7 +717,7 @@
                 align-items: center;
             }
 
-            .share-button, .new-game-button {
+            .share-button {
                 width: 100%;
                 max-width: 200px;
             }
@@ -768,7 +771,7 @@
             <div class="modal-score" id="modalScore"></div>
             <div class="modal-buttons">
                 <button class="share-button" id="shareButton">Copy Score</button>
-                <button class="new-game-button" id="newGameButton">New Game</button>
+                <button class="debug-button" id="debugButton" style="display: none;">🔧 Debug: Try Random Day</button>
             </div>
         </div>
     </div>

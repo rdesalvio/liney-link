@@ -119,6 +119,25 @@ class LineyLinkGame {
     setupEventListeners() {
         this.searchInput.addEventListener('input', (e) => this.handleSearchInput(e));
         this.searchInput.addEventListener('keydown', (e) => this.handleKeyDown(e));
+        
+        // Fix iOS keyboard white space issue
+        this.searchInput.addEventListener('blur', () => {
+            // Scroll to top to reset viewport after keyboard dismissal
+            setTimeout(() => {
+                window.scrollTo(0, 0);
+                document.body.scrollTop = 0;
+                document.documentElement.scrollTop = 0;
+            }, 100);
+        });
+        
+        // Ensure proper focus handling on iOS
+        this.searchInput.addEventListener('focus', () => {
+            // Prevent iOS from zooming in on input focus
+            setTimeout(() => {
+                this.searchInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }, 100);
+        });
+        
         this.addButton.addEventListener('click', () => this.addLinkage());
         this.shareButton.addEventListener('click', () => {
             if (this.gameFailed) {
@@ -176,7 +195,7 @@ class LineyLinkGame {
         this.hardLabel.classList.toggle('active', isHard);
         
         // Update description
-        this.difficultyText.textContent = isHard ? 'Minimum 2+ players' : 'Minimum 1 player';
+        this.difficultyText.textContent = isHard ? 'Can be solved in 2+ players' : 'Can be solved in 1 player';
         
         // Ensure toggle is in correct position
         this.difficultyToggle.checked = isHard;
@@ -293,6 +312,9 @@ class LineyLinkGame {
             this.showError(validation.error);
             return;
         }
+        
+        // Blur input to dismiss keyboard on mobile
+        this.searchInput.blur();
 
         // Add player to chain
         this.insertPlayerInChain(this.selectedPlayer, validation.insertionIndex);

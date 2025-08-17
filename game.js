@@ -5,7 +5,7 @@ class LineyLinkGame {
         this.selectedPlayer = null;
         this.gameComplete = false;
         this.gameFailed = false;
-        this.wrongGuesses = 0;
+        this.attemptsRemaining = 3;
         this.maxWrongGuesses = 3;
         
         // Data containers - will be loaded securely
@@ -14,6 +14,8 @@ class LineyLinkGame {
         this.targetPlayers = { start: null, end: null };
         
         this.initializeElements();
+        this.setupEventListeners(); // Set up event listeners once
+        this.updateDifficultyUI(); // Initialize difficulty UI
         this.loadGameData();
     }
 
@@ -26,7 +28,6 @@ class LineyLinkGame {
         this.completionModal = document.getElementById('completionModal');
         this.modalScore = document.getElementById('modalScore');
         this.shareButton = document.getElementById('shareButton');
-        this.newGameButton = document.getElementById('newGameButton');
         this.confetti = document.getElementById('confetti');
         this.guessCount = document.getElementById('guessCount');
         this.linematesLink = document.getElementById('linematesLink');
@@ -35,21 +36,41 @@ class LineyLinkGame {
         this.howToPlayBtn = document.getElementById('howToPlayBtn');
         this.howToPlayModal = document.getElementById('howToPlayModal');
         this.howToPlayClose = document.getElementById('howToPlayClose');
+        this.debugButton = document.getElementById('debugButton');
+        this.searchClear = document.getElementById('searchClear');
+        this.difficultyToggle = document.getElementById('difficultyToggle');
+        this.difficultyText = document.getElementById('difficultyText');
+        this.easyLabel = document.querySelector('.easy-label');
+        this.hardLabel = document.querySelector('.hard-label');
+        
+        // Game state
+        this.currentDifficulty = 'easy'; // Default to easy
+        this.currentPuzzleDate = null; // Track which day we're currently playing (null = today)
     }
 
     async loadGameData() {
         try {
-            // Get today's date for puzzle selection
-            const today = new Date().toISOString().split('T')[0]; // YYYY-MM-DD format
+            // Use current puzzle date or today's date if none set
+            const puzzleDate = this.currentPuzzleDate || new Date().toISOString().split('T')[0]; // YYYY-MM-DD format
+            console.log(`Loading puzzle for ${puzzleDate} in ${this.currentDifficulty} mode`);
             
             // Load all data files
             const [playersResponse, connectionsResponse, gameResponse] = await Promise.all([
-                fetch('./web_data/players.json'),
-                fetch('./web_data/connections.json'),
-                fetch(`./puzzles/${today}.json`).catch(() => {
-                    // Fallback to a default puzzle if today's doesn't exist
-                    console.warn(`No puzzle found for ${today}, using fallback`);
-                    return fetch('./puzzles/2024-12-16.json'); // Use first available puzzle as fallback
+                fetch('./web_data/players.json').then(response => {
+                    console.log('Players fetch:', response.status, response.url);
+                    return response;
+                }),
+                fetch('./web_data/connections.json').then(response => {
+                    console.log('Connections fetch:', response.status, response.url);
+                    return response;
+                }),
+                fetch(`./puzzles/${puzzleDate}-${this.currentDifficulty}.json`).then(response => {
+                    console.log('Puzzle fetch:', response.status, response.url);
+                    return response;
+                }).catch((error) => {
+                    // Fallback to a default puzzle if current date doesn't exist
+                    console.warn(`No puzzle found for ${puzzleDate}, using fallback`, error);
+                    return fetch(`./puzzles/2025-08-16-${this.currentDifficulty}.json`);
                 })
             ]);
 
@@ -91,8 +112,8 @@ class LineyLinkGame {
         ];
 
         this.renderPlayerChain();
-        this.setupEventListeners();
         this.enableInput();
+        this.updateGuessCounter(); // Ensure counter is properly initialized
     }
 
     setupEventListeners() {
@@ -106,7 +127,9 @@ class LineyLinkGame {
                 this.shareScore();
             }
         });
-        this.newGameButton.addEventListener('click', () => this.startNewGame());
+        this.debugButton.addEventListener('click', () => this.loadRandomDay());
+        this.difficultyToggle.addEventListener('change', () => this.handleDifficultyChange());
+        this.searchClear.addEventListener('click', () => this.clearSearchInput());
         
         // Setup linemates tooltip
         this.setupLinematesTooltip();
@@ -127,8 +150,48 @@ class LineyLinkGame {
         this.searchInput.placeholder = 'Search for a player...';
     }
 
+    handleDifficultyChange() {
+        const isHard = this.difficultyToggle.checked;
+        this.currentDifficulty = isHard ? 'hard' : 'easy';
+        
+        // Update UI
+        this.updateDifficultyUI();
+        
+        // Store current attempts to preserve across difficulty change
+        const preservedAttempts = this.attemptsRemaining;
+        
+        // Reload the game with new difficulty
+        this.loadGameData().then(() => {
+            // Restore attempts after reload
+            this.attemptsRemaining = preservedAttempts;
+            this.updateGuessCounter();
+        });
+    }
+
+    updateDifficultyUI() {
+        const isHard = this.currentDifficulty === 'hard';
+        
+        // Update labels
+        this.easyLabel.classList.toggle('active', !isHard);
+        this.hardLabel.classList.toggle('active', isHard);
+        
+        // Update description
+        this.difficultyText.textContent = isHard ? 'Minimum 2+ players' : 'Minimum 1 player';
+        
+        // Ensure toggle is in correct position
+        this.difficultyToggle.checked = isHard;
+    }
+
     handleSearchInput(e) {
         const query = e.target.value.trim();
+        
+        // Show/hide clear button based on input content
+        if (e.target.value.length > 0) {
+            this.searchClear.classList.add('show');
+        } else {
+            this.searchClear.classList.remove('show');
+        }
+        
         if (query.length < 2) {
             this.hideSuggestions();
             this.selectedPlayer = null;
@@ -151,6 +214,18 @@ class LineyLinkGame {
         } else if (e.key === 'Escape') {
             this.hideSuggestions();
         }
+    }
+
+    clearSearchInput() {
+        this.searchInput.value = '';
+        this.searchClear.classList.remove('show');
+        this.selectedPlayer = null;
+        this.updateAddButton();
+        this.hideSuggestions();
+        this.clearError();
+        
+        // Focus back on the input after clearing
+        this.searchInput.focus();
     }
 
     showSuggestions(query) {
@@ -246,11 +321,12 @@ class LineyLinkGame {
         }
 
         if (connectedToPlayers.length === 0) {
-            // Wrong guess - increment counter
-            this.wrongGuesses++;
+            // Wrong guess - decrement attempts
+            this.attemptsRemaining--;
             this.updateGuessCounter();
             
-            if (this.wrongGuesses >= this.maxWrongGuesses) {
+            if (this.attemptsRemaining <= 0) {
+                this.attemptsRemaining = 0; // Ensure it doesn't go below 0
                 this.failGame();
             }
             
@@ -392,6 +468,9 @@ class LineyLinkGame {
         `;
         
         this.completionModal.style.display = 'flex';
+        
+        // Show debug button for completed games
+        this.debugButton.style.display = 'inline-block';
     }
 
     shareScore() {
@@ -405,14 +484,37 @@ class LineyLinkGame {
         const year = String(today.getFullYear()).slice(-2);
         const dateStr = `${month}/${day}/${year}`;
         
-        // Error display with emoji
-        const perfectGame = this.wrongGuesses === 0;
-        const errorEmoji = perfectGame ? '🎯' : '❌';
-        const errorDisplay = perfectGame ? 'Perfect' : `${this.wrongGuesses} errors`;
+        // Build emoji grid representation
+        const difficultyText = this.currentDifficulty === 'hard' ? 'Hard' : 'Easy';
+        const errorsCount = 3 - this.attemptsRemaining;
         
-        // Build share text with player chain
-        const chainStr = playerNames.join(' → ');
-        const shareText = `Liney ${dateStr}\n${chainLength} players - ${errorDisplay} ${errorEmoji}\n\n${chainStr}\n\n${window.location.host}`;
+        // Create rows for each attempt
+        let emojiGrid = '';
+        
+        // Add failed attempts (red X between locks)
+        for (let i = 0; i < errorsCount; i++) {
+            emojiGrid += '🔒❌🔒\n';
+        }
+        
+        // Add successful completion (chain between locks)
+        if (this.currentDifficulty === 'easy') {
+            // Easy mode: single chain emoji
+            emojiGrid += '🔒⛓️🔒';
+        } else {
+            // Hard mode: number of chain emojis equals number of players used
+            const chainEmojis = '⛓️'.repeat(chainLength);
+            emojiGrid += `🔒${chainEmojis}🔒`;
+        }
+        
+        // Build share text
+        let shareContent = `Liney ${dateStr} (${difficultyText})\n\n${emojiGrid}`;
+        
+        if (this.currentDifficulty === 'hard') {
+            const chainStr = playerNames.join(' → ');
+            shareContent += `\n\n${chainStr}`;
+        }
+        
+        const shareText = `${shareContent}\n\n${window.location.host}`;
         
         if (navigator.clipboard) {
             navigator.clipboard.writeText(shareText).then(() => {
@@ -473,8 +575,59 @@ class LineyLinkGame {
         }
     }
 
+    async loadRandomDay() {
+        try {
+            // Generate a random date within the available puzzle range
+            const startDate = new Date('2025-08-16'); // Base date
+            const randomDays = Math.floor(Math.random() * 60); // Random day within 60 days
+            const randomDate = new Date(startDate);
+            randomDate.setDate(startDate.getDate() + randomDays);
+            
+            const randomDateStr = randomDate.toISOString().split('T')[0];
+            
+            // Try to load the random date's puzzle
+            const gameResponse = await fetch(`./puzzles/${randomDateStr}-${this.currentDifficulty}.json`);
+            
+            if (gameResponse.ok) {
+                const gameData = await gameResponse.json();
+                
+                // Set the current puzzle date to the random date we loaded
+                this.currentPuzzleDate = randomDateStr;
+                
+                // Update the target players
+                this.targetPlayers = {
+                    start: gameData.playerA,
+                    end: gameData.playerB
+                };
+                
+                // Reset the game state completely
+                this.playerChain = [
+                    { id: this.targetPlayers.start, name: this.playerNames.get(this.targetPlayers.start), isTarget: true },
+                    { id: this.targetPlayers.end, name: this.playerNames.get(this.targetPlayers.end), isTarget: true }
+                ];
+                
+                // Use the reset method to ensure complete state reset
+                this.resetGameState();
+                
+                // Close modal and update UI
+                this.completionModal.style.display = 'none';
+                this.renderPlayerChain();
+                
+                console.log(`Loaded random puzzle for ${randomDateStr}: ${this.playerNames.get(this.targetPlayers.start)} → ${this.playerNames.get(this.targetPlayers.end)}`);
+            } else {
+                // Fallback to reload if specific date not found
+                window.location.reload();
+            }
+        } catch (error) {
+            console.error('Error loading random day:', error);
+            // Fallback: just reload the page
+            window.location.reload();
+        }
+    }
+
     clearInput() {
         this.searchInput.value = '';
+        this.searchClear.classList.remove('show');
         this.selectedPlayer = null;
         this.updateAddButton();
         this.hideSuggestions();
@@ -491,11 +644,34 @@ class LineyLinkGame {
         this.errorMessage.classList.remove('show');
     }
 
-    updateGuessCounter() {
-        this.guessCount.textContent = this.wrongGuesses;
+    resetGameState() {
+        // Reset all game state variables
+        this.attemptsRemaining = 3;
+        this.gameComplete = false;
+        this.gameFailed = false;
+        this.selectedPlayer = null;
         
-        // Add danger class if close to max
-        if (this.wrongGuesses >= this.maxWrongGuesses - 1) {
+        // Reset UI elements
+        this.updateGuessCounter();
+        this.clearInput();
+        this.clearError();
+        this.enableInput();
+        
+        // Reset modal title and button text in case they were changed
+        const modalTitle = this.completionModal.querySelector('.modal-title');
+        modalTitle.textContent = '🎉 Puzzle Complete!';
+        modalTitle.style.color = '';
+        this.shareButton.textContent = 'Copy Score';
+    }
+
+    updateGuessCounter() {
+        this.guessCount.textContent = this.attemptsRemaining;
+        
+        // Remove danger class first
+        this.guessCount.classList.remove('danger');
+        
+        // Add danger class if only 1 attempt remaining
+        if (this.attemptsRemaining <= 1) {
             this.guessCount.classList.add('danger');
         }
     }
@@ -510,11 +686,27 @@ class LineyLinkGame {
     }
 
     showFailureModal() {
+        let solutionHtml = '';
+        
+        // Only show solution for hard mode
+        if (this.currentDifficulty === 'hard') {
+            const solution = this.findShortestSolution();
+            
+            if (solution && solution.length > 0) {
+                const solutionNames = solution.map(playerId => {
+                    return this.playerNames.get(playerId) || `Player ${playerId}`;
+                });
+                solutionHtml = `<br><br><strong>Shortest Solution (${solutionNames.length} players):</strong><br>
+                    <span style="color: #a6e3a1;">${solutionNames.join(' → ')}</span>`;
+            }
+        }
+        
         this.modalScore.innerHTML = `
             <strong style="color: #f38ba8;">Game Over!</strong><br><br>
-            You've used all 3 wrong guesses.<br>
+            You've used all 3 attempts.<br>
             The puzzle was to connect:<br><br>
             <strong>${this.playerNames.get(this.targetPlayers.start)} → ${this.playerNames.get(this.targetPlayers.end)}</strong>
+            ${solutionHtml}
         `;
         
         // Change modal title for failure
@@ -526,6 +718,9 @@ class LineyLinkGame {
         this.shareButton.textContent = 'Share Result';
         
         this.completionModal.style.display = 'flex';
+        
+        // Show debug button for failed games too
+        this.debugButton.style.display = 'inline-block';
     }
 
     shareFailure() {
@@ -536,14 +731,16 @@ class LineyLinkGame {
         const year = String(today.getFullYear()).slice(-2);
         const dateStr = `${month}/${day}/${year}`;
         
-        // Check if any successful links were made (more than just the two target players)
-        const hasLinks = this.playerChain.length > 2;
-        const linksDisplay = hasLinks ? 
-            this.playerChain.map(p => p.name).join(' → ') : 
-            'No links found';
+        const difficultyText = this.currentDifficulty === 'hard' ? 'Hard' : 'Easy';
         
-        // Build share text for failure
-        const shareText = `Liney ${dateStr}\nFailed - 3 errors ❌\n\n${linksDisplay}\n\n${window.location.host}`;
+        // Build emoji grid for failure (3 failed attempts)
+        let emojiGrid = '';
+        for (let i = 0; i < 3; i++) {
+            emojiGrid += '🔒❌🔒';
+            if (i < 2) emojiGrid += '\n'; // Add newline except for last row
+        }
+        
+        const shareText = `Liney ${dateStr} (${difficultyText})\n\n${emojiGrid}\n\n${window.location.host}`;
         
         if (navigator.clipboard) {
             navigator.clipboard.writeText(shareText).then(() => {
@@ -658,6 +855,36 @@ class LineyLinkGame {
                 this.howToPlayModal.classList.remove('show');
             }
         });
+    }
+
+    findShortestSolution() {
+        // BFS to find shortest path between the two target players
+        const startId = this.targetPlayers.start;
+        const endId = this.targetPlayers.end;
+        const visited = new Set();
+        const queue = [[startId]];
+        visited.add(startId);
+        
+        while (queue.length > 0) {
+            const path = queue.shift();
+            const currentId = path[path.length - 1];
+            
+            if (currentId === endId) {
+                return path;
+            }
+            
+            const connections = this.connections.get(currentId.toString());
+            if (connections) {
+                for (const nextId of connections) {
+                    const nextIdNum = parseInt(nextId);
+                    if (!visited.has(nextIdNum)) {
+                        visited.add(nextIdNum);
+                        queue.push([...path, nextIdNum]);
+                    }
+                }
+            }
+        }
+        return null;
     }
 }
 

@@ -91,7 +91,7 @@ class LineyLinkGame {
         this.howToPlayBtn = document.getElementById('howToPlayBtn');
         this.howToPlayModal = document.getElementById('howToPlayModal');
         this.howToPlayClose = document.getElementById('howToPlayClose');
-        this.debugButton = document.getElementById('debugButton');
+        // this.debugButton = document.getElementById('debugButton'); // Debug button removed
         this.searchClear = document.getElementById('searchClear');
         this.difficultyToggle = document.getElementById('difficultyToggle');
         this.difficultyText = document.getElementById('difficultyText');
@@ -228,7 +228,7 @@ class LineyLinkGame {
                 this.shareScore();
             }
         });
-        this.debugButton.addEventListener('click', () => this.loadRandomDay());
+        // this.debugButton.addEventListener('click', () => this.loadRandomDay()); // Debug button removed
         this.difficultyToggle.addEventListener('change', () => this.handleDifficultyChange());
         this.searchClear.addEventListener('click', () => this.clearSearchInput());
         
@@ -674,8 +674,8 @@ class LineyLinkGame {
         
         this.completionModal.style.display = 'flex';
         
-        // Show debug button for completed games
-        this.debugButton.style.display = 'inline-block';
+        // Debug button removed
+        // this.debugButton.style.display = 'inline-block';
     }
 
     shareScore() {
@@ -973,8 +973,8 @@ class LineyLinkGame {
         
         this.completionModal.style.display = 'flex';
         
-        // Show debug button for failed games too
-        this.debugButton.style.display = 'inline-block';
+        // Debug button removed
+        // this.debugButton.style.display = 'inline-block';
     }
 
     shareFailure() {

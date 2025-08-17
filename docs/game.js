@@ -495,26 +495,60 @@ class LineyLinkGame {
     }
 
     findBestInsertionPoint(connectedToPlayers) {
-        // If connected to start or end, prioritize those positions
+        // Debug logging
+        console.log('Current chain:', this.playerChain.map((p, i) => `${i}:${p.name}`));
+        console.log('Connected to:', connectedToPlayers.map(c => `${c.index}:${c.player.name}`));
+        
         const startIndex = 0;
         const endIndex = this.playerChain.length - 1;
         
-        for (const conn of connectedToPlayers) {
-            if (conn.index === startIndex) {
-                return { index: 1, connectedTo: 'start' }; // Insert after start
-            }
-            if (conn.index === endIndex) {
-                return { index: endIndex, connectedTo: 'end' }; // Insert before end
-            }
+        // Sort connections by index to process them in order
+        connectedToPlayers.sort((a, b) => a.index - b.index);
+        
+        // If connected to multiple players, we want to insert after the rightmost non-target player
+        // or between connected players if they're adjacent
+        let bestIndex = -1;
+        
+        // Check if any connections are to non-target middle players
+        const middleConnections = connectedToPlayers.filter(conn => 
+            conn.index !== startIndex && conn.index !== endIndex
+        );
+        
+        if (middleConnections.length > 0) {
+            // Insert after the rightmost middle player
+            const rightmostMiddle = middleConnections[middleConnections.length - 1];
+            bestIndex = rightmostMiddle.index + 1;
+            console.log(`Inserting after middle player ${rightmostMiddle.player.name} at index ${bestIndex}`);
+            return { index: bestIndex, connectedTo: 'middle' };
         }
         
-        // Otherwise, insert next to the first connected player
+        // If only connected to start player
+        const connectedToStart = connectedToPlayers.find(conn => conn.index === startIndex);
+        if (connectedToStart && connectedToPlayers.length === 1) {
+            console.log('Inserting after start at index 1');
+            return { index: 1, connectedTo: 'start' };
+        }
+        
+        // If only connected to end player
+        const connectedToEnd = connectedToPlayers.find(conn => conn.index === endIndex);
+        if (connectedToEnd && connectedToPlayers.length === 1) {
+            console.log('Inserting before end at index', endIndex);
+            return { index: endIndex, connectedTo: 'end' };
+        }
+        
+        // If connected to both start and something else, insert after the non-start player
+        if (connectedToStart && connectedToPlayers.length > 1) {
+            const otherConnection = connectedToPlayers.find(conn => conn.index !== startIndex);
+            bestIndex = otherConnection.index + 1;
+            console.log(`Connected to start and ${otherConnection.player.name}, inserting at index ${bestIndex}`);
+            return { index: bestIndex, connectedTo: 'multiple' };
+        }
+        
+        // Default: insert after the first connection
         const firstConnection = connectedToPlayers[0];
-        return { 
-            index: firstConnection.index + 1, 
-            connectedTo: 'middle',
-            connectedPlayer: firstConnection.player 
-        };
+        bestIndex = firstConnection.index + 1;
+        console.log(`Default: inserting after ${firstConnection.player.name} at index ${bestIndex}`);
+        return { index: bestIndex, connectedTo: 'default' };
     }
 
     insertPlayerInChain(player, insertionIndex) {
@@ -965,10 +999,33 @@ class LineyLinkGame {
     removePlayer(playerId) {
         if (this.gameComplete || this.gameFailed) return;
         
-        // Find and remove the player from chain (keep target players)
-        this.playerChain = this.playerChain.filter(player => 
-            player.isTarget || player.id !== playerId
-        );
+        // Find the index of the player to remove
+        const playerIndex = this.playerChain.findIndex(p => p.id === playerId);
+        if (playerIndex === -1) return;
+        
+        // Remove the player
+        this.playerChain.splice(playerIndex, 1);
+        
+        // Now check each remaining middle player to see if they're still part of a valid chain
+        // A middle player must be connected to its immediate predecessor in the chain
+        let changed = true;
+        while (changed) {
+            changed = false;
+            
+            for (let i = 1; i < this.playerChain.length - 1; i++) {
+                const player = this.playerChain[i];
+                const prevPlayer = this.playerChain[i - 1];
+                
+                // Check if this player is connected to its immediate predecessor
+                // This ensures a continuous chain from start
+                if (!this.arePlayersLinked(player.id, prevPlayer.id)) {
+                    console.log(`Removing disconnected player: ${player.name} (not connected to ${prevPlayer.name})`);
+                    this.playerChain.splice(i, 1);
+                    changed = true;
+                    break;
+                }
+            }
+        }
         
         this.renderPlayerChain();
         this.clearInput();

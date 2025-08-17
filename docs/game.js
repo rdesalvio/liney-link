@@ -120,21 +120,35 @@ class LineyLinkGame {
         this.searchInput.addEventListener('input', (e) => this.handleSearchInput(e));
         this.searchInput.addEventListener('keydown', (e) => this.handleKeyDown(e));
         
-        // Fix iOS keyboard white space issue
+        // Fix mobile keyboard issues
+        let viewportHeight = window.innerHeight;
+        
+        this.searchInput.addEventListener('focus', () => {
+            // Store the current viewport height before keyboard appears
+            viewportHeight = window.innerHeight;
+        });
+        
         this.searchInput.addEventListener('blur', () => {
-            // Force viewport to recalculate after keyboard dismissal
+            // Force viewport reset after keyboard dismissal
             setTimeout(() => {
-                window.scrollTo(0, 1);
+                // Force browser to recalculate viewport
+                document.body.style.height = '100vh';
                 window.scrollTo(0, 0);
+                
+                // Additional reset for stubborn mobile browsers
+                setTimeout(() => {
+                    document.body.style.height = '';
+                    window.scrollTo(0, 0);
+                }, 50);
             }, 100);
         });
         
-        // Ensure proper focus handling on iOS
-        this.searchInput.addEventListener('focus', () => {
-            // Prevent iOS from zooming in on input focus
-            setTimeout(() => {
-                this.searchInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            }, 100);
+        // Handle form submission (Enter key)
+        this.searchInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                this.searchInput.blur();
+            }
         });
         
         this.addButton.addEventListener('click', () => this.addLinkage());
@@ -312,8 +326,10 @@ class LineyLinkGame {
             return;
         }
         
-        // Blur input to dismiss keyboard on mobile
-        this.searchInput.blur();
+        // Immediately blur input to dismiss keyboard on mobile
+        if (document.activeElement === this.searchInput) {
+            this.searchInput.blur();
+        }
 
         // Add player to chain
         this.insertPlayerInChain(this.selectedPlayer, validation.insertionIndex);
@@ -709,17 +725,15 @@ class LineyLinkGame {
     showFailureModal() {
         let solutionHtml = '';
         
-        // Only show solution for hard mode
-        if (this.currentDifficulty === 'hard') {
-            const solution = this.findShortestSolution();
-            
-            if (solution && solution.length > 0) {
-                const solutionNames = solution.map(playerId => {
-                    return this.playerNames.get(playerId) || `Player ${playerId}`;
-                });
-                solutionHtml = `<br><br><strong>Shortest Solution (${solutionNames.length} players):</strong><br>
-                    <span style="color: #a6e3a1;">${solutionNames.join(' → ')}</span>`;
-            }
+        // Show solution for both easy and hard mode
+        const solution = this.findShortestSolution();
+        
+        if (solution && solution.length > 0) {
+            const solutionNames = solution.map(playerId => {
+                return this.playerNames.get(playerId) || `Player ${playerId}`;
+            });
+            solutionHtml = `<br><br><strong>Shortest Solution (${solutionNames.length} players):</strong><br>
+                <span style="color: #a6e3a1;">${solutionNames.join(' → ')}</span>`;
         }
         
         this.modalScore.innerHTML = `
@@ -735,8 +749,9 @@ class LineyLinkGame {
         modalTitle.textContent = '💀 Better luck next time!';
         modalTitle.style.color = '#f38ba8';
         
-        // Update share button to still allow sharing failure
+        // Allow sharing for all failures
         this.shareButton.textContent = 'Share Result';
+        this.shareButton.style.display = 'inline-block';
         
         this.completionModal.style.display = 'flex';
         
@@ -912,5 +927,22 @@ class LineyLinkGame {
 // Initialize game when page loads
 let game;
 document.addEventListener('DOMContentLoaded', () => {
+    // Mobile viewport fix
+    if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
+        // Set initial viewport height
+        const setViewportHeight = () => {
+            const vh = window.innerHeight * 0.01;
+            document.documentElement.style.setProperty('--vh', `${vh}px`);
+        };
+        
+        setViewportHeight();
+        window.addEventListener('resize', setViewportHeight);
+        
+        // Prevent background from shifting
+        document.addEventListener('touchstart', () => {
+            document.body.style.backgroundPosition = 'center';
+        });
+    }
+    
     game = new LineyLinkGame();
 });

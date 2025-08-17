@@ -495,60 +495,74 @@ class LineyLinkGame {
     }
 
     findBestInsertionPoint(connectedToPlayers) {
-        // Debug logging
-        console.log('Current chain:', this.playerChain.map((p, i) => `${i}:${p.name}`));
-        console.log('Connected to:', connectedToPlayers.map(c => `${c.index}:${c.player.name}`));
-        
         const startIndex = 0;
         const endIndex = this.playerChain.length - 1;
         
-        // Sort connections by index to process them in order
+        // Sort connections by index
         connectedToPlayers.sort((a, b) => a.index - b.index);
         
-        // If connected to multiple players, we want to insert after the rightmost non-target player
-        // or between connected players if they're adjacent
-        let bestIndex = -1;
-        
-        // Check if any connections are to non-target middle players
-        const middleConnections = connectedToPlayers.filter(conn => 
-            conn.index !== startIndex && conn.index !== endIndex
+        // Separate target and non-target connections
+        const targetConnections = connectedToPlayers.filter(conn => 
+            this.playerChain[conn.index].isTarget
+        );
+        const nonTargetConnections = connectedToPlayers.filter(conn => 
+            !this.playerChain[conn.index].isTarget
         );
         
-        if (middleConnections.length > 0) {
-            // Insert after the rightmost middle player
-            const rightmostMiddle = middleConnections[middleConnections.length - 1];
-            bestIndex = rightmostMiddle.index + 1;
-            console.log(`Inserting after middle player ${rightmostMiddle.player.name} at index ${bestIndex}`);
-            return { index: bestIndex, connectedTo: 'middle' };
+        // If connecting to non-target players, determine which chain they belong to
+        if (nonTargetConnections.length > 0) {
+            for (const conn of nonTargetConnections) {
+                const connectedPlayer = this.playerChain[conn.index];
+                
+                // Check if this player is part of the "start chain"
+                // (i.e., it has a connection path back to the start)
+                if (conn.index > 0) {
+                    const prevPlayer = this.playerChain[conn.index - 1];
+                    if (this.arePlayersLinked(connectedPlayer.id, prevPlayer.id)) {
+                        // This player is connected to its predecessor, so it's part of start chain
+                        // Insert after it
+                        return { index: conn.index + 1, connectedTo: 'start-chain' };
+                    }
+                }
+                
+                // Check if this player is part of the "end chain"  
+                // (i.e., it has a connection path forward to the end)
+                if (conn.index < this.playerChain.length - 1) {
+                    const nextPlayer = this.playerChain[conn.index + 1];
+                    if (this.arePlayersLinked(connectedPlayer.id, nextPlayer.id)) {
+                        // This player is connected to its successor, so it's part of end chain
+                        // Insert before it
+                        return { index: conn.index, connectedTo: 'end-chain' };
+                    }
+                }
+            }
+            
+            // If we can't determine the chain, default to inserting after
+            const conn = nonTargetConnections[0];
+            return { index: conn.index + 1, connectedTo: 'unknown-chain' };
         }
         
-        // If only connected to start player
-        const connectedToStart = connectedToPlayers.find(conn => conn.index === startIndex);
-        if (connectedToStart && connectedToPlayers.length === 1) {
-            console.log('Inserting after start at index 1');
+        // Only connecting to target players
+        const connectedToStart = targetConnections.find(conn => conn.index === startIndex);
+        const connectedToEnd = targetConnections.find(conn => conn.index === endIndex);
+        
+        if (connectedToStart && !connectedToEnd) {
+            // Building from start
             return { index: 1, connectedTo: 'start' };
         }
         
-        // If only connected to end player
-        const connectedToEnd = connectedToPlayers.find(conn => conn.index === endIndex);
-        if (connectedToEnd && connectedToPlayers.length === 1) {
-            console.log('Inserting before end at index', endIndex);
+        if (connectedToEnd && !connectedToStart) {
+            // Building from end
             return { index: endIndex, connectedTo: 'end' };
         }
         
-        // If connected to both start and something else, insert after the non-start player
-        if (connectedToStart && connectedToPlayers.length > 1) {
-            const otherConnection = connectedToPlayers.find(conn => conn.index !== startIndex);
-            bestIndex = otherConnection.index + 1;
-            console.log(`Connected to start and ${otherConnection.player.name}, inserting at index ${bestIndex}`);
-            return { index: bestIndex, connectedTo: 'multiple' };
+        if (connectedToStart && connectedToEnd) {
+            // Connects both - completes the puzzle
+            return { index: 1, connectedTo: 'both' };
         }
         
-        // Default: insert after the first connection
-        const firstConnection = connectedToPlayers[0];
-        bestIndex = firstConnection.index + 1;
-        console.log(`Default: inserting after ${firstConnection.player.name} at index ${bestIndex}`);
-        return { index: bestIndex, connectedTo: 'default' };
+        // Fallback
+        return { index: 1, connectedTo: 'fallback' };
     }
 
     insertPlayerInChain(player, insertionIndex) {
@@ -1006,26 +1020,52 @@ class LineyLinkGame {
         // Remove the player
         this.playerChain.splice(playerIndex, 1);
         
-        // Now check each remaining middle player to see if they're still part of a valid chain
-        // A middle player must be connected to its immediate predecessor in the chain
-        let changed = true;
-        while (changed) {
-            changed = false;
+        // The chain has two parts: building from start (left) and building from end (right)
+        // We need to identify which players belong to which side
+        // Start from both ends and trace connections
+        
+        const startIndex = 0;
+        const endIndex = this.playerChain.length - 1;
+        const validPlayers = new Set();
+        
+        // Always keep the target players
+        validPlayers.add(this.playerChain[startIndex].id);
+        validPlayers.add(this.playerChain[endIndex].id);
+        
+        // Trace from start - add all players connected in sequence from start
+        let lastValidFromStart = startIndex;
+        for (let i = 1; i < this.playerChain.length - 1; i++) {
+            const player = this.playerChain[i];
+            const prevPlayer = this.playerChain[lastValidFromStart];
             
-            for (let i = 1; i < this.playerChain.length - 1; i++) {
-                const player = this.playerChain[i];
-                const prevPlayer = this.playerChain[i - 1];
-                
-                // Check if this player is connected to its immediate predecessor
-                // This ensures a continuous chain from start
-                if (!this.arePlayersLinked(player.id, prevPlayer.id)) {
-                    console.log(`Removing disconnected player: ${player.name} (not connected to ${prevPlayer.name})`);
-                    this.playerChain.splice(i, 1);
-                    changed = true;
-                    break;
-                }
+            if (this.arePlayersLinked(player.id, prevPlayer.id)) {
+                validPlayers.add(player.id);
+                lastValidFromStart = i;
+            } else {
+                // No more connections from start side
+                break;
             }
         }
+        
+        // Trace from end - add all players connected in sequence from end
+        let lastValidFromEnd = endIndex;
+        for (let i = this.playerChain.length - 2; i > 0; i--) {
+            const player = this.playerChain[i];
+            const nextPlayer = this.playerChain[lastValidFromEnd];
+            
+            if (this.arePlayersLinked(player.id, nextPlayer.id)) {
+                validPlayers.add(player.id);
+                lastValidFromEnd = i;
+            } else {
+                // No more connections from end side
+                break;
+            }
+        }
+        
+        // Remove all players not in the valid set
+        this.playerChain = this.playerChain.filter(player => 
+            player.isTarget || validPlayers.has(player.id)
+        );
         
         this.renderPlayerChain();
         this.clearInput();

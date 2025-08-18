@@ -817,6 +817,14 @@
             font-style: italic;
         }
 
+        .countdown-timer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 0.8rem;
+            color: #6c7086;
+            font-style: italic;
+        }
+
         /* Mobile specific fixes */
         @supports (-webkit-touch-callout: none) {
             /* iOS specific */
@@ -931,6 +939,10 @@
                 <button class="add-button" id="addButton" disabled>Add Player</button>
                 <div class="error-message" id="errorMessage"></div>
             </div>
+        </div>
+        
+        <div class="countdown-timer" id="countdownTimer">
+            New puzzle in X hours
         </div>
     </div>
 

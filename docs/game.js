@@ -23,6 +23,7 @@ class LineyLinkGame {
         this.initializeElements();
         this.setupEventListeners(); // Set up event listeners once
         this.updateDifficultyUI(); // Initialize difficulty UI
+        this.updateCountdownTimer(); // Initialize countdown timer
         this.loadGameData();
     }
     
@@ -98,6 +99,7 @@ class LineyLinkGame {
         this.difficultyText = document.getElementById('difficultyText');
         this.easyLabel = document.querySelector('.easy-label');
         this.hardLabel = document.querySelector('.hard-label');
+        this.countdownTimer = document.getElementById('countdownTimer');
         
         // Game state
         this.currentDifficulty = 'easy'; // Default to easy
@@ -1227,6 +1229,34 @@ class LineyLinkGame {
         }
         return null;
     }
+
+    updateCountdownTimer() {
+        // Calculate hours until next puzzle (next day at midnight UTC)
+        const now = new Date();
+        const tomorrow = new Date(now);
+        tomorrow.setUTCDate(tomorrow.getUTCDate() + 1);
+        tomorrow.setUTCHours(0, 0, 0, 0); // Set to midnight UTC
+        
+        const hoursUntilNext = Math.ceil((tomorrow - now) / (1000 * 60 * 60));
+        
+        if (hoursUntilNext <= 0) {
+            this.countdownTimer.textContent = "New puzzle available now!";
+        } else if (hoursUntilNext === 1) {
+            this.countdownTimer.textContent = "New puzzle in 1 hour";
+        } else {
+            this.countdownTimer.textContent = `New puzzle in ${hoursUntilNext} hours`;
+        }
+    }
+
+    startCountdownTimer() {
+        // Update immediately
+        this.updateCountdownTimer();
+        
+        // Update every hour
+        setInterval(() => {
+            this.updateCountdownTimer();
+        }, 1000 * 60 * 60); // 1 hour in milliseconds
+    }
 }
 
 // Initialize game when page loads
@@ -1250,4 +1280,5 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     
     game = new LineyLinkGame();
+    game.startCountdownTimer();
 });

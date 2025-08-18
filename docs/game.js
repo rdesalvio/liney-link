@@ -684,7 +684,6 @@ class LineyLinkGame {
 
     shareScore() {
         const chainLength = this.playerChain.length;
-        const playerNames = this.playerChain.map(p => p.name);
         const uniquenessScore = this.calculateUniquenessScore();
         
         // Get today's date in MM/DD/YY format
@@ -711,18 +710,14 @@ class LineyLinkGame {
             // Easy mode: single chain emoji
             emojiGrid += '🔒⛓️🔒';
         } else {
-            // Hard mode: number of chain emojis equals number of players used
-            const chainEmojis = '⛓️'.repeat(chainLength);
+            // Hard mode: number of chain emojis equals number of intermediate players (excluding start/end)
+            const intermediatePlayerCount = Math.max(0, chainLength - 2);
+            const chainEmojis = '⛓️'.repeat(intermediatePlayerCount);
             emojiGrid += `🔒${chainEmojis}🔒`;
         }
         
         // Build share text
         let shareContent = `Liney ${dateStr} (${difficultyText})\n\n${emojiGrid}`;
-        
-        if (this.currentDifficulty === 'hard') {
-            const chainStr = playerNames.join(' → ');
-            shareContent += `\n\n${chainStr}`;
-        }
         
         // Add uniqueness score for both difficulties
         shareContent += `\nUniqueness: ${uniquenessScore}`;

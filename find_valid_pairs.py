@@ -95,16 +95,12 @@ def is_relevant_player(player_id, verbose=False):
                 print(f"  {player_name}: Only {len(nhl_seasons)} NHL seasons")
             return False
         
-        # Must average at least 40 points per season
+        # Must average at least 4300 points per season
         avg_points = sum(nhl_seasons) / len(nhl_seasons)
-        if avg_points < 40:
+        if avg_points < 30:
             if verbose:
                 player_name = f"{player_data.get('firstName', {}).get('default', '')} {player_data.get('lastName', {}).get('default', '')}"
                 print(f"  {player_name}: {len(nhl_seasons)} NHL seasons, {avg_points:.1f} avg points")
-            return False
-        
-        # temporary measure to only get players from last 5 seasons
-        if player_data.get('seasonTotals')[-1].get("season") < 20192020:
             return False
         
         if verbose:
@@ -157,7 +153,7 @@ def find_interesting_pairs(max_pairs=100, difficulty="mixed"):
     
     print("Finding valid pairs...")
     attempts = 0
-    max_attempts = 10000
+    max_attempts = 100000
     
     while len(valid_pairs) < max_pairs and attempts < max_attempts:
         attempts += 1

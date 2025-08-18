@@ -1,35 +1,326 @@
 [
   {
-    "player_a": 8475166,
-    "player_b": 8478402,
+    "player_a": 8478414,
+    "player_b": 8480027,
     "path_length": 5,
     "path": [
-      8475166,
-      8477939,
-      8479318,
-      8475786,
+      8478414,
+      8474053,
+      8466139,
+      8470794,
+      8480027
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8468504,
+    "player_b": 8476346,
+    "path_length": 5,
+    "path": [
+      8468504,
+      8477493,
+      8477409,
+      8479314,
+      8476346
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8482740,
+    "player_b": 8477497,
+    "path_length": 7,
+    "path": [
+      8482740,
+      8474149,
+      8477493,
+      8477409,
+      8479314,
+      8476346,
+      8477497
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8482740,
+    "player_b": 8466139,
+    "path_length": 5,
+    "path": [
+      8482740,
+      8480027,
+      8470794,
+      8466138,
+      8466139
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8482740,
+    "player_b": 8477409,
+    "path_length": 4,
+    "path": [
+      8482740,
+      8474149,
+      8477493,
+      8477409
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8477933,
+    "player_b": 8477497,
+    "path_length": 6,
+    "path": [
+      8477933,
+      8477493,
+      8477409,
+      8479314,
+      8476346,
+      8477497
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8478403,
+    "player_b": 8477409,
+    "path_length": 4,
+    "path": [
+      8478403,
+      8477933,
+      8477493,
+      8477409
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8481557,
+    "player_b": 8475744,
+    "path_length": 6,
+    "path": [
+      8481557,
+      8482079,
+      8475149,
+      8473563,
+      8471214,
+      8475744
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8478403,
+    "player_b": 8477497,
+    "path_length": 7,
+    "path": [
+      8478403,
+      8477933,
+      8477493,
+      8477409,
+      8479314,
+      8476346,
+      8477497
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8474573,
+    "player_b": 8477934,
+    "path_length": 6,
+    "path": [
+      8474573,
+      8475314,
+      8478445,
+      8474586,
+      8476454,
+      8477934
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8458529,
+    "player_b": 8477496,
+    "path_length": 6,
+    "path": [
+      8458529,
+      8476456,
+      8477493,
+      8477409,
+      8479314,
+      8477496
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8458529,
+    "player_b": 8477497,
+    "path_length": 7,
+    "path": [
+      8458529,
+      8476456,
+      8477493,
+      8477409,
+      8479314,
+      8476346,
+      8477497
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8460542,
+    "player_b": 8478402,
+    "path_length": 9,
+    "path": [
+      8460542,
+      8471233,
+      8475151,
+      8475754,
+      8475314,
+      8478445,
+      8474586,
+      8476454,
       8478402
     ],
     "has_quality_path": true
   },
   {
-    "player_a": 8482116,
-    "player_b": 8478439,
+    "player_a": 8478403,
+    "player_b": 8477409,
     "path_length": 4,
     "path": [
-      8482116,
-      8473512,
-      8476461,
-      8478439
+      8478403,
+      8477933,
+      8477493,
+      8477409
     ],
     "has_quality_path": true
   },
   {
-    "player_a": 8448208,
+    "player_a": 8466148,
+    "player_b": 8479337,
+    "path_length": 4,
+    "path": [
+      8466148,
+      8473604,
+      8474141,
+      8479337
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8478402,
+    "player_b": 8477939,
+    "path_length": 4,
+    "path": [
+      8478402,
+      8475786,
+      8479318,
+      8477939
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8479385,
+    "player_b": 8473563,
+    "path_length": 12,
+    "path": [
+      8479385,
+      8477402,
+      8476459,
+      8475184,
+      8474613,
+      8470041,
+      8475692,
+      8478864,
+      8481557,
+      8482079,
+      8475149,
+      8473563
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8482665,
+    "player_b": 8478402,
+    "path_length": 4,
+    "path": [
+      8482665,
+      8474586,
+      8476454,
+      8478402
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8477933,
+    "player_b": 8476346,
+    "path_length": 5,
+    "path": [
+      8477933,
+      8477493,
+      8477409,
+      8479314,
+      8476346
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8473604,
+    "player_b": 8473563,
+    "path_length": 6,
+    "path": [
+      8473604,
+      8474141,
+      8479337,
+      8478440,
+      8471214,
+      8473563
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8474141,
+    "player_b": 8473563,
+    "path_length": 5,
+    "path": [
+      8474141,
+      8479337,
+      8478440,
+      8471214,
+      8473563
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8478483,
+    "player_b": 8474586,
+    "path_length": 5,
+    "path": [
+      8478483,
+      8479318,
+      8475786,
+      8476454,
+      8474586
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8482740,
+    "player_b": 8477496,
+    "path_length": 6,
+    "path": [
+      8482740,
+      8474149,
+      8477493,
+      8477409,
+      8479314,
+      8477496
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8460542,
     "player_b": 8478483,
     "path_length": 7,
     "path": [
-      8448208,
+      8460542,
       8471233,
       8475151,
       8475754,
@@ -40,88 +331,82 @@
     "has_quality_path": true
   },
   {
-    "player_a": 8476456,
-    "player_b": 8478403,
-    "path_length": 4,
+    "player_a": 8477493,
+    "player_b": 8477497,
+    "path_length": 5,
     "path": [
-      8476456,
       8477493,
-      8477933,
-      8478403
+      8477409,
+      8479314,
+      8476346,
+      8477497
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8482665,
+    "player_b": 8477939,
+    "path_length": 6,
+    "path": [
+      8482665,
+      8474586,
+      8478445,
+      8474573,
+      8475166,
+      8477939
     ],
     "has_quality_path": true
   },
   {
     "player_a": 8448208,
-    "player_b": 8478403,
-    "path_length": 4,
+    "player_b": 8474586,
+    "path_length": 7,
     "path": [
       8448208,
+      8471233,
+      8475151,
+      8475754,
+      8475314,
+      8478445,
+      8474586
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8477493,
+    "player_b": 8476346,
+    "path_length": 4,
+    "path": [
       8477493,
-      8477933,
-      8478403
-    ],
-    "has_quality_path": true
-  },
-  {
-    "player_a": 8475166,
-    "player_b": 8477934,
-    "path_length": 5,
-    "path": [
-      8475166,
-      8477939,
-      8479318,
-      8475786,
-      8477934
-    ],
-    "has_quality_path": true
-  },
-  {
-    "player_a": 8482116,
-    "player_b": 8478439,
-    "path_length": 4,
-    "path": [
-      8482116,
-      8473512,
-      8476461,
-      8478439
-    ],
-    "has_quality_path": true
-  },
-  {
-    "player_a": 8479314,
-    "player_b": 8476456,
-    "path_length": 4,
-    "path": [
-      8479314,
       8477409,
-      8477493,
-      8476456
+      8479314,
+      8476346
     ],
     "has_quality_path": true
   },
   {
-    "player_a": 8478483,
-    "player_b": 8477934,
+    "player_a": 8458529,
+    "player_b": 8477409,
     "path_length": 4,
     "path": [
-      8478483,
-      8479318,
-      8475786,
-      8477934
+      8458529,
+      8476456,
+      8477493,
+      8477409
     ],
     "has_quality_path": true
   },
   {
-    "player_a": 8473604,
-    "player_b": 8471214,
-    "path_length": 5,
+    "player_a": 8460542,
+    "player_b": 8478445,
+    "path_length": 6,
     "path": [
-      8473604,
-      8474141,
-      8479337,
-      8478440,
-      8471214
+      8460542,
+      8471233,
+      8475151,
+      8475754,
+      8475314,
+      8478445
     ],
     "has_quality_path": true
   },
@@ -139,37 +424,357 @@
     "has_quality_path": true
   },
   {
-    "player_a": 8478402,
-    "player_b": 8475166,
+    "player_a": 8482745,
+    "player_b": 8478550,
+    "path_length": 4,
+    "path": [
+      8482745,
+      8478873,
+      8476458,
+      8478550
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8479318,
+    "player_b": 8474586,
+    "path_length": 4,
+    "path": [
+      8479318,
+      8475786,
+      8476454,
+      8474586
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8468504,
+    "player_b": 8477497,
+    "path_length": 6,
+    "path": [
+      8468504,
+      8477493,
+      8477409,
+      8479314,
+      8476346,
+      8477497
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8480208,
+    "player_b": 8478439,
     "path_length": 5,
     "path": [
-      8478402,
-      8475786,
-      8479318,
-      8478483,
-      8475166
+      8480208,
+      8482116,
+      8473512,
+      8476461,
+      8478439
     ],
     "has_quality_path": true
   },
   {
     "player_a": 8478402,
-    "player_b": 8475166,
-    "path_length": 5,
+    "player_b": 8477939,
+    "path_length": 4,
     "path": [
       8478402,
       8475786,
       8479318,
-      8478483,
-      8475166
+      8477939
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8458529,
+    "player_b": 8477497,
+    "path_length": 7,
+    "path": [
+      8458529,
+      8476456,
+      8477493,
+      8477409,
+      8479314,
+      8476346,
+      8477497
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8477933,
+    "player_b": 8477497,
+    "path_length": 6,
+    "path": [
+      8477933,
+      8477493,
+      8477409,
+      8479314,
+      8476346,
+      8477497
     ],
     "has_quality_path": true
   },
   {
     "player_a": 8448208,
+    "player_b": 8477939,
+    "path_length": 7,
+    "path": [
+      8448208,
+      8471233,
+      8475151,
+      8475754,
+      8474573,
+      8475166,
+      8477939
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8476456,
+    "player_b": 8479314,
+    "path_length": 4,
+    "path": [
+      8476456,
+      8477493,
+      8477409,
+      8479314
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8477934,
+    "player_b": 8478445,
+    "path_length": 4,
+    "path": [
+      8477934,
+      8476454,
+      8474586,
+      8478445
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8478483,
+    "player_b": 8474573,
+    "path_length": 7,
+    "path": [
+      8478483,
+      8479318,
+      8475786,
+      8476454,
+      8474586,
+      8478445,
+      8474573
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8482740,
+    "player_b": 8477933,
+    "path_length": 4,
+    "path": [
+      8482740,
+      8474149,
+      8477493,
+      8477933
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8466148,
+    "player_b": 8473563,
+    "path_length": 7,
+    "path": [
+      8466148,
+      8473604,
+      8474141,
+      8479337,
+      8478440,
+      8471214,
+      8473563
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8473604,
+    "player_b": 8473563,
+    "path_length": 6,
+    "path": [
+      8473604,
+      8474141,
+      8479337,
+      8478440,
+      8471214,
+      8473563
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8478403,
+    "player_b": 8476456,
+    "path_length": 4,
+    "path": [
+      8478403,
+      8477933,
+      8477493,
+      8476456
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8470041,
+    "player_b": 8475744,
+    "path_length": 9,
+    "path": [
+      8470041,
+      8475692,
+      8478864,
+      8481557,
+      8482079,
+      8475149,
+      8473563,
+      8471214,
+      8475744
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8474141,
+    "player_b": 8471214,
+    "path_length": 4,
+    "path": [
+      8474141,
+      8479337,
+      8478440,
+      8471214
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8479385,
+    "player_b": 8481557,
+    "path_length": 9,
+    "path": [
+      8479385,
+      8477402,
+      8476459,
+      8475184,
+      8474613,
+      8470041,
+      8475692,
+      8478864,
+      8481557
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8478483,
+    "player_b": 8474586,
+    "path_length": 5,
+    "path": [
+      8478483,
+      8479318,
+      8475786,
+      8476454,
+      8474586
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8479318,
+    "player_b": 8474586,
+    "path_length": 4,
+    "path": [
+      8479318,
+      8475786,
+      8476454,
+      8474586
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8480023,
+    "player_b": 8478864,
+    "path_length": 8,
+    "path": [
+      8480023,
+      8477402,
+      8476459,
+      8475184,
+      8474613,
+      8470041,
+      8475692,
+      8478864
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8477934,
+    "player_b": 8478445,
+    "path_length": 4,
+    "path": [
+      8477934,
+      8476454,
+      8474586,
+      8478445
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8478483,
+    "player_b": 8474573,
+    "path_length": 7,
+    "path": [
+      8478483,
+      8479318,
+      8475786,
+      8476454,
+      8474586,
+      8478445,
+      8474573
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8477402,
+    "player_b": 8473563,
+    "path_length": 11,
+    "path": [
+      8477402,
+      8476459,
+      8475184,
+      8474613,
+      8470041,
+      8475692,
+      8478864,
+      8481557,
+      8482079,
+      8475149,
+      8473563
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8477330,
+    "player_b": 8471214,
+    "path_length": 6,
+    "path": [
+      8477330,
+      8473604,
+      8474141,
+      8479337,
+      8478440,
+      8471214
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8460542,
     "player_b": 8477934,
     "path_length": 9,
     "path": [
-      8448208,
+      8460542,
       8471233,
       8475151,
       8475754,
@@ -182,27 +787,172 @@
     "has_quality_path": true
   },
   {
-    "player_a": 8478402,
+    "player_a": 8468504,
+    "player_b": 8477496,
+    "path_length": 5,
+    "path": [
+      8468504,
+      8477493,
+      8477409,
+      8479314,
+      8477496
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8482665,
+    "player_b": 8477934,
+    "path_length": 4,
+    "path": [
+      8482665,
+      8474586,
+      8476454,
+      8477934
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8457981,
+    "player_b": 8476460,
+    "path_length": 5,
+    "path": [
+      8457981,
+      8473618,
+      8473412,
+      8471218,
+      8476460
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8478414,
+    "player_b": 8478449,
+    "path_length": 5,
+    "path": [
+      8478414,
+      8474053,
+      8466139,
+      8470794,
+      8478449
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8480023,
+    "player_b": 8481557,
+    "path_length": 9,
+    "path": [
+      8480023,
+      8477402,
+      8476459,
+      8475184,
+      8474613,
+      8470041,
+      8475692,
+      8478864,
+      8481557
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8479314,
+    "player_b": 8476456,
+    "path_length": 4,
+    "path": [
+      8479314,
+      8477409,
+      8477493,
+      8476456
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8473604,
+    "player_b": 8471214,
+    "path_length": 5,
+    "path": [
+      8473604,
+      8474141,
+      8479337,
+      8478440,
+      8471214
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8482665,
     "player_b": 8475166,
     "path_length": 5,
     "path": [
-      8478402,
-      8475786,
-      8479318,
-      8478483,
+      8482665,
+      8474586,
+      8478445,
+      8474573,
       8475166
     ],
     "has_quality_path": true
   },
   {
-    "player_a": 8476456,
-    "player_b": 8478403,
+    "player_a": 8478449,
+    "player_b": 8474053,
+    "path_length": 5,
+    "path": [
+      8478449,
+      8470794,
+      8466138,
+      8466139,
+      8474053
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8474573,
+    "player_b": 8479318,
     "path_length": 4,
     "path": [
-      8476456,
-      8477493,
-      8477933,
-      8478403
+      8474573,
+      8475166,
+      8477939,
+      8479318
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8474053,
+    "player_b": 8480027,
+    "path_length": 4,
+    "path": [
+      8474053,
+      8466139,
+      8470794,
+      8480027
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8470041,
+    "player_b": 8473563,
+    "path_length": 7,
+    "path": [
+      8470041,
+      8475692,
+      8478864,
+      8481557,
+      8482079,
+      8475149,
+      8473563
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8478402,
+    "player_b": 8477939,
+    "path_length": 4,
+    "path": [
+      8478402,
+      8475786,
+      8479318,
+      8477939
     ],
     "has_quality_path": true
   },
@@ -223,46 +973,47 @@
     "has_quality_path": true
   },
   {
-    "player_a": 8448208,
-    "player_b": 8478403,
-    "path_length": 4,
+    "player_a": 8478864,
+    "player_b": 8473563,
+    "path_length": 5,
     "path": [
-      8448208,
-      8477493,
-      8477933,
-      8478403
-    ],
-    "has_quality_path": true
-  },
-  {
-    "player_a": 8474141,
-    "player_b": 8471214,
-    "path_length": 4,
-    "path": [
-      8474141,
-      8479337,
-      8478440,
-      8471214
+      8478864,
+      8481557,
+      8482079,
+      8475149,
+      8473563
     ],
     "has_quality_path": true
   },
   {
     "player_a": 8477934,
-    "player_b": 8478483,
+    "player_b": 8477939,
     "path_length": 5,
     "path": [
       8477934,
       8478402,
       8475786,
       8479318,
-      8478483
+      8477939
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8467338,
+    "player_b": 8477956,
+    "path_length": 4,
+    "path": [
+      8467338,
+      8462042,
+      8471276,
+      8477956
     ],
     "has_quality_path": true
   },
   {
     "player_a": 8448208,
-    "player_b": 8477934,
-    "path_length": 9,
+    "player_b": 8474586,
+    "path_length": 7,
     "path": [
       8448208,
       8471233,
@@ -270,43 +1021,16 @@
       8475754,
       8475314,
       8478445,
-      8474586,
-      8476454,
-      8477934
+      8474586
     ],
     "has_quality_path": true
   },
   {
-    "player_a": 8480801,
-    "player_b": 8478439,
-    "path_length": 5,
-    "path": [
-      8480801,
-      8482116,
-      8473512,
-      8476461,
-      8478439
-    ],
-    "has_quality_path": true
-  },
-  {
-    "player_a": 8477934,
-    "player_b": 8479318,
-    "path_length": 4,
-    "path": [
-      8477934,
-      8478402,
-      8475786,
-      8479318
-    ],
-    "has_quality_path": true
-  },
-  {
-    "player_a": 8448208,
+    "player_a": 8460542,
     "player_b": 8475166,
     "path_length": 6,
     "path": [
-      8448208,
+      8460542,
       8471233,
       8475151,
       8475754,
@@ -316,14 +1040,465 @@
     "has_quality_path": true
   },
   {
-    "player_a": 8478483,
-    "player_b": 8477934,
+    "player_a": 8480023,
+    "player_b": 8471214,
+    "path_length": 13,
+    "path": [
+      8480023,
+      8477402,
+      8476459,
+      8475184,
+      8474613,
+      8470041,
+      8475692,
+      8478864,
+      8481557,
+      8482079,
+      8475149,
+      8473563,
+      8471214
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8460542,
+    "player_b": 8475166,
+    "path_length": 6,
+    "path": [
+      8460542,
+      8471233,
+      8475151,
+      8475754,
+      8474573,
+      8475166
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8467338,
+    "player_b": 8477956,
     "path_length": 4,
     "path": [
-      8478483,
+      8467338,
+      8462042,
+      8471276,
+      8477956
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8480023,
+    "player_b": 8473563,
+    "path_length": 12,
+    "path": [
+      8480023,
+      8477402,
+      8476459,
+      8475184,
+      8474613,
+      8470041,
+      8475692,
+      8478864,
+      8481557,
+      8482079,
+      8475149,
+      8473563
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8466148,
+    "player_b": 8478440,
+    "path_length": 5,
+    "path": [
+      8466148,
+      8473604,
+      8474141,
+      8479337,
+      8478440
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8448208,
+    "player_b": 8477496,
+    "path_length": 5,
+    "path": [
+      8448208,
+      8477493,
+      8477409,
+      8479314,
+      8477496
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8480023,
+    "player_b": 8470041,
+    "path_length": 6,
+    "path": [
+      8480023,
+      8477402,
+      8476459,
+      8475184,
+      8474613,
+      8470041
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8460542,
+    "player_b": 8478445,
+    "path_length": 6,
+    "path": [
+      8460542,
+      8471233,
+      8475151,
+      8475754,
+      8475314,
+      8478445
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8473604,
+    "player_b": 8473563,
+    "path_length": 6,
+    "path": [
+      8473604,
+      8474141,
+      8479337,
+      8478440,
+      8471214,
+      8473563
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8476459,
+    "player_b": 8478864,
+    "path_length": 6,
+    "path": [
+      8476459,
+      8475184,
+      8474613,
+      8470041,
+      8475692,
+      8478864
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8477939,
+    "player_b": 8474586,
+    "path_length": 5,
+    "path": [
+      8477939,
       8479318,
       8475786,
-      8477934
+      8476454,
+      8474586
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8479385,
+    "player_b": 8471214,
+    "path_length": 13,
+    "path": [
+      8479385,
+      8477402,
+      8476459,
+      8475184,
+      8474613,
+      8470041,
+      8475692,
+      8478864,
+      8481557,
+      8482079,
+      8475149,
+      8473563,
+      8471214
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8481557,
+    "player_b": 8471214,
+    "path_length": 5,
+    "path": [
+      8481557,
+      8482079,
+      8475149,
+      8473563,
+      8471214
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8466378,
+    "player_b": 8478864,
+    "path_length": 5,
+    "path": [
+      8466378,
+      8474613,
+      8470041,
+      8475692,
+      8478864
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8477330,
+    "player_b": 8475744,
+    "path_length": 7,
+    "path": [
+      8477330,
+      8473604,
+      8474141,
+      8479337,
+      8478440,
+      8471214,
+      8475744
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8477939,
+    "player_b": 8474586,
+    "path_length": 5,
+    "path": [
+      8477939,
+      8479318,
+      8475786,
+      8476454,
+      8474586
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8477933,
+    "player_b": 8477496,
+    "path_length": 5,
+    "path": [
+      8477933,
+      8477493,
+      8477409,
+      8479314,
+      8477496
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8467338,
+    "player_b": 8470638,
+    "path_length": 5,
+    "path": [
+      8467338,
+      8462042,
+      8471276,
+      8477956,
+      8470638
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8479318,
+    "player_b": 8474573,
+    "path_length": 6,
+    "path": [
+      8479318,
+      8475786,
+      8476454,
+      8474586,
+      8478445,
+      8474573
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8479385,
+    "player_b": 8481557,
+    "path_length": 9,
+    "path": [
+      8479385,
+      8477402,
+      8476459,
+      8475184,
+      8474613,
+      8470041,
+      8475692,
+      8478864,
+      8481557
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8471676,
+    "player_b": 8473563,
+    "path_length": 11,
+    "path": [
+      8471676,
+      8476459,
+      8475184,
+      8474613,
+      8470041,
+      8475692,
+      8478864,
+      8481557,
+      8482079,
+      8475149,
+      8473563
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8476454,
+    "player_b": 8478483,
+    "path_length": 5,
+    "path": [
+      8476454,
+      8478402,
+      8475786,
+      8479318,
+      8478483
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8474141,
+    "player_b": 8473563,
+    "path_length": 5,
+    "path": [
+      8474141,
+      8479337,
+      8478440,
+      8471214,
+      8473563
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8460542,
+    "player_b": 8478402,
+    "path_length": 9,
+    "path": [
+      8460542,
+      8471233,
+      8475151,
+      8475754,
+      8475314,
+      8478445,
+      8474586,
+      8476454,
+      8478402
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8479385,
+    "player_b": 8481557,
+    "path_length": 9,
+    "path": [
+      8479385,
+      8477402,
+      8476459,
+      8475184,
+      8474613,
+      8470041,
+      8475692,
+      8478864,
+      8481557
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8458529,
+    "player_b": 8479314,
+    "path_length": 5,
+    "path": [
+      8458529,
+      8476456,
+      8477493,
+      8477409,
+      8479314
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8467338,
+    "player_b": 8470638,
+    "path_length": 5,
+    "path": [
+      8467338,
+      8462042,
+      8471276,
+      8477956,
+      8470638
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8477939,
+    "player_b": 8476454,
+    "path_length": 4,
+    "path": [
+      8477939,
+      8479318,
+      8475786,
+      8476454
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8480023,
+    "player_b": 8470041,
+    "path_length": 6,
+    "path": [
+      8480023,
+      8477402,
+      8476459,
+      8475184,
+      8474613,
+      8470041
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8478445,
+    "player_b": 8477939,
+    "path_length": 4,
+    "path": [
+      8478445,
+      8474573,
+      8475166,
+      8477939
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8457981,
+    "player_b": 8476460,
+    "path_length": 5,
+    "path": [
+      8457981,
+      8473618,
+      8473412,
+      8471218,
+      8476460
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8474586,
+    "player_b": 8477939,
+    "path_length": 5,
+    "path": [
+      8474586,
+      8478445,
+      8474573,
+      8475166,
+      8477939
     ],
     "has_quality_path": true
   },
@@ -340,35 +1515,33 @@
     "has_quality_path": true
   },
   {
-    "player_a": 8473604,
-    "player_b": 8471214,
+    "player_a": 8480023,
+    "player_b": 8475744,
+    "path_length": 14,
+    "path": [
+      8480023,
+      8477402,
+      8476459,
+      8475184,
+      8474613,
+      8470041,
+      8475692,
+      8478864,
+      8481557,
+      8482079,
+      8475149,
+      8473563,
+      8471214,
+      8475744
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8458529,
+    "player_b": 8479314,
     "path_length": 5,
     "path": [
-      8473604,
-      8474141,
-      8479337,
-      8478440,
-      8471214
-    ],
-    "has_quality_path": true
-  },
-  {
-    "player_a": 8476456,
-    "player_b": 8479314,
-    "path_length": 4,
-    "path": [
-      8476456,
-      8477493,
-      8477409,
-      8479314
-    ],
-    "has_quality_path": true
-  },
-  {
-    "player_a": 8476456,
-    "player_b": 8479314,
-    "path_length": 4,
-    "path": [
+      8458529,
       8476456,
       8477493,
       8477409,
@@ -389,126 +1562,79 @@
     "has_quality_path": true
   },
   {
-    "player_a": 8448208,
-    "player_b": 8478483,
+    "player_a": 8474053,
+    "player_b": 8480027,
+    "path_length": 4,
+    "path": [
+      8474053,
+      8466139,
+      8470794,
+      8480027
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8468504,
+    "player_b": 8476346,
+    "path_length": 5,
+    "path": [
+      8468504,
+      8477493,
+      8477409,
+      8479314,
+      8476346
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8466148,
+    "player_b": 8475744,
     "path_length": 7,
     "path": [
-      8448208,
-      8471233,
-      8475151,
-      8475754,
-      8474573,
-      8475166,
-      8478483
-    ],
-    "has_quality_path": true
-  },
-  {
-    "player_a": 8478402,
-    "player_b": 8475166,
-    "path_length": 5,
-    "path": [
-      8478402,
-      8475786,
-      8479318,
-      8478483,
-      8475166
-    ],
-    "has_quality_path": true
-  },
-  {
-    "player_a": 8448208,
-    "player_b": 8478402,
-    "path_length": 9,
-    "path": [
-      8448208,
-      8471233,
-      8475151,
-      8475754,
-      8475314,
-      8478445,
-      8474586,
-      8476454,
-      8478402
-    ],
-    "has_quality_path": true
-  },
-  {
-    "player_a": 8448208,
-    "player_b": 8477934,
-    "path_length": 9,
-    "path": [
-      8448208,
-      8471233,
-      8475151,
-      8475754,
-      8475314,
-      8478445,
-      8474586,
-      8476454,
-      8477934
-    ],
-    "has_quality_path": true
-  },
-  {
-    "player_a": 8476456,
-    "player_b": 8478403,
-    "path_length": 4,
-    "path": [
-      8476456,
-      8477493,
-      8477933,
-      8478403
-    ],
-    "has_quality_path": true
-  },
-  {
-    "player_a": 8478402,
-    "player_b": 8475166,
-    "path_length": 5,
-    "path": [
-      8478402,
-      8475786,
-      8479318,
-      8478483,
-      8475166
-    ],
-    "has_quality_path": true
-  },
-  {
-    "player_a": 8474141,
-    "player_b": 8471214,
-    "path_length": 4,
-    "path": [
+      8466148,
+      8473604,
       8474141,
       8479337,
       8478440,
-      8471214
+      8471214,
+      8475744
     ],
     "has_quality_path": true
   },
   {
-    "player_a": 8482116,
-    "player_b": 8478439,
+    "player_a": 8470041,
+    "player_b": 8481557,
     "path_length": 4,
     "path": [
-      8482116,
-      8473512,
-      8476461,
-      8478439
+      8470041,
+      8475692,
+      8478864,
+      8481557
     ],
     "has_quality_path": true
   },
   {
-    "player_a": 8478402,
-    "player_b": 8475166,
+    "player_a": 8478449,
+    "player_b": 8474053,
     "path_length": 5,
     "path": [
-      8478402,
-      8475786,
-      8479318,
-      8478483,
-      8475166
+      8478449,
+      8470794,
+      8466138,
+      8466139,
+      8474053
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8478403,
+    "player_b": 8476456,
+    "path_length": 4,
+    "path": [
+      8478403,
+      8477933,
+      8477493,
+      8476456
     ],
     "has_quality_path": true
   },
@@ -526,15 +1652,192 @@
     "has_quality_path": true
   },
   {
-    "player_a": 8476456,
-    "player_b": 8476346,
+    "player_a": 8473604,
+    "player_b": 8475744,
+    "path_length": 6,
+    "path": [
+      8473604,
+      8474141,
+      8479337,
+      8478440,
+      8471214,
+      8475744
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8474141,
+    "player_b": 8473563,
     "path_length": 5,
     "path": [
+      8474141,
+      8479337,
+      8478440,
+      8471214,
+      8473563
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8466148,
+    "player_b": 8473563,
+    "path_length": 7,
+    "path": [
+      8466148,
+      8473604,
+      8474141,
+      8479337,
+      8478440,
+      8471214,
+      8473563
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8480027,
+    "player_b": 8466139,
+    "path_length": 4,
+    "path": [
+      8480027,
+      8470794,
+      8466138,
+      8466139
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8460542,
+    "player_b": 8477939,
+    "path_length": 7,
+    "path": [
+      8460542,
+      8471233,
+      8475151,
+      8475754,
+      8474573,
+      8475166,
+      8477939
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8477939,
+    "player_b": 8477934,
+    "path_length": 4,
+    "path": [
+      8477939,
+      8479318,
+      8475786,
+      8477934
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8476454,
+    "player_b": 8477939,
+    "path_length": 5,
+    "path": [
+      8476454,
+      8478402,
+      8475786,
+      8479318,
+      8477939
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8460542,
+    "player_b": 8477934,
+    "path_length": 9,
+    "path": [
+      8460542,
+      8471233,
+      8475151,
+      8475754,
+      8475314,
+      8478445,
+      8474586,
+      8476454,
+      8477934
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8478483,
+    "player_b": 8478445,
+    "path_length": 6,
+    "path": [
+      8478483,
+      8479318,
+      8475786,
+      8476454,
+      8474586,
+      8478445
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8448208,
+    "player_b": 8474573,
+    "path_length": 5,
+    "path": [
+      8448208,
+      8471233,
+      8475151,
+      8475754,
+      8474573
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8458529,
+    "player_b": 8478403,
+    "path_length": 5,
+    "path": [
+      8458529,
       8476456,
       8477493,
+      8477933,
+      8478403
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8479318,
+    "player_b": 8474573,
+    "path_length": 6,
+    "path": [
+      8479318,
+      8475786,
+      8476454,
+      8474586,
+      8478445,
+      8474573
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8482665,
+    "player_b": 8475166,
+    "path_length": 5,
+    "path": [
+      8482665,
+      8474586,
+      8478445,
+      8474573,
+      8475166
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8468504,
+    "player_b": 8479314,
+    "path_length": 4,
+    "path": [
+      8468504,
+      8477493,
       8477409,
-      8479314,
-      8476346
+      8479314
     ],
     "has_quality_path": true
   },
@@ -555,14 +1858,83 @@
     "has_quality_path": true
   },
   {
-    "player_a": 8479314,
-    "player_b": 8476456,
+    "player_a": 8448208,
+    "player_b": 8474586,
+    "path_length": 7,
+    "path": [
+      8448208,
+      8471233,
+      8475151,
+      8475754,
+      8475314,
+      8478445,
+      8474586
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8482745,
+    "player_b": 8478550,
     "path_length": 4,
     "path": [
-      8479314,
-      8477409,
+      8482745,
+      8478873,
+      8476458,
+      8478550
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8477493,
+    "player_b": 8477497,
+    "path_length": 5,
+    "path": [
       8477493,
-      8476456
+      8477409,
+      8479314,
+      8476346,
+      8477497
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8471676,
+    "player_b": 8470041,
+    "path_length": 5,
+    "path": [
+      8471676,
+      8476459,
+      8475184,
+      8474613,
+      8470041
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8480801,
+    "player_b": 8476461,
+    "path_length": 4,
+    "path": [
+      8480801,
+      8482116,
+      8473512,
+      8476461
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8471676,
+    "player_b": 8481557,
+    "path_length": 8,
+    "path": [
+      8471676,
+      8476459,
+      8475184,
+      8474613,
+      8470041,
+      8475692,
+      8478864,
+      8481557
     ],
     "has_quality_path": true
   },
@@ -580,24 +1952,249 @@
     "has_quality_path": true
   },
   {
-    "player_a": 8477934,
-    "player_b": 8478483,
+    "player_a": 8448208,
+    "player_b": 8476454,
+    "path_length": 8,
+    "path": [
+      8448208,
+      8471233,
+      8475151,
+      8475754,
+      8475314,
+      8478445,
+      8474586,
+      8476454
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8478449,
+    "player_b": 8474053,
     "path_length": 5,
     "path": [
-      8477934,
-      8478402,
-      8475786,
-      8479318,
-      8478483
+      8478449,
+      8470794,
+      8466138,
+      8466139,
+      8474053
     ],
     "has_quality_path": true
   },
   {
     "player_a": 8448208,
-    "player_b": 8479318,
+    "player_b": 8476454,
     "path_length": 8,
     "path": [
       8448208,
+      8471233,
+      8475151,
+      8475754,
+      8475314,
+      8478445,
+      8474586,
+      8476454
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8482665,
+    "player_b": 8477939,
+    "path_length": 6,
+    "path": [
+      8482665,
+      8474586,
+      8478445,
+      8474573,
+      8475166,
+      8477939
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8478445,
+    "player_b": 8477939,
+    "path_length": 4,
+    "path": [
+      8478445,
+      8474573,
+      8475166,
+      8477939
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8448208,
+    "player_b": 8478483,
+    "path_length": 7,
+    "path": [
+      8448208,
+      8471233,
+      8475151,
+      8475754,
+      8474573,
+      8475166,
+      8478483
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8482740,
+    "player_b": 8477409,
+    "path_length": 4,
+    "path": [
+      8482740,
+      8474149,
+      8477493,
+      8477409
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8458529,
+    "player_b": 8477933,
+    "path_length": 4,
+    "path": [
+      8458529,
+      8476456,
+      8477493,
+      8477933
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8476456,
+    "player_b": 8478403,
+    "path_length": 4,
+    "path": [
+      8476456,
+      8477493,
+      8477933,
+      8478403
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8480023,
+    "player_b": 8478864,
+    "path_length": 8,
+    "path": [
+      8480023,
+      8477402,
+      8476459,
+      8475184,
+      8474613,
+      8470041,
+      8475692,
+      8478864
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8448208,
+    "player_b": 8474586,
+    "path_length": 7,
+    "path": [
+      8448208,
+      8471233,
+      8475151,
+      8475754,
+      8475314,
+      8478445,
+      8474586
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8460542,
+    "player_b": 8477939,
+    "path_length": 7,
+    "path": [
+      8460542,
+      8471233,
+      8475151,
+      8475754,
+      8474573,
+      8475166,
+      8477939
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8481557,
+    "player_b": 8475744,
+    "path_length": 6,
+    "path": [
+      8481557,
+      8482079,
+      8475149,
+      8473563,
+      8471214,
+      8475744
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8481533,
+    "player_b": 8476389,
+    "path_length": 4,
+    "path": [
+      8481533,
+      8476458,
+      8478550,
+      8476389
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8477402,
+    "player_b": 8473563,
+    "path_length": 11,
+    "path": [
+      8477402,
+      8476459,
+      8475184,
+      8474613,
+      8470041,
+      8475692,
+      8478864,
+      8481557,
+      8482079,
+      8475149,
+      8473563
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8457981,
+    "player_b": 8476460,
+    "path_length": 5,
+    "path": [
+      8457981,
+      8473618,
+      8473412,
+      8471218,
+      8476460
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8480208,
+    "player_b": 8476461,
+    "path_length": 4,
+    "path": [
+      8480208,
+      8482116,
+      8473512,
+      8476461
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8460542,
+    "player_b": 8479318,
+    "path_length": 8,
+    "path": [
+      8460542,
       8471233,
       8475151,
       8475754,
@@ -609,47 +2206,249 @@
     "has_quality_path": true
   },
   {
-    "player_a": 8480801,
-    "player_b": 8478439,
+    "player_a": 8482665,
+    "player_b": 8474573,
+    "path_length": 4,
+    "path": [
+      8482665,
+      8474586,
+      8478445,
+      8474573
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8448208,
+    "player_b": 8474586,
+    "path_length": 7,
+    "path": [
+      8448208,
+      8471233,
+      8475151,
+      8475754,
+      8475314,
+      8478445,
+      8474586
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8478483,
+    "player_b": 8474586,
     "path_length": 5,
     "path": [
-      8480801,
-      8482116,
-      8473512,
-      8476461,
-      8478439
+      8478483,
+      8479318,
+      8475786,
+      8476454,
+      8474586
     ],
     "has_quality_path": true
   },
   {
-    "player_a": 8482116,
-    "player_b": 8478439,
-    "path_length": 4,
+    "player_a": 8478483,
+    "player_b": 8474573,
+    "path_length": 7,
     "path": [
-      8482116,
-      8473512,
-      8476461,
-      8478439
+      8478483,
+      8479318,
+      8475786,
+      8476454,
+      8474586,
+      8478445,
+      8474573
     ],
     "has_quality_path": true
   },
   {
-    "player_a": 8474141,
-    "player_b": 8471214,
+    "player_a": 8480023,
+    "player_b": 8473563,
+    "path_length": 12,
+    "path": [
+      8480023,
+      8477402,
+      8476459,
+      8475184,
+      8474613,
+      8470041,
+      8475692,
+      8478864,
+      8481557,
+      8482079,
+      8475149,
+      8473563
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8448208,
+    "player_b": 8476454,
+    "path_length": 8,
+    "path": [
+      8448208,
+      8471233,
+      8475151,
+      8475754,
+      8475314,
+      8478445,
+      8474586,
+      8476454
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8482665,
+    "player_b": 8474573,
     "path_length": 4,
     "path": [
+      8482665,
+      8474586,
+      8478445,
+      8474573
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8477939,
+    "player_b": 8474573,
+    "path_length": 7,
+    "path": [
+      8477939,
+      8479318,
+      8475786,
+      8476454,
+      8474586,
+      8478445,
+      8474573
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8471676,
+    "player_b": 8473563,
+    "path_length": 11,
+    "path": [
+      8471676,
+      8476459,
+      8475184,
+      8474613,
+      8470041,
+      8475692,
+      8478864,
+      8481557,
+      8482079,
+      8475149,
+      8473563
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8473604,
+    "player_b": 8473563,
+    "path_length": 6,
+    "path": [
+      8473604,
       8474141,
       8479337,
       8478440,
-      8471214
+      8471214,
+      8473563
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8478483,
+    "player_b": 8477934,
+    "path_length": 4,
+    "path": [
+      8478483,
+      8479318,
+      8475786,
+      8477934
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8458529,
+    "player_b": 8477933,
+    "path_length": 4,
+    "path": [
+      8458529,
+      8476456,
+      8477493,
+      8477933
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8468504,
+    "player_b": 8479314,
+    "path_length": 4,
+    "path": [
+      8468504,
+      8477493,
+      8477409,
+      8479314
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8482745,
+    "player_b": 8476389,
+    "path_length": 5,
+    "path": [
+      8482745,
+      8478873,
+      8476458,
+      8478550,
+      8476389
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8458529,
+    "player_b": 8477933,
+    "path_length": 4,
+    "path": [
+      8458529,
+      8476456,
+      8477493,
+      8477933
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8482740,
+    "player_b": 8474053,
+    "path_length": 6,
+    "path": [
+      8482740,
+      8480027,
+      8470794,
+      8466138,
+      8466139,
+      8474053
     ],
     "has_quality_path": true
   },
   {
     "player_a": 8476456,
-    "player_b": 8476346,
-    "path_length": 5,
+    "player_b": 8479314,
+    "path_length": 4,
     "path": [
+      8476456,
+      8477493,
+      8477409,
+      8479314
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8458529,
+    "player_b": 8476346,
+    "path_length": 6,
+    "path": [
+      8458529,
       8476456,
       8477493,
       8477409,
@@ -659,19 +2458,53 @@
     "has_quality_path": true
   },
   {
-    "player_a": 8448208,
-    "player_b": 8478402,
-    "path_length": 9,
+    "player_a": 8478445,
+    "player_b": 8478483,
+    "path_length": 4,
     "path": [
-      8448208,
-      8471233,
-      8475151,
-      8475754,
-      8475314,
       8478445,
-      8474586,
-      8476454,
-      8478402
+      8474573,
+      8475166,
+      8478483
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8481557,
+    "player_b": 8475744,
+    "path_length": 6,
+    "path": [
+      8481557,
+      8482079,
+      8475149,
+      8473563,
+      8471214,
+      8475744
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8466148,
+    "player_b": 8479337,
+    "path_length": 4,
+    "path": [
+      8466148,
+      8473604,
+      8474141,
+      8479337
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8478864,
+    "player_b": 8473563,
+    "path_length": 5,
+    "path": [
+      8478864,
+      8481557,
+      8482079,
+      8475149,
+      8473563
     ],
     "has_quality_path": true
   },
@@ -690,128 +2523,261 @@
     "has_quality_path": true
   },
   {
-    "player_a": 8448208,
-    "player_b": 8477934,
-    "path_length": 9,
+    "player_a": 8478403,
+    "player_b": 8477496,
+    "path_length": 6,
     "path": [
-      8448208,
-      8471233,
-      8475151,
-      8475754,
-      8475314,
-      8478445,
-      8474586,
-      8476454,
-      8477934
-    ],
-    "has_quality_path": true
-  },
-  {
-    "player_a": 8479314,
-    "player_b": 8476456,
-    "path_length": 4,
-    "path": [
-      8479314,
-      8477409,
-      8477493,
-      8476456
-    ],
-    "has_quality_path": true
-  },
-  {
-    "player_a": 8480801,
-    "player_b": 8478439,
-    "path_length": 5,
-    "path": [
-      8480801,
-      8482116,
-      8473512,
-      8476461,
-      8478439
-    ],
-    "has_quality_path": true
-  },
-  {
-    "player_a": 8477933,
-    "player_b": 8476346,
-    "path_length": 5,
-    "path": [
+      8478403,
       8477933,
       8477493,
       8477409,
       8479314,
-      8476346
+      8477496
     ],
     "has_quality_path": true
   },
   {
-    "player_a": 8475166,
-    "player_b": 8477934,
-    "path_length": 5,
+    "player_a": 8479318,
+    "player_b": 8474586,
+    "path_length": 4,
     "path": [
-      8475166,
+      8479318,
+      8475786,
+      8476454,
+      8474586
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8477939,
+    "player_b": 8478402,
+    "path_length": 4,
+    "path": [
       8477939,
       8479318,
       8475786,
-      8477934
-    ],
-    "has_quality_path": true
-  },
-  {
-    "player_a": 8448208,
-    "player_b": 8478402,
-    "path_length": 9,
-    "path": [
-      8448208,
-      8471233,
-      8475151,
-      8475754,
-      8475314,
-      8478445,
-      8474586,
-      8476454,
       8478402
     ],
     "has_quality_path": true
   },
   {
-    "player_a": 8448208,
-    "player_b": 8478402,
-    "path_length": 9,
+    "player_a": 8471676,
+    "player_b": 8475744,
+    "path_length": 13,
     "path": [
-      8448208,
-      8471233,
-      8475151,
-      8475754,
-      8475314,
-      8478445,
-      8474586,
-      8476454,
-      8478402
+      8471676,
+      8476459,
+      8475184,
+      8474613,
+      8470041,
+      8475692,
+      8478864,
+      8481557,
+      8482079,
+      8475149,
+      8473563,
+      8471214,
+      8475744
     ],
     "has_quality_path": true
   },
   {
-    "player_a": 8477493,
-    "player_b": 8476346,
+    "player_a": 8478445,
+    "player_b": 8479318,
+    "path_length": 5,
+    "path": [
+      8478445,
+      8474573,
+      8475166,
+      8477939,
+      8479318
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8482740,
+    "player_b": 8477409,
     "path_length": 4,
     "path": [
+      8482740,
+      8474149,
       8477493,
-      8477409,
-      8479314,
-      8476346
+      8477409
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8478440,
+    "player_b": 8466148,
+    "path_length": 4,
+    "path": [
+      8478440,
+      8474141,
+      8473604,
+      8466148
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8482740,
+    "player_b": 8478403,
+    "path_length": 5,
+    "path": [
+      8482740,
+      8474149,
+      8477493,
+      8477933,
+      8478403
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8471676,
+    "player_b": 8473563,
+    "path_length": 11,
+    "path": [
+      8471676,
+      8476459,
+      8475184,
+      8474613,
+      8470041,
+      8475692,
+      8478864,
+      8481557,
+      8482079,
+      8475149,
+      8473563
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8477402,
+    "player_b": 8481557,
+    "path_length": 8,
+    "path": [
+      8477402,
+      8476459,
+      8475184,
+      8474613,
+      8470041,
+      8475692,
+      8478864,
+      8481557
     ],
     "has_quality_path": true
   },
   {
     "player_a": 8477934,
-    "player_b": 8479318,
-    "path_length": 4,
+    "player_b": 8477939,
+    "path_length": 5,
     "path": [
       8477934,
       8478402,
       8475786,
-      8479318
+      8479318,
+      8477939
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8479337,
+    "player_b": 8466148,
+    "path_length": 4,
+    "path": [
+      8479337,
+      8474141,
+      8473604,
+      8466148
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8458529,
+    "player_b": 8478403,
+    "path_length": 5,
+    "path": [
+      8458529,
+      8476456,
+      8477493,
+      8477933,
+      8478403
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8466148,
+    "player_b": 8475744,
+    "path_length": 7,
+    "path": [
+      8466148,
+      8473604,
+      8474141,
+      8479337,
+      8478440,
+      8471214,
+      8475744
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8477934,
+    "player_b": 8478483,
+    "path_length": 5,
+    "path": [
+      8477934,
+      8478402,
+      8475786,
+      8479318,
+      8478483
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8477939,
+    "player_b": 8478402,
+    "path_length": 4,
+    "path": [
+      8477939,
+      8479318,
+      8475786,
+      8478402
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8480027,
+    "player_b": 8466139,
+    "path_length": 4,
+    "path": [
+      8480027,
+      8470794,
+      8466138,
+      8466139
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8477934,
+    "player_b": 8478483,
+    "path_length": 5,
+    "path": [
+      8477934,
+      8478402,
+      8475786,
+      8479318,
+      8478483
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8477409,
+    "player_b": 8477497,
+    "path_length": 4,
+    "path": [
+      8477409,
+      8479314,
+      8476346,
+      8477497
     ],
     "has_quality_path": true
   },
@@ -828,104 +2794,209 @@
     "has_quality_path": true
   },
   {
-    "player_a": 8482116,
-    "player_b": 8478439,
+    "player_a": 8477934,
+    "player_b": 8479318,
     "path_length": 4,
     "path": [
-      8482116,
-      8473512,
-      8476461,
-      8478439
+      8477934,
+      8478402,
+      8475786,
+      8479318
     ],
     "has_quality_path": true
   },
   {
-    "player_a": 8475166,
-    "player_b": 8477934,
+    "player_a": 8480027,
+    "player_b": 8466139,
+    "path_length": 4,
+    "path": [
+      8480027,
+      8470794,
+      8466138,
+      8466139
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8477934,
+    "player_b": 8478445,
+    "path_length": 4,
+    "path": [
+      8477934,
+      8476454,
+      8474586,
+      8478445
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8458529,
+    "player_b": 8476346,
+    "path_length": 6,
+    "path": [
+      8458529,
+      8476456,
+      8477493,
+      8477409,
+      8479314,
+      8476346
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8466378,
+    "player_b": 8478864,
     "path_length": 5,
     "path": [
-      8475166,
+      8466378,
+      8474613,
+      8470041,
+      8475692,
+      8478864
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8482665,
+    "player_b": 8478402,
+    "path_length": 4,
+    "path": [
+      8482665,
+      8474586,
+      8476454,
+      8478402
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8477939,
+    "player_b": 8478402,
+    "path_length": 4,
+    "path": [
       8477939,
       8479318,
       8475786,
-      8477934
+      8478402
     ],
     "has_quality_path": true
   },
   {
-    "player_a": 8448208,
-    "player_b": 8477934,
-    "path_length": 9,
+    "player_a": 8474573,
+    "player_b": 8479318,
+    "path_length": 4,
     "path": [
-      8448208,
+      8474573,
+      8475166,
+      8477939,
+      8479318
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8480208,
+    "player_b": 8474161,
+    "path_length": 4,
+    "path": [
+      8480208,
+      8482116,
+      8473512,
+      8474161
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8476454,
+    "player_b": 8477939,
+    "path_length": 5,
+    "path": [
+      8476454,
+      8478402,
+      8475786,
+      8479318,
+      8477939
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8470041,
+    "player_b": 8473563,
+    "path_length": 7,
+    "path": [
+      8470041,
+      8475692,
+      8478864,
+      8481557,
+      8482079,
+      8475149,
+      8473563
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8458529,
+    "player_b": 8477933,
+    "path_length": 4,
+    "path": [
+      8458529,
+      8476456,
+      8477493,
+      8477933
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8477933,
+    "player_b": 8477497,
+    "path_length": 6,
+    "path": [
+      8477933,
+      8477493,
+      8477409,
+      8479314,
+      8476346,
+      8477497
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8460542,
+    "player_b": 8477939,
+    "path_length": 7,
+    "path": [
+      8460542,
       8471233,
       8475151,
       8475754,
-      8475314,
-      8478445,
-      8474586,
-      8476454,
-      8477934
+      8474573,
+      8475166,
+      8477939
     ],
     "has_quality_path": true
   },
   {
-    "player_a": 8482116,
-    "player_b": 8478439,
-    "path_length": 4,
+    "player_a": 8476459,
+    "player_b": 8478864,
+    "path_length": 6,
     "path": [
-      8482116,
-      8473512,
-      8476461,
-      8478439
+      8476459,
+      8475184,
+      8474613,
+      8470041,
+      8475692,
+      8478864
     ],
     "has_quality_path": true
   },
   {
-    "player_a": 8448208,
-    "player_b": 8478403,
-    "path_length": 4,
+    "player_a": 8478402,
+    "player_b": 8475166,
+    "path_length": 5,
     "path": [
-      8448208,
-      8477493,
-      8477933,
-      8478403
-    ],
-    "has_quality_path": true
-  },
-  {
-    "player_a": 8478403,
-    "player_b": 8476456,
-    "path_length": 4,
-    "path": [
-      8478403,
-      8477933,
-      8477493,
-      8476456
-    ],
-    "has_quality_path": true
-  },
-  {
-    "player_a": 8448208,
-    "player_b": 8478403,
-    "path_length": 4,
-    "path": [
-      8448208,
-      8477493,
-      8477933,
-      8478403
-    ],
-    "has_quality_path": true
-  },
-  {
-    "player_a": 8448208,
-    "player_b": 8478403,
-    "path_length": 4,
-    "path": [
-      8448208,
-      8477493,
-      8477933,
-      8478403
+      8478402,
+      8475786,
+      8479318,
+      8478483,
+      8475166
     ],
     "has_quality_path": true
   },
@@ -943,15 +3014,246 @@
     "has_quality_path": true
   },
   {
-    "player_a": 8480801,
-    "player_b": 8478439,
+    "player_a": 8477939,
+    "player_b": 8474573,
+    "path_length": 7,
+    "path": [
+      8477939,
+      8479318,
+      8475786,
+      8476454,
+      8474586,
+      8478445,
+      8474573
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8477939,
+    "player_b": 8478402,
+    "path_length": 4,
+    "path": [
+      8477939,
+      8479318,
+      8475786,
+      8478402
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8480023,
+    "player_b": 8470041,
+    "path_length": 6,
+    "path": [
+      8480023,
+      8477402,
+      8476459,
+      8475184,
+      8474613,
+      8470041
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8482665,
+    "player_b": 8479318,
+    "path_length": 6,
+    "path": [
+      8482665,
+      8474586,
+      8476454,
+      8478402,
+      8475786,
+      8479318
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8471676,
+    "player_b": 8470041,
     "path_length": 5,
     "path": [
-      8480801,
+      8471676,
+      8476459,
+      8475184,
+      8474613,
+      8470041
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8476459,
+    "player_b": 8471214,
+    "path_length": 11,
+    "path": [
+      8476459,
+      8475184,
+      8474613,
+      8470041,
+      8475692,
+      8478864,
+      8481557,
+      8482079,
+      8475149,
+      8473563,
+      8471214
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8478449,
+    "player_b": 8474053,
+    "path_length": 5,
+    "path": [
+      8478449,
+      8470794,
+      8466138,
+      8466139,
+      8474053
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8476456,
+    "player_b": 8479314,
+    "path_length": 4,
+    "path": [
+      8476456,
+      8477493,
+      8477409,
+      8479314
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8477934,
+    "player_b": 8478483,
+    "path_length": 5,
+    "path": [
+      8477934,
+      8478402,
+      8475786,
+      8479318,
+      8478483
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8478414,
+    "player_b": 8478449,
+    "path_length": 5,
+    "path": [
+      8478414,
+      8474053,
+      8466139,
+      8470794,
+      8478449
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8479318,
+    "player_b": 8478445,
+    "path_length": 5,
+    "path": [
+      8479318,
+      8475786,
+      8476454,
+      8474586,
+      8478445
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8482116,
+    "player_b": 8478439,
+    "path_length": 4,
+    "path": [
       8482116,
       8473512,
       8476461,
       8478439
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8478483,
+    "player_b": 8477934,
+    "path_length": 4,
+    "path": [
+      8478483,
+      8479318,
+      8475786,
+      8477934
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8480027,
+    "player_b": 8474053,
+    "path_length": 5,
+    "path": [
+      8480027,
+      8470794,
+      8466138,
+      8466139,
+      8474053
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8475166,
+    "player_b": 8477934,
+    "path_length": 5,
+    "path": [
+      8475166,
+      8477939,
+      8479318,
+      8475786,
+      8477934
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8458529,
+    "player_b": 8478403,
+    "path_length": 5,
+    "path": [
+      8458529,
+      8476456,
+      8477493,
+      8477933,
+      8478403
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8448208,
+    "player_b": 8479318,
+    "path_length": 8,
+    "path": [
+      8448208,
+      8471233,
+      8475151,
+      8475754,
+      8474573,
+      8475166,
+      8477939,
+      8479318
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8460542,
+    "player_b": 8478445,
+    "path_length": 6,
+    "path": [
+      8460542,
+      8471233,
+      8475151,
+      8475754,
+      8475314,
+      8478445
     ],
     "has_quality_path": true
   },
@@ -968,14 +3270,120 @@
     "has_quality_path": true
   },
   {
-    "player_a": 8476456,
+    "player_a": 8482740,
     "player_b": 8478403,
-    "path_length": 4,
+    "path_length": 5,
     "path": [
-      8476456,
+      8482740,
+      8474149,
       8477493,
       8477933,
       8478403
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8479318,
+    "player_b": 8474573,
+    "path_length": 6,
+    "path": [
+      8479318,
+      8475786,
+      8476454,
+      8474586,
+      8478445,
+      8474573
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8478445,
+    "player_b": 8478483,
+    "path_length": 4,
+    "path": [
+      8478445,
+      8474573,
+      8475166,
+      8478483
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8471676,
+    "player_b": 8470041,
+    "path_length": 5,
+    "path": [
+      8471676,
+      8476459,
+      8475184,
+      8474613,
+      8470041
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8477933,
+    "player_b": 8477497,
+    "path_length": 6,
+    "path": [
+      8477933,
+      8477493,
+      8477409,
+      8479314,
+      8476346,
+      8477497
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8477409,
+    "player_b": 8477497,
+    "path_length": 4,
+    "path": [
+      8477409,
+      8479314,
+      8476346,
+      8477497
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8478403,
+    "player_b": 8477409,
+    "path_length": 4,
+    "path": [
+      8478403,
+      8477933,
+      8477493,
+      8477409
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8477934,
+    "player_b": 8478483,
+    "path_length": 5,
+    "path": [
+      8477934,
+      8478402,
+      8475786,
+      8479318,
+      8478483
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8470041,
+    "player_b": 8473563,
+    "path_length": 7,
+    "path": [
+      8470041,
+      8475692,
+      8478864,
+      8481557,
+      8482079,
+      8475149,
+      8473563
     ],
     "has_quality_path": true
   },
@@ -996,22 +3404,103 @@
   },
   {
     "player_a": 8448208,
-    "player_b": 8478403,
-    "path_length": 4,
+    "player_b": 8478402,
+    "path_length": 9,
     "path": [
       8448208,
-      8477493,
-      8477933,
-      8478403
+      8471233,
+      8475151,
+      8475754,
+      8475314,
+      8478445,
+      8474586,
+      8476454,
+      8478402
     ],
     "has_quality_path": true
   },
   {
-    "player_a": 8477934,
-    "player_b": 8479318,
+    "player_a": 8478445,
+    "player_b": 8477934,
     "path_length": 4,
     "path": [
-      8477934,
+      8478445,
+      8474586,
+      8476454,
+      8477934
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8478445,
+    "player_b": 8477939,
+    "path_length": 4,
+    "path": [
+      8478445,
+      8474573,
+      8475166,
+      8477939
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8477330,
+    "player_b": 8473563,
+    "path_length": 7,
+    "path": [
+      8477330,
+      8473604,
+      8474141,
+      8479337,
+      8478440,
+      8471214,
+      8473563
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8457981,
+    "player_b": 8471218,
+    "path_length": 4,
+    "path": [
+      8457981,
+      8473618,
+      8473412,
+      8471218
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8478873,
+    "player_b": 8476389,
+    "path_length": 4,
+    "path": [
+      8478873,
+      8476458,
+      8478550,
+      8476389
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8479318,
+    "player_b": 8474586,
+    "path_length": 4,
+    "path": [
+      8479318,
+      8475786,
+      8476454,
+      8474586
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8474586,
+    "player_b": 8479318,
+    "path_length": 5,
+    "path": [
+      8474586,
+      8476454,
       8478402,
       8475786,
       8479318
@@ -1019,30 +3508,619 @@
     "has_quality_path": true
   },
   {
-    "player_a": 8478403,
-    "player_b": 8476456,
+    "player_a": 8468504,
+    "player_b": 8479314,
     "path_length": 4,
     "path": [
-      8478403,
-      8477933,
+      8468504,
       8477493,
-      8476456
+      8477409,
+      8479314
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8478864,
+    "player_b": 8473563,
+    "path_length": 5,
+    "path": [
+      8478864,
+      8481557,
+      8482079,
+      8475149,
+      8473563
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8482740,
+    "player_b": 8476346,
+    "path_length": 6,
+    "path": [
+      8482740,
+      8474149,
+      8477493,
+      8477409,
+      8479314,
+      8476346
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8482740,
+    "player_b": 8477496,
+    "path_length": 6,
+    "path": [
+      8482740,
+      8474149,
+      8477493,
+      8477409,
+      8479314,
+      8477496
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8479337,
+    "player_b": 8475744,
+    "path_length": 4,
+    "path": [
+      8479337,
+      8478440,
+      8471214,
+      8475744
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8479337,
+    "player_b": 8475744,
+    "path_length": 4,
+    "path": [
+      8479337,
+      8478440,
+      8471214,
+      8475744
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8474586,
+    "player_b": 8479318,
+    "path_length": 5,
+    "path": [
+      8474586,
+      8476454,
+      8478402,
+      8475786,
+      8479318
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8480023,
+    "player_b": 8471214,
+    "path_length": 13,
+    "path": [
+      8480023,
+      8477402,
+      8476459,
+      8475184,
+      8474613,
+      8470041,
+      8475692,
+      8478864,
+      8481557,
+      8482079,
+      8475149,
+      8473563,
+      8471214
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8478483,
+    "player_b": 8476454,
+    "path_length": 4,
+    "path": [
+      8478483,
+      8479318,
+      8475786,
+      8476454
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8478445,
+    "player_b": 8479318,
+    "path_length": 5,
+    "path": [
+      8478445,
+      8474573,
+      8475166,
+      8477939,
+      8479318
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8460542,
+    "player_b": 8478445,
+    "path_length": 6,
+    "path": [
+      8460542,
+      8471233,
+      8475151,
+      8475754,
+      8475314,
+      8478445
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8476459,
+    "player_b": 8481557,
+    "path_length": 7,
+    "path": [
+      8476459,
+      8475184,
+      8474613,
+      8470041,
+      8475692,
+      8478864,
+      8481557
     ],
     "has_quality_path": true
   },
   {
     "player_a": 8448208,
-    "player_b": 8479318,
-    "path_length": 8,
+    "player_b": 8474573,
+    "path_length": 5,
     "path": [
       8448208,
       8471233,
       8475151,
       8475754,
+      8474573
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8477402,
+    "player_b": 8481557,
+    "path_length": 8,
+    "path": [
+      8477402,
+      8476459,
+      8475184,
+      8474613,
+      8470041,
+      8475692,
+      8478864,
+      8481557
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8477934,
+    "player_b": 8475166,
+    "path_length": 6,
+    "path": [
+      8477934,
+      8478402,
+      8475786,
+      8479318,
+      8478483,
+      8475166
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8478449,
+    "player_b": 8466139,
+    "path_length": 4,
+    "path": [
+      8478449,
+      8470794,
+      8466138,
+      8466139
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8481557,
+    "player_b": 8471214,
+    "path_length": 5,
+    "path": [
+      8481557,
+      8482079,
+      8475149,
+      8473563,
+      8471214
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8466378,
+    "player_b": 8481557,
+    "path_length": 6,
+    "path": [
+      8466378,
+      8474613,
+      8470041,
+      8475692,
+      8478864,
+      8481557
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8476459,
+    "player_b": 8475744,
+    "path_length": 12,
+    "path": [
+      8476459,
+      8475184,
+      8474613,
+      8470041,
+      8475692,
+      8478864,
+      8481557,
+      8482079,
+      8475149,
+      8473563,
+      8471214,
+      8475744
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8477330,
+    "player_b": 8473563,
+    "path_length": 7,
+    "path": [
+      8477330,
+      8473604,
+      8474141,
+      8479337,
+      8478440,
+      8471214,
+      8473563
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8480801,
+    "player_b": 8474161,
+    "path_length": 4,
+    "path": [
+      8480801,
+      8482116,
+      8473512,
+      8474161
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8466148,
+    "player_b": 8478440,
+    "path_length": 5,
+    "path": [
+      8466148,
+      8473604,
+      8474141,
+      8479337,
+      8478440
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8477409,
+    "player_b": 8477497,
+    "path_length": 4,
+    "path": [
+      8477409,
+      8479314,
+      8476346,
+      8477497
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8480801,
+    "player_b": 8474161,
+    "path_length": 4,
+    "path": [
+      8480801,
+      8482116,
+      8473512,
+      8474161
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8478483,
+    "player_b": 8478445,
+    "path_length": 6,
+    "path": [
+      8478483,
+      8479318,
+      8475786,
+      8476454,
+      8474586,
+      8478445
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8478445,
+    "player_b": 8478483,
+    "path_length": 4,
+    "path": [
+      8478445,
       8474573,
       8475166,
+      8478483
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8471676,
+    "player_b": 8471214,
+    "path_length": 12,
+    "path": [
+      8471676,
+      8476459,
+      8475184,
+      8474613,
+      8470041,
+      8475692,
+      8478864,
+      8481557,
+      8482079,
+      8475149,
+      8473563,
+      8471214
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8458529,
+    "player_b": 8477409,
+    "path_length": 4,
+    "path": [
+      8458529,
+      8476456,
+      8477493,
+      8477409
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8467338,
+    "player_b": 8470638,
+    "path_length": 5,
+    "path": [
+      8467338,
+      8462042,
+      8471276,
+      8477956,
+      8470638
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8466148,
+    "player_b": 8475744,
+    "path_length": 7,
+    "path": [
+      8466148,
+      8473604,
+      8474141,
+      8479337,
+      8478440,
+      8471214,
+      8475744
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8460542,
+    "player_b": 8478445,
+    "path_length": 6,
+    "path": [
+      8460542,
+      8471233,
+      8475151,
+      8475754,
+      8475314,
+      8478445
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8460542,
+    "player_b": 8475166,
+    "path_length": 6,
+    "path": [
+      8460542,
+      8471233,
+      8475151,
+      8475754,
+      8474573,
+      8475166
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8474586,
+    "player_b": 8477939,
+    "path_length": 5,
+    "path": [
+      8474586,
+      8478445,
+      8474573,
+      8475166,
+      8477939
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8480801,
+    "player_b": 8478439,
+    "path_length": 5,
+    "path": [
+      8480801,
+      8482116,
+      8473512,
+      8476461,
+      8478439
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8480801,
+    "player_b": 8476461,
+    "path_length": 4,
+    "path": [
+      8480801,
+      8482116,
+      8473512,
+      8476461
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8479385,
+    "player_b": 8471214,
+    "path_length": 13,
+    "path": [
+      8479385,
+      8477402,
+      8476459,
+      8475184,
+      8474613,
+      8470041,
+      8475692,
+      8478864,
+      8481557,
+      8482079,
+      8475149,
+      8473563,
+      8471214
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8457981,
+    "player_b": 8478398,
+    "path_length": 5,
+    "path": [
+      8457981,
+      8473618,
+      8473412,
+      8471218,
+      8478398
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8477939,
+    "player_b": 8477934,
+    "path_length": 4,
+    "path": [
       8477939,
-      8479318
+      8479318,
+      8475786,
+      8477934
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8479337,
+    "player_b": 8473563,
+    "path_length": 4,
+    "path": [
+      8479337,
+      8478440,
+      8471214,
+      8473563
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8479385,
+    "player_b": 8475744,
+    "path_length": 14,
+    "path": [
+      8479385,
+      8477402,
+      8476459,
+      8475184,
+      8474613,
+      8470041,
+      8475692,
+      8478864,
+      8481557,
+      8482079,
+      8475149,
+      8473563,
+      8471214,
+      8475744
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8458529,
+    "player_b": 8479314,
+    "path_length": 5,
+    "path": [
+      8458529,
+      8476456,
+      8477493,
+      8477409,
+      8479314
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8478445,
+    "player_b": 8478483,
+    "path_length": 4,
+    "path": [
+      8478445,
+      8474573,
+      8475166,
+      8478483
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8466378,
+    "player_b": 8473563,
+    "path_length": 9,
+    "path": [
+      8466378,
+      8474613,
+      8470041,
+      8475692,
+      8478864,
+      8481557,
+      8482079,
+      8475149,
+      8473563
+    ],
+    "has_quality_path": true
+  },
+  {
+    "player_a": 8474141,
+    "player_b": 8471214,
+    "path_length": 4,
+    "path": [
+      8474141,
+      8479337,
+      8478440,
+      8471214
     ],
     "has_quality_path": true
   }

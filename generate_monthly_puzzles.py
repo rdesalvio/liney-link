@@ -38,11 +38,11 @@ def generate_monthly_puzzles(days=60):
     
     # Get easy and hard pairs separately
     print("🔍 Finding easy player pairs (path length 3)...")
-    easy_pairs = find_easy_pairs(max_pairs=150)
+    easy_pairs = find_easy_pairs(max_pairs=300)
     print(f"✓ Found {len(easy_pairs)} easy pairs")
     
     print("🔍 Finding hard player pairs (path length 4+)...")
-    hard_pairs = find_hard_pairs(max_pairs=150)
+    hard_pairs = find_hard_pairs(max_pairs=300)
     print(f"✓ Found {len(hard_pairs)} hard pairs")
     
     if not easy_pairs or not hard_pairs:

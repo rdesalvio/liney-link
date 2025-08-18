@@ -3,7 +3,8 @@
     "allow": [
       "Bash(curl:*)",
       "Bash(grep:*)",
-      "Bash(node:*)"
+      "Bash(node:*)",
+      "Bash(python3:*)"
     ],
     "deny": [],
     "ask": []

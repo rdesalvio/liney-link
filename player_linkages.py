@@ -183,12 +183,12 @@ def main():
                 print(f"  Error processing {game_file}: {e}")
     
     print(f"\nProcessed {total_files} total games")
-    print("Filtering connections with >=50% of player's total minutes...")
+    print("Filtering connections with >=55% of player's total minutes...")
     
-    # Filter for >=50% of total minutes and prepare output
+    # Filter for >=10% of total minutes and prepare output
     player_linkages = {}
     total_connections = 0
-    percentage_threshold = 0.3  # 30% threshold
+    percentage_threshold = 0.05  # 5% threshold
     
     for player_id, connections in all_player_connections.items():
         valid_connections = []
@@ -199,7 +199,7 @@ def main():
             continue
         
         for connected_player, data in connections.items():
-            # Check if minutes with this player are >= 50% of total minutes
+            # Check if minutes with this player are >= 5% of total minutes
             percentage = data['minutes'] / player_total if player_total > 0 else 0
             
             if percentage >= percentage_threshold:

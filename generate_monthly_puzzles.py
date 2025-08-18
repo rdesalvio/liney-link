@@ -12,6 +12,7 @@ from pathlib import Path
 
 # Import existing modules
 from find_valid_pairs import find_easy_pairs, find_hard_pairs
+from generate_game import get_all_solutions
 import random
 
 def generate_monthly_puzzles(days=60):
@@ -70,22 +71,48 @@ def generate_monthly_puzzles(days=60):
             easy_pair = easy_pairs[day_offset]
             hard_pair = hard_pairs[day_offset]
             
-            # Create easy puzzle data
+            # Get solutions with TOI percentages and uniqueness scores for easy puzzle
+            easy_solutions = get_all_solutions(easy_pair['player_a'], easy_pair['player_b'])
+            
+            # Get solutions with TOI percentages and uniqueness scores for hard puzzle
+            hard_solutions = get_all_solutions(hard_pair['player_a'], hard_pair['player_b'])
+            
+            # Create easy puzzle data with solutions
             easy_puzzle_data = {
                 "playerA": easy_pair['player_a'],
                 "playerB": easy_pair['player_b'],
                 "date": date_str,
                 "difficulty": "easy",
-                "pathLength": easy_pair['path_length']
+                "pathLength": easy_pair['path_length'],
+                "solutions": [
+                    {
+                        "path_ids": sol['path_ids'],
+                        "path_names": sol['path_names'],
+                        "length": sol['length'],
+                        "toi_percentages": sol['toi_percentages'],
+                        "uniqueness_score": sol['uniqueness_score']
+                    }
+                    for sol in easy_solutions
+                ] if easy_solutions else []
             }
             
-            # Create hard puzzle data
+            # Create hard puzzle data with solutions
             hard_puzzle_data = {
                 "playerA": hard_pair['player_a'],
                 "playerB": hard_pair['player_b'],
                 "date": date_str,
                 "difficulty": "hard",
-                "pathLength": hard_pair['path_length']
+                "pathLength": hard_pair['path_length'],
+                "solutions": [
+                    {
+                        "path_ids": sol['path_ids'],
+                        "path_names": sol['path_names'],
+                        "length": sol['length'],
+                        "toi_percentages": sol['toi_percentages'],
+                        "uniqueness_score": sol['uniqueness_score']
+                    }
+                    for sol in hard_solutions
+                ] if hard_solutions else []
             }
             
             # Save individual puzzle files
@@ -97,22 +124,29 @@ def generate_monthly_puzzles(days=60):
             with open(hard_puzzle_file, 'w') as f:
                 json.dump(hard_puzzle_data, f)
             
-            # Add to index
+            # Add to index with best uniqueness scores
             puzzle_index[date_str] = {
                 "easy": {
                     "playerA": easy_pair['player_a'],
                     "playerB": easy_pair['player_b'],
-                    "pathLength": easy_pair['path_length']
+                    "pathLength": easy_pair['path_length'],
+                    "bestUniquenessScore": min([s['uniqueness_score'] for s in easy_solutions]) if easy_solutions else 100,
+                    "solutionCount": len(easy_solutions)
                 },
                 "hard": {
                     "playerA": hard_pair['player_a'],
                     "playerB": hard_pair['player_b'],
-                    "pathLength": hard_pair['path_length']
+                    "pathLength": hard_pair['path_length'],
+                    "bestUniquenessScore": min([s['uniqueness_score'] for s in hard_solutions]) if hard_solutions else 100,
+                    "solutionCount": len(hard_solutions)
                 }
             }
             
-            print(f"✓ Generated easy puzzle: {easy_pair['player_a']} → {easy_pair['player_b']} (length {easy_pair['path_length']})")
-            print(f"✓ Generated hard puzzle: {hard_pair['player_a']} → {hard_pair['player_b']} (length {hard_pair['path_length']})")
+            easy_best_score = min([s['uniqueness_score'] for s in easy_solutions]) if easy_solutions else 100
+            hard_best_score = min([s['uniqueness_score'] for s in hard_solutions]) if hard_solutions else 100
+            
+            print(f"✓ Generated easy puzzle: {easy_pair['player_a']} → {easy_pair['player_b']} (length {easy_pair['path_length']}, best uniqueness: {easy_best_score:.1f})")
+            print(f"✓ Generated hard puzzle: {hard_pair['player_a']} → {hard_pair['player_b']} (length {hard_pair['path_length']}, best uniqueness: {hard_best_score:.1f})")
             
         except Exception as e:
             print(f"❌ Error generating puzzles for {date_str}: {e}")

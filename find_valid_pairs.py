@@ -35,8 +35,15 @@ def load_all_player_teams():
     
     return player_teams
 
-def find_shortest_path(start_player, end_player, linkages):
-    """Find shortest path between two players using BFS"""
+def find_shortest_path(start_player, end_player, linkages, min_percentage=None):
+    """Find shortest path between two players using BFS
+    
+    Args:
+        start_player: Starting player ID
+        end_player: Ending player ID
+        linkages: Player linkage data
+        min_percentage: If specified, only use connections with at least this percentage of TOI
+    """
     if start_player == end_player:
         return [start_player]
     
@@ -51,6 +58,11 @@ def find_shortest_path(start_player, end_player, linkages):
             
         for connection in linkages[current].get('connections', []):
             next_player = connection['playerId']
+            
+            # Filter by minimum percentage if specified
+            if min_percentage is not None:
+                if connection.get('percentage_of_total', 0) < min_percentage:
+                    continue
             
             if next_player == end_player:
                 return path + [next_player]
@@ -164,24 +176,32 @@ def find_interesting_pairs(max_pairs=100, difficulty="mixed"):
         if player_teams[player_a].intersection(player_teams[player_b]):
             continue  # They were teammates, skip
         
-        # Check if there's a path between them
-        path = find_shortest_path(player_a, player_b, linkages)
+        # First check if there's a "quality" path with >=40% TOI connections
+        quality_path = find_shortest_path(player_a, player_b, linkages, min_percentage=20)
         
-        # Check path length based on difficulty
+        # Also check for any path with the 5% threshold (for flexibility)
+        any_path = find_shortest_path(player_a, player_b, linkages)
+        
+        # We need at least one quality path to exist
+        if not quality_path:
+            continue
+            
+        # Check path length based on difficulty (using the quality path)
         valid_path = False
-        if difficulty == "easy" and path and len(path) == 3:
+        if difficulty == "easy" and quality_path and len(quality_path) == 3:
             valid_path = True
-        elif difficulty == "hard" and path and len(path) >= 4:
+        elif difficulty == "hard" and quality_path and len(quality_path) >= 4:
             valid_path = True
-        elif difficulty == "mixed" and path and 2 <= len(path) <= 4:
+        elif difficulty == "mixed" and quality_path and 2 <= len(quality_path) <= 4:
             valid_path = True
             
         if valid_path:
             valid_pairs.append({
                 'player_a': player_a,
                 'player_b': player_b,
-                'path_length': len(path),
-                'path': path
+                'path_length': len(quality_path),
+                'path': quality_path,
+                'has_quality_path': True
             })
             
             if len(valid_pairs) % 10 == 0:

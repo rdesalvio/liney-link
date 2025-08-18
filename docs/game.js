@@ -18,6 +18,7 @@ class LineyLinkGame {
         this.playerNames = new Map();
         this.connections = new Map();
         this.targetPlayers = { start: null, end: null };
+        this.puzzleSolutions = [];
         
         this.initializeElements();
         this.setupEventListeners(); // Set up event listeners once
@@ -142,6 +143,7 @@ class LineyLinkGame {
             // Set up game
             this.targetPlayers.start = gameData.playerA;
             this.targetPlayers.end = gameData.playerB;
+            this.puzzleSolutions = gameData.solutions || [];
             
             // Check for saved game state
             const hasLoadedState = this.loadGameState(puzzleDate);
@@ -658,6 +660,7 @@ class LineyLinkGame {
     showCompletionModal() {
         const chainLength = this.playerChain.length;
         const playerNames = this.playerChain.map(p => p.name);
+        const uniquenessScore = this.calculateUniquenessScore();
         
         // Reset modal title to success state (in case it was changed by failure modal)
         const modalTitle = this.completionModal.querySelector('.modal-title');
@@ -669,7 +672,8 @@ class LineyLinkGame {
         
         this.modalScore.innerHTML = `
             <strong>Your Solution (${chainLength} players):</strong><br><br>
-            ${playerNames.join(' → ')}
+            ${playerNames.join(' → ')}<br><br>
+            <strong>Uniqueness: ${uniquenessScore}</strong>
         `;
         
         this.completionModal.style.display = 'flex';
@@ -681,6 +685,7 @@ class LineyLinkGame {
     shareScore() {
         const chainLength = this.playerChain.length;
         const playerNames = this.playerChain.map(p => p.name);
+        const uniquenessScore = this.calculateUniquenessScore();
         
         // Get today's date in MM/DD/YY format
         const today = new Date();
@@ -718,6 +723,9 @@ class LineyLinkGame {
             const chainStr = playerNames.join(' → ');
             shareContent += `\n\n${chainStr}`;
         }
+        
+        // Add uniqueness score for both difficulties
+        shareContent += `\nUniqueness: ${uniquenessScore}`;
         
         const shareText = `${shareContent}\n\n${window.location.host}`;
         
@@ -1159,6 +1167,40 @@ class LineyLinkGame {
                 this.howToPlayModal.classList.remove('show');
             }
         });
+    }
+
+    calculateUniquenessScore() {
+        // Calculate uniqueness score based on TOI percentages in the current solution
+        if (this.playerChain.length < 2) return 0;
+        
+        // Get the current player chain as IDs
+        const playerPath = this.playerChain.map(p => p.id);
+        
+        // Find matching solution in puzzle solutions
+        const matchingSolution = this.puzzleSolutions.find(solution => {
+            if (solution.path_ids.length !== playerPath.length) return false;
+            return solution.path_ids.every((id, index) => id === playerPath[index]);
+        });
+        
+        if (matchingSolution && matchingSolution.toi_percentages) {
+            // Use the pre-calculated uniqueness score from the solution
+            return matchingSolution.uniqueness_score;
+        }
+        
+        // Fallback: calculate from TOI percentages if available
+        if (matchingSolution && matchingSolution.toi_percentages) {
+            const percentages = matchingSolution.toi_percentages;
+            const avgPercentage = percentages.reduce((sum, p) => sum + p, 0) / percentages.length;
+            
+            // Map from [5%, 100%] to [0, 100]
+            const clampedAvg = Math.max(5, Math.min(100, avgPercentage));
+            const uniquenessScore = ((clampedAvg - 5) / 95) * 100;
+            
+            return Math.round(uniquenessScore * 10) / 10;
+        }
+        
+        // Default fallback if no solution data available
+        return 25.0;
     }
 
     findShortestSolution() {

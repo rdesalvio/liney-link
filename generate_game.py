@@ -35,34 +35,35 @@ def get_player_info(playerId):
 
     return player
 
-def find_all_paths(start_player, end_player, max_length=10):
+def find_all_paths(start_player, end_player, max_length=10, linkages=None):
     """
     Find all possible paths between two players.
-    Returns a list of paths sorted by length (longest first).
+    Returns a list of paths sorted by length (longest first) with TOI percentages.
     """
     if start_player == end_player:
         return [[start_player]]
     
-    # Load linkages
-    linkages = {}
-    for filename in os.listdir(player_linkage_folder):
-        if not filename.endswith('.json') or filename == 'summary.json':
-            continue
-        
-        player_id = int(filename.split('.')[0])
-        try:
-            with open(f"{player_linkage_folder}/{filename}") as f:
-                linkages[player_id] = json.load(f)
-        except:
-            continue
+    # Load linkages if not provided
+    if linkages is None:
+        linkages = {}
+        for filename in os.listdir(player_linkage_folder):
+            if not filename.endswith('.json') or filename == 'summary.json':
+                continue
+            
+            player_id = int(filename.split('.')[0])
+            try:
+                with open(f"{player_linkage_folder}/{filename}") as f:
+                    linkages[player_id] = json.load(f)
+            except:
+                continue
     
     # Find all paths using BFS with path tracking
     all_paths = []
     visited_at_length = {}  # Track at what path length we first visited each node
-    queue = deque([(start_player, [start_player])])
+    queue = deque([(start_player, [start_player], [])])  # Added percentages list
     
     while queue:
-        current, path = queue.popleft()
+        current, path, percentages = queue.popleft()
         
         # Skip if path is too long
         if len(path) > max_length:
@@ -84,20 +85,45 @@ def find_all_paths(start_player, end_player, max_length=10):
                 continue
             
             new_path = path + [next_player]
+            new_percentages = percentages + [connection.get('percentage_of_total', 0)]
             
             if next_player == end_player:
-                all_paths.append(new_path)
+                all_paths.append((new_path, new_percentages))
             else:
-                queue.append((next_player, new_path))
+                queue.append((next_player, new_path, new_percentages))
     
-    # Sort paths by length (longest first)
-    all_paths.sort(key=len, reverse=True)
+    # Sort paths by length (shortest first)
+    all_paths.sort(key=lambda x: len(x[0]), reverse=False)
     
     return all_paths
 
+def calculate_uniqueness_score(percentages):
+    """
+    Calculate uniqueness score from TOI percentages.
+    Score is 0-100 where 0 is lowest (obscure connections) and 100 is highest (obvious connections).
+    
+    Uses the average percentage and maps it to a 0-100 scale:
+    - 5% average = score 0 (most obscure connections, barely played together)
+    - 100% average = score 100 (most obvious connections, played together constantly)
+    - Linear interpolation between
+    """
+    if not percentages:
+        return 0
+    
+    avg_percentage = sum(percentages) / len(percentages)
+    
+    # Map from [5%, 100%] to [0, 100]
+    # Clamp between 5 and 100
+    avg_percentage = max(5, min(100, avg_percentage))
+    
+    # Linear mapping: 5% -> 0, 100% -> 100
+    uniqueness_score = ((avg_percentage - 5) / 95) * 100
+    
+    return round(uniqueness_score, 1)
+
 def get_all_solutions(player_a_id, player_b_id, max_paths=None):
     """
-    Get all possible solutions (paths) between two players.
+    Get all possible solutions (paths) between two players with TOI percentages and uniqueness scores.
     Returns paths sorted by length (longest to shortest).
     """
     all_paths = find_all_paths(player_a_id, player_b_id)
@@ -107,7 +133,7 @@ def get_all_solutions(player_a_id, player_b_id, max_paths=None):
     
     # Convert player IDs to names for display
     solutions = []
-    for path in all_paths:
+    for path, percentages in all_paths:
         path_with_names = []
         for player_id in path:
             try:
@@ -118,10 +144,14 @@ def get_all_solutions(player_a_id, player_b_id, max_paths=None):
             except:
                 path_with_names.append(f"Player {player_id}")
         
+        uniqueness_score = calculate_uniqueness_score(percentages)
+        
         solutions.append({
             'path_ids': path,
             'path_names': path_with_names,
-            'length': len(path)
+            'length': len(path),
+            'toi_percentages': percentages,
+            'uniqueness_score': uniqueness_score
         })
     
     return solutions
@@ -179,9 +209,14 @@ if __name__ == "__main__":
         print()
         
         for i, solution in enumerate(solutions, 1):
-            print(f"Solution {i} (Length: {solution['length']}):")
+            print(f"Solution {i} (Length: {solution['length']}, Uniqueness: {solution['uniqueness_score']}):")
             path_str = " → ".join(solution['path_names'])
             print(f"  {path_str}")
+            
+            # Show TOI percentages for each connection
+            if solution['toi_percentages']:
+                toi_str = " → ".join([f"{p:.1f}%" for p in solution['toi_percentages']])
+                print(f"  TOI%: {toi_str}")
             print()
     else:
         print("No solutions found!")

@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-Liney Link is a hockey player connection game similar to Wordle. Players must connect two NHL players who were never teammates through a chain of linemates (players who played 600+ minutes together on the same team during the same season). The game features daily puzzles with both accessible short paths and challenging longer paths for hockey experts.
+Liney Link is a hockey player connection game similar to Wordle. Players must connect two NHL players who were never teammates through a chain of linemates (players who played ≥50% of their total minutes together on the same team during the same season). The game features daily puzzles with both accessible short paths and challenging longer paths for hockey experts.
 
 ## Core Components
 
@@ -10,7 +10,7 @@ Liney Link is a hockey player connection game similar to Wordle. Players must co
 1. **player_linkages.py** - Processes NHL shift data to create player connection networks
    - Reads shift data from `shift_charts/` (organized by season/game)
    - Loads player position data from `players/` (JSON files by player ID)
-   - Creates linkages between players who played 600+ minutes together
+   - Creates linkages between players who played ≥50% of their total minutes together
    - Only links players with compatible positions (Forwards with Forwards, Defensemen with Defensemen)
    - Outputs processed linkages to `player_linkages/` folder
 
@@ -27,7 +27,7 @@ Liney Link is a hockey player connection game similar to Wordle. Players must co
 ### Key Data Structures
 - **shift_charts/[season]/[gameId].json** - Raw NHL shift data by game
 - **players/[playerId].json** - Player metadata including position and team history
-- **player_linkages/[playerId].json** - Pre-computed connections for each player with metadata (minutes, seasons, connectivity score)
+- **player_linkages/[playerId].json** - Pre-computed connections for each player with metadata (minutes, percentage of total minutes, seasons, connectivity score)
 - **valid_game_pairs.json** - Pre-scored optimal puzzle pairs with solution variety metrics
 
 ### Teammate Detection Logic
@@ -45,7 +45,7 @@ python generate_game.py            # Generate and solve daily puzzle
 ## Architecture Notes
 
 - Position compatibility enforced: C/L/R (Forwards) link only with other Forwards, D (Defensemen) only with Defensemen, G (Goalies) excluded
-- 600-minute threshold ensures meaningful linemate relationships
+- ≥50% threshold ensures meaningful linemate relationships - better captures players who regularly play together regardless of total ice time
 - Daily puzzle format requires 3-hop minimum accessibility with expert-level variety (10+ total solutions preferred)
 - Path finding uses BFS with cycle detection for comprehensive solution discovery
 - Scoring system balances accessibility (short paths) with expert engagement (solution volume and variety)

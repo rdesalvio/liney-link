@@ -58,14 +58,17 @@ def parse_time_to_seconds(time_str):
         return 0
 
 def process_shift_file(filepath, season, player_positions):
-    """Process a single shift file and extract player overlap data"""
+    """Process a single shift file and extract player overlap data and total minutes"""
     with open(filepath, 'r') as f:
         data = json.load(f)
     
     if 'data' not in data or not data['data']:
-        return {}
+        return {}, {}
     
     shifts = data['data']
+    
+    # Track total minutes played by each player
+    player_total_minutes = defaultdict(float)
     
     # Group shifts by team and period
     team_periods = defaultdict(lambda: defaultdict(list))
@@ -80,6 +83,10 @@ def process_shift_file(filepath, season, player_positions):
         if all([team_id, period, player_id, start_time, end_time]):
             start_seconds = parse_time_to_seconds(start_time)
             end_seconds = parse_time_to_seconds(end_time)
+            
+            # Track total minutes for this player
+            shift_duration = (end_seconds - start_seconds) / 60
+            player_total_minutes[player_id] += shift_duration
             
             team_periods[team_id][period].append({
                 'player_id': player_id,
@@ -124,7 +131,7 @@ def process_shift_file(filepath, season, player_positions):
                         overlaps[player2][player1]['minutes'] += overlap_seconds / 60
                         overlaps[player2][player1]['seasons'].add(season)
     
-    return overlaps
+    return overlaps, player_total_minutes
 
 def main():
     print("Starting player linkage generation...")
@@ -138,6 +145,7 @@ def main():
     
     # Initialize the aggregated data structure
     all_player_connections = defaultdict(lambda: defaultdict(lambda: {'minutes': 0, 'seasons': set()}))
+    all_player_total_minutes = defaultdict(float)
     
     # Process all shift files
     shift_charts_dir = 'shift_charts'
@@ -158,33 +166,47 @@ def main():
                 
             filepath = os.path.join(season_dir, game_file)
             try:
-                overlaps = process_shift_file(filepath, season, player_positions)
+                overlaps, player_minutes = process_shift_file(filepath, season, player_positions)
                 
                 # Aggregate the overlaps
                 for player1, connections in overlaps.items():
                     for player2, data in connections.items():
                         all_player_connections[player1][player2]['minutes'] += data['minutes']
                         all_player_connections[player1][player2]['seasons'].update(data['seasons'])
+                
+                # Aggregate total minutes for each player
+                for player_id, minutes in player_minutes.items():
+                    all_player_total_minutes[player_id] += minutes
                         
                 total_files += 1
             except Exception as e:
                 print(f"  Error processing {game_file}: {e}")
     
     print(f"\nProcessed {total_files} total games")
-    print("Filtering connections with 600+ minutes...")
+    print("Filtering connections with >=50% of player's total minutes...")
     
-    # Filter for 500+ minutes and prepare output
+    # Filter for >=50% of total minutes and prepare output
     player_linkages = {}
     total_connections = 0
+    percentage_threshold = 0.3  # 30% threshold
     
     for player_id, connections in all_player_connections.items():
         valid_connections = []
+        player_total = all_player_total_minutes.get(player_id, 0)
+        
+        # Skip players with no recorded minutes
+        if player_total == 0:
+            continue
         
         for connected_player, data in connections.items():
-            if data['minutes'] >= 600:
+            # Check if minutes with this player are >= 50% of total minutes
+            percentage = data['minutes'] / player_total if player_total > 0 else 0
+            
+            if percentage >= percentage_threshold:
                 valid_connections.append({
                     'playerId': connected_player,
                     'minutes': round(data['minutes'], 2),
+                    'percentage_of_total': round(percentage * 100, 1),
                     'seasons': sorted(list(data['seasons']))
                 })
                 total_connections += 1
@@ -195,6 +217,7 @@ def main():
             
             player_linkages[player_id] = {
                 'connectivity_score': connectivity_score,
+                'total_minutes_played': round(player_total, 2),
                 'connections': sorted(valid_connections, key=lambda x: x['minutes'], reverse=True)
             }
     

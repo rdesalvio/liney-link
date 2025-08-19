@@ -88,16 +88,16 @@ def is_relevant_player(player_id, verbose=False):
                 points = goals + assists
                 nhl_seasons.append(points)
         
-        # Must have at least 3 NHL seasons
-        if len(nhl_seasons) < 3:
+        # Must have at least 1 NHL seasons
+        if len(nhl_seasons) < 1:
             if verbose:
                 player_name = f"{player_data.get('firstName', {}).get('default', '')} {player_data.get('lastName', {}).get('default', '')}"
                 print(f"  {player_name}: Only {len(nhl_seasons)} NHL seasons")
             return False
         
-        # Must average at least 4300 points per season
+        # Must average at least 30 points per season
         avg_points = sum(nhl_seasons) / len(nhl_seasons)
-        if avg_points < 30:
+        if avg_points < 10:
             if verbose:
                 player_name = f"{player_data.get('firstName', {}).get('default', '')} {player_data.get('lastName', {}).get('default', '')}"
                 print(f"  {player_name}: {len(nhl_seasons)} NHL seasons, {avg_points:.1f} avg points")

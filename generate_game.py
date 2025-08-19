@@ -103,7 +103,7 @@ def calculate_uniqueness_score(percentages):
     Score is 0-100 where 0 is lowest (obscure connections) and 100 is highest (obvious connections).
     
     Uses the average percentage and maps it to a 0-100 scale:
-    - 5% average = score 0 (most obscure connections, barely played together)
+    - 4% average = score 0 (most obscure connections, barely played together)
     - 100% average = score 100 (most obvious connections, played together constantly)
     - Linear interpolation between
     """
@@ -114,10 +114,10 @@ def calculate_uniqueness_score(percentages):
     
     # Map from [5%, 100%] to [0, 100]
     # Clamp between 5 and 100
-    avg_percentage = max(5, min(100, avg_percentage))
+    avg_percentage = max(4, min(100, avg_percentage))
     
     # Linear mapping: 5% -> 0, 100% -> 100
-    uniqueness_score = ((avg_percentage - 5) / 95) * 100
+    uniqueness_score = ((avg_percentage - 4) / 95) * 100
     
     return round(uniqueness_score, 1)
 

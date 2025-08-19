@@ -1190,8 +1190,8 @@ class LineyLinkGame {
             const avgPercentage = percentages.reduce((sum, p) => sum + p, 0) / percentages.length;
             
             // Map from [5%, 100%] to [0, 100]
-            const clampedAvg = Math.max(5, Math.min(100, avgPercentage));
-            const uniquenessScore = ((clampedAvg - 5) / 95) * 100;
+            const clampedAvg = Math.max(4, Math.min(100, avgPercentage));
+            const uniquenessScore = ((clampedAvg - 4) / 95) * 100;
             
             return Math.round(uniquenessScore * 10) / 10;
         }

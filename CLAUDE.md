@@ -15,9 +15,9 @@ Liney Link is a hockey player connection game similar to Wordle. Players must co
 1. **player_linkages.py** - Processes NHL shift data to create player connection networks
    - Reads shift data from `shift_charts/` (organized by season/game)
    - Loads player position data from `players/` (JSON files by player ID)
-   - Creates linkages between players who played ≥5% of their total minutes together
+   - Creates linkages if either player spent ≥4% of their total minutes with the other
    - Only links players with compatible positions (Forwards with Forwards, Defensemen with Defensemen)
-   - Outputs processed linkages to `player_linkages/` folder with percentage_of_total field
+   - Outputs processed linkages to `player_linkages/` folder with percentage_of_total and percentage_of_other fields
 
 2. **find_valid_pairs.py** - Identifies optimal daily puzzle candidates
    - Finds player pairs who were never teammates but are connected through linemates
@@ -53,8 +53,8 @@ python generate_game.py            # Generate and solve daily puzzle
 
 - Position compatibility enforced: C/L/R (Forwards) link only with other Forwards, D (Defensemen) only with Defensemen, G (Goalies) excluded
 - Dual threshold system:
-  - 5% TOI threshold for player linkages (enables creative solutions)
-  - 40% TOI requirement for at least one solution path (ensures quality answers)
+  - 4% TOI threshold for player linkages - if EITHER player spent ≥4% with the other (enables creative solutions, especially for lower-minute players)
+  - 20% TOI requirement for at least one solution path (ensures quality answers)
 - Uniqueness scoring (0-100, lower is better) rewards using high-TOI connections
 - Daily puzzle format requires 3-hop minimum accessibility with expert-level variety
 - Path finding uses BFS with cycle detection for comprehensive solution discovery

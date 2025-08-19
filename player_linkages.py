@@ -183,12 +183,12 @@ def main():
                 print(f"  Error processing {game_file}: {e}")
     
     print(f"\nProcessed {total_files} total games")
-    print("Filtering connections with >=55% of player's total minutes...")
+    print("Filtering connections with >=4% of either player's total minutes...")
     
-    # Filter for >=10% of total minutes and prepare output
+    # Filter for >=4% of total minutes (checking both directions)
     player_linkages = {}
     total_connections = 0
-    percentage_threshold = 0.05  # 5% threshold
+    percentage_threshold = 0.04  # 4% threshold
     
     for player_id, connections in all_player_connections.items():
         valid_connections = []
@@ -199,14 +199,19 @@ def main():
             continue
         
         for connected_player, data in connections.items():
-            # Check if minutes with this player are >= 5% of total minutes
-            percentage = data['minutes'] / player_total if player_total > 0 else 0
+            # Check if either player spent >= 4% with the other
+            percentage_from_player = data['minutes'] / player_total if player_total > 0 else 0
             
-            if percentage >= percentage_threshold:
+            connected_player_total = all_player_total_minutes.get(connected_player, 0)
+            percentage_from_connected = data['minutes'] / connected_player_total if connected_player_total > 0 else 0
+            
+            # Include connection if EITHER player spent >= 4% with the other
+            if percentage_from_player >= percentage_threshold or percentage_from_connected >= percentage_threshold:
                 valid_connections.append({
                     'playerId': connected_player,
                     'minutes': round(data['minutes'], 2),
-                    'percentage_of_total': round(percentage * 100, 1),
+                    'percentage_of_total': round(percentage_from_player * 100, 1),
+                    'percentage_of_other': round(percentage_from_connected * 100, 1),
                     'seasons': sorted(list(data['seasons']))
                 })
                 total_connections += 1

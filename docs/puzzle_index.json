@@ -1,197 +1,85 @@
 {
-  "2025-08-18": {
-    "easy": {
-      "playerA": 8471234,
-      "playerB": 8476887,
-      "pathLength": 3,
-      "bestUniquenessScore": 0.8,
-      "solutionCount": 306
-    },
-    "hard": {
-      "playerA": 8464977,
-      "playerB": 8478483,
-      "pathLength": 7,
-      "bestUniquenessScore": 0.0,
-      "solutionCount": 119
-    }
-  },
-  "2025-08-19": {
-    "easy": {
-      "playerA": 8479974,
-      "playerB": 8475170,
-      "pathLength": 3,
-      "bestUniquenessScore": 0.0,
-      "solutionCount": 156
-    },
-    "hard": {
-      "playerA": 8458529,
-      "playerB": 8477409,
-      "pathLength": 4,
-      "bestUniquenessScore": 0.6,
-      "solutionCount": 59
-    }
-  },
   "2025-08-20": {
     "easy": {
-      "playerA": 8483464,
-      "playerB": 8473604,
+      "playerA": 8470667,
+      "playerB": 8476905,
       "pathLength": 3,
-      "bestUniquenessScore": 3.0,
-      "solutionCount": 77
+      "bestUniquenessScore": 0.0,
+      "solutionCount": 106
     },
     "hard": {
-      "playerA": 8459492,
-      "playerB": 8478864,
-      "pathLength": 4,
+      "playerA": 8479339,
+      "playerB": 8471217,
+      "pathLength": 5,
       "bestUniquenessScore": 0.0,
-      "solutionCount": 53
+      "solutionCount": 249
     }
   },
   "2025-08-21": {
     "easy": {
-      "playerA": 8464977,
-      "playerB": 8477493,
+      "playerA": 8477409,
+      "playerB": 8474150,
       "pathLength": 3,
       "bestUniquenessScore": 0.0,
-      "solutionCount": 197
+      "solutionCount": 245
     },
     "hard": {
-      "playerA": 8481028,
-      "playerB": 8477933,
+      "playerA": 8448208,
+      "playerB": 8478403,
       "pathLength": 4,
       "bestUniquenessScore": 0.0,
-      "solutionCount": 351
+      "solutionCount": 117
     }
   },
   "2025-08-22": {
     "easy": {
-      "playerA": 8462077,
-      "playerB": 8473533,
+      "playerA": 8459492,
+      "playerB": 8471685,
       "pathLength": 3,
-      "bestUniquenessScore": 0.0,
-      "solutionCount": 229
+      "bestUniquenessScore": 0.7,
+      "solutionCount": 124
     },
     "hard": {
-      "playerA": 8448208,
-      "playerB": 8478402,
-      "pathLength": 9,
+      "playerA": 8468504,
+      "playerB": 8478403,
+      "pathLength": 4,
       "bestUniquenessScore": 0.0,
-      "solutionCount": 115
+      "solutionCount": 149
     }
   },
   "2025-08-23": {
     "easy": {
-      "playerA": 8470054,
-      "playerB": 8475222,
+      "playerA": 8458529,
+      "playerB": 8477493,
       "pathLength": 3,
       "bestUniquenessScore": 0.0,
-      "solutionCount": 69
+      "solutionCount": 164
     },
     "hard": {
-      "playerA": 8471339,
-      "playerB": 8479542,
-      "pathLength": 5,
+      "playerA": 8474613,
+      "playerB": 8478864,
+      "pathLength": 4,
       "bestUniquenessScore": 0.0,
-      "solutionCount": 163
+      "solutionCount": 41
     }
   },
   "2025-08-24": {
     "easy": {
-      "playerA": 8474149,
-      "playerB": 8477409,
+      "playerA": 8482159,
+      "playerB": 8473512,
       "pathLength": 3,
       "bestUniquenessScore": 0.0,
-      "solutionCount": 37
+      "solutionCount": 417
     },
     "hard": {
-      "playerA": 8477402,
-      "playerB": 8478413,
-      "pathLength": 9,
+      "playerA": 8479385,
+      "playerB": 8473563,
+      "pathLength": 12,
       "bestUniquenessScore": 0.0,
-      "solutionCount": 199
+      "solutionCount": 376
     }
   },
   "2025-08-25": {
-    "easy": {
-      "playerA": 8479346,
-      "playerB": 8471276,
-      "pathLength": 3,
-      "bestUniquenessScore": 0.0,
-      "solutionCount": 162
-    },
-    "hard": {
-      "playerA": 8474149,
-      "playerB": 8479314,
-      "pathLength": 4,
-      "bestUniquenessScore": 0.0,
-      "solutionCount": 69
-    }
-  },
-  "2025-08-26": {
-    "easy": {
-      "playerA": 8476834,
-      "playerB": 8477497,
-      "pathLength": 3,
-      "bestUniquenessScore": 0.0,
-      "solutionCount": 371
-    },
-    "hard": {
-      "playerA": 8478438,
-      "playerB": 8477933,
-      "pathLength": 7,
-      "bestUniquenessScore": 0.0,
-      "solutionCount": 199
-    }
-  },
-  "2025-08-27": {
-    "easy": {
-      "playerA": 8482092,
-      "playerB": 8476461,
-      "pathLength": 3,
-      "bestUniquenessScore": 0.0,
-      "solutionCount": 132
-    },
-    "hard": {
-      "playerA": 8475184,
-      "playerB": 8478864,
-      "pathLength": 5,
-      "bestUniquenessScore": 0.0,
-      "solutionCount": 37
-    }
-  },
-  "2025-08-28": {
-    "easy": {
-      "playerA": 8469812,
-      "playerB": 8475191,
-      "pathLength": 3,
-      "bestUniquenessScore": 1.2,
-      "solutionCount": 89
-    },
-    "hard": {
-      "playerA": 8482077,
-      "playerB": 8478864,
-      "pathLength": 9,
-      "bestUniquenessScore": 0.0,
-      "solutionCount": 120
-    }
-  },
-  "2025-08-29": {
-    "easy": {
-      "playerA": 8478109,
-      "playerB": 8477493,
-      "pathLength": 3,
-      "bestUniquenessScore": 0.0,
-      "solutionCount": 300
-    },
-    "hard": {
-      "playerA": 8480185,
-      "playerB": 8476399,
-      "pathLength": 8,
-      "bestUniquenessScore": 0.0,
-      "solutionCount": 157
-    }
-  },
-  "2025-08-30": {
     "easy": {
       "playerA": 8482089,
       "playerB": 8475768,
@@ -200,270 +88,142 @@
       "solutionCount": 346
     },
     "hard": {
-      "playerA": 8475184,
-      "playerB": 8478864,
-      "pathLength": 5,
-      "bestUniquenessScore": 0.0,
-      "solutionCount": 37
-    }
-  },
-  "2025-08-31": {
-    "easy": {
-      "playerA": 8482116,
-      "playerB": 8474161,
-      "pathLength": 3,
-      "bestUniquenessScore": 0.0,
-      "solutionCount": 167
-    },
-    "hard": {
-      "playerA": 8460542,
-      "playerB": 8475754,
+      "playerA": 8477939,
+      "playerB": 8476454,
       "pathLength": 4,
-      "bestUniquenessScore": 0.3,
-      "solutionCount": 138
+      "bestUniquenessScore": 0.0,
+      "solutionCount": 285
     }
   },
-  "2025-09-01": {
+  "2025-08-26": {
     "easy": {
-      "playerA": 8468504,
+      "playerA": 8474149,
       "playerB": 8477933,
       "pathLength": 3,
       "bestUniquenessScore": 0.0,
-      "solutionCount": 116
+      "solutionCount": 171
     },
     "hard": {
-      "playerA": 8475098,
-      "playerB": 8477404,
+      "playerA": 8474613,
+      "playerB": 8471214,
+      "pathLength": 9,
+      "bestUniquenessScore": 0.0,
+      "solutionCount": 228
+    }
+  },
+  "2025-08-27": {
+    "easy": {
+      "playerA": 8477409,
+      "playerB": 8477496,
+      "pathLength": 3,
+      "bestUniquenessScore": 0.0,
+      "solutionCount": 201
+    },
+    "hard": {
+      "playerA": 8475151,
+      "playerB": 8478483,
       "pathLength": 5,
       "bestUniquenessScore": 0.0,
-      "solutionCount": 97
+      "solutionCount": 179
     }
   },
-  "2025-09-02": {
+  "2025-08-28": {
     "easy": {
-      "playerA": 8467338,
-      "playerB": 8473473,
-      "pathLength": 3,
-      "bestUniquenessScore": 0.0,
-      "solutionCount": 214
-    },
-    "hard": {
-      "playerA": 8470667,
-      "playerB": 8481557,
-      "pathLength": 9,
-      "bestUniquenessScore": 0.3,
-      "solutionCount": 71
-    }
-  },
-  "2025-09-03": {
-    "easy": {
-      "playerA": 8468504,
-      "playerB": 8477409,
-      "pathLength": 3,
-      "bestUniquenessScore": 0.0,
-      "solutionCount": 22
-    },
-    "hard": {
-      "playerA": 8481522,
-      "playerB": 8475786,
-      "pathLength": 6,
-      "bestUniquenessScore": 0.0,
-      "solutionCount": 135
-    }
-  },
-  "2025-09-04": {
-    "easy": {
-      "playerA": 8465042,
-      "playerB": 8476854,
-      "pathLength": 3,
-      "bestUniquenessScore": 1.6,
-      "solutionCount": 54
-    },
-    "hard": {
-      "playerA": 8478864,
-      "playerB": 8471698,
-      "pathLength": 6,
-      "bestUniquenessScore": 0.0,
-      "solutionCount": 60
-    }
-  },
-  "2025-09-05": {
-    "easy": {
-      "playerA": 8473564,
-      "playerB": 8476399,
-      "pathLength": 3,
-      "bestUniquenessScore": 0.0,
-      "solutionCount": 188
-    },
-    "hard": {
-      "playerA": 8480995,
-      "playerB": 8475314,
-      "pathLength": 8,
-      "bestUniquenessScore": 0.2,
-      "solutionCount": 88
-    }
-  },
-  "2025-09-06": {
-    "easy": {
-      "playerA": 8482155,
+      "playerA": 8481533,
       "playerB": 8478550,
       "pathLength": 3,
       "bestUniquenessScore": 0.0,
-      "solutionCount": 140
+      "solutionCount": 239
     },
     "hard": {
-      "playerA": 8460621,
-      "playerB": 8476905,
-      "pathLength": 4,
+      "playerA": 8482146,
+      "playerB": 8476456,
+      "pathLength": 7,
       "bestUniquenessScore": 0.0,
-      "solutionCount": 214
+      "solutionCount": 324
     }
   },
-  "2025-09-07": {
+  "2025-08-29": {
     "easy": {
-      "playerA": 8479974,
-      "playerB": 8475170,
+      "playerA": 8478047,
+      "playerB": 8475786,
       "pathLength": 3,
       "bestUniquenessScore": 0.0,
-      "solutionCount": 156
+      "solutionCount": 182
     },
     "hard": {
-      "playerA": 8482679,
-      "playerB": 8476346,
-      "pathLength": 4,
-      "bestUniquenessScore": 0.0,
-      "solutionCount": 376
-    }
-  },
-  "2025-09-08": {
-    "easy": {
-      "playerA": 8471234,
-      "playerB": 8471698,
-      "pathLength": 3,
-      "bestUniquenessScore": 0.0,
-      "solutionCount": 97
-    },
-    "hard": {
-      "playerA": 8477341,
-      "playerB": 8478463,
+      "playerA": 8482109,
+      "playerB": 8481557,
       "pathLength": 9,
       "bestUniquenessScore": 0.0,
-      "solutionCount": 208
+      "solutionCount": 42
     }
   },
-  "2025-09-09": {
+  "2025-08-30": {
     "easy": {
-      "playerA": 8470596,
-      "playerB": 8477956,
-      "pathLength": 3,
-      "bestUniquenessScore": 0.0,
-      "solutionCount": 58
-    },
-    "hard": {
-      "playerA": 8473526,
-      "playerB": 8477497,
-      "pathLength": 7,
-      "bestUniquenessScore": 0.0,
-      "solutionCount": 308
-    }
-  },
-  "2025-09-10": {
-    "easy": {
-      "playerA": 8458938,
-      "playerB": 8475167,
-      "pathLength": 3,
-      "bestUniquenessScore": 0.0,
-      "solutionCount": 76
-    },
-    "hard": {
-      "playerA": 8480188,
-      "playerB": 8478449,
-      "pathLength": 7,
-      "bestUniquenessScore": 0.0,
-      "solutionCount": 118
-    }
-  },
-  "2025-09-11": {
-    "easy": {
-      "playerA": 8470667,
-      "playerB": 8476905,
-      "pathLength": 3,
-      "bestUniquenessScore": 0.0,
-      "solutionCount": 106
-    },
-    "hard": {
-      "playerA": 8484958,
-      "playerB": 8477934,
-      "pathLength": 7,
-      "bestUniquenessScore": 0.0,
-      "solutionCount": 393
-    }
-  },
-  "2025-09-12": {
-    "easy": {
-      "playerA": 8471217,
-      "playerB": 8478398,
-      "pathLength": 3,
-      "bestUniquenessScore": 0.2,
-      "solutionCount": 67
-    },
-    "hard": {
-      "playerA": 8478403,
-      "playerB": 8477496,
-      "pathLength": 6,
-      "bestUniquenessScore": 0.0,
-      "solutionCount": 389
-    }
-  },
-  "2025-09-13": {
-    "easy": {
-      "playerA": 8476235,
-      "playerB": 8474091,
-      "pathLength": 3,
-      "bestUniquenessScore": 0.0,
-      "solutionCount": 387
-    },
-    "hard": {
-      "playerA": 8477402,
-      "playerB": 8482079,
-      "pathLength": 9,
-      "bestUniquenessScore": 0.0,
-      "solutionCount": 76
-    }
-  },
-  "2025-09-14": {
-    "easy": {
-      "playerA": 8462077,
-      "playerB": 8473533,
-      "pathLength": 3,
-      "bestUniquenessScore": 0.0,
-      "solutionCount": 229
-    },
-    "hard": {
-      "playerA": 8480028,
-      "playerB": 8476177,
-      "pathLength": 4,
-      "bestUniquenessScore": 0.0,
-      "solutionCount": 63
-    }
-  },
-  "2025-09-15": {
-    "easy": {
-      "playerA": 8482159,
-      "playerB": 8474161,
+      "playerA": 8478873,
+      "playerB": 8478550,
       "pathLength": 3,
       "bestUniquenessScore": 0.0,
       "solutionCount": 85
     },
     "hard": {
       "playerA": 8448208,
-      "playerB": 8478445,
-      "pathLength": 6,
+      "playerB": 8475754,
+      "pathLength": 4,
       "bestUniquenessScore": 0.0,
-      "solutionCount": 592
+      "solutionCount": 679
     }
   },
-  "2025-09-16": {
+  "2025-08-31": {
+    "easy": {
+      "playerA": 8458529,
+      "playerB": 8477493,
+      "pathLength": 3,
+      "bestUniquenessScore": 0.0,
+      "solutionCount": 164
+    },
+    "hard": {
+      "playerA": 8477939,
+      "playerB": 8474573,
+      "pathLength": 7,
+      "bestUniquenessScore": 0.0,
+      "solutionCount": 157
+    }
+  },
+  "2025-09-01": {
+    "easy": {
+      "playerA": 8482074,
+      "playerB": 8481559,
+      "pathLength": 3,
+      "bestUniquenessScore": 0.0,
+      "solutionCount": 169
+    },
+    "hard": {
+      "playerA": 8478445,
+      "playerB": 8475786,
+      "pathLength": 5,
+      "bestUniquenessScore": 0.0,
+      "solutionCount": 144
+    }
+  },
+  "2025-09-02": {
+    "easy": {
+      "playerA": 8480027,
+      "playerB": 8466138,
+      "pathLength": 3,
+      "bestUniquenessScore": 0.0,
+      "solutionCount": 63
+    },
+    "hard": {
+      "playerA": 8466378,
+      "playerB": 8471214,
+      "pathLength": 10,
+      "bestUniquenessScore": 0.0,
+      "solutionCount": 334
+    }
+  },
+  "2025-09-03": {
     "easy": {
       "playerA": 8476437,
       "playerB": 8476346,
@@ -472,27 +232,635 @@
       "solutionCount": 277
     },
     "hard": {
-      "playerA": 8470667,
-      "playerB": 8474613,
+      "playerA": 8467899,
+      "playerB": 8478483,
+      "pathLength": 8,
+      "bestUniquenessScore": 0.4,
+      "solutionCount": 111
+    }
+  },
+  "2025-09-04": {
+    "easy": {
+      "playerA": 8480893,
+      "playerB": 8477496,
+      "pathLength": 3,
+      "bestUniquenessScore": 0.0,
+      "solutionCount": 239
+    },
+    "hard": {
+      "playerA": 8467899,
+      "playerB": 8478449,
       "pathLength": 5,
       "bestUniquenessScore": 0.0,
-      "solutionCount": 106
+      "solutionCount": 49
+    }
+  },
+  "2025-09-05": {
+    "easy": {
+      "playerA": 8482089,
+      "playerB": 8476459,
+      "pathLength": 3,
+      "bestUniquenessScore": 0.0,
+      "solutionCount": 407
+    },
+    "hard": {
+      "playerA": 8479385,
+      "playerB": 8475692,
+      "pathLength": 7,
+      "bestUniquenessScore": 0.0,
+      "solutionCount": 154
+    }
+  },
+  "2025-09-06": {
+    "easy": {
+      "playerA": 8478109,
+      "playerB": 8477493,
+      "pathLength": 3,
+      "bestUniquenessScore": 0.0,
+      "solutionCount": 300
+    },
+    "hard": {
+      "playerA": 8482110,
+      "playerB": 8478449,
+      "pathLength": 6,
+      "bestUniquenessScore": 0.0,
+      "solutionCount": 54
+    }
+  },
+  "2025-09-07": {
+    "easy": {
+      "playerA": 8477955,
+      "playerB": 8476454,
+      "pathLength": 3,
+      "bestUniquenessScore": 0.0,
+      "solutionCount": 218
+    },
+    "hard": {
+      "playerA": 8473544,
+      "playerB": 8482079,
+      "pathLength": 5,
+      "bestUniquenessScore": 0.0,
+      "solutionCount": 50
+    }
+  },
+  "2025-09-08": {
+    "easy": {
+      "playerA": 8484144,
+      "playerB": 8477946,
+      "pathLength": 3,
+      "bestUniquenessScore": 0.0,
+      "solutionCount": 193
+    },
+    "hard": {
+      "playerA": 8484145,
+      "playerB": 8474586,
+      "pathLength": 9,
+      "bestUniquenessScore": 0.0,
+      "solutionCount": 813
+    }
+  },
+  "2025-09-09": {
+    "easy": {
+      "playerA": 8470599,
+      "playerB": 8475184,
+      "pathLength": 3,
+      "bestUniquenessScore": 0.0,
+      "solutionCount": 116
+    },
+    "hard": {
+      "playerA": 8481028,
+      "playerB": 8479407,
+      "pathLength": 5,
+      "bestUniquenessScore": 0.0,
+      "solutionCount": 140
+    }
+  },
+  "2025-09-10": {
+    "easy": {
+      "playerA": 8476458,
+      "playerB": 8476389,
+      "pathLength": 3,
+      "bestUniquenessScore": 0.0,
+      "solutionCount": 233
+    },
+    "hard": {
+      "playerA": 8459457,
+      "playerB": 8475170,
+      "pathLength": 4,
+      "bestUniquenessScore": 0.0,
+      "solutionCount": 369
+    }
+  },
+  "2025-09-11": {
+    "easy": {
+      "playerA": 8477955,
+      "playerB": 8476454,
+      "pathLength": 3,
+      "bestUniquenessScore": 0.0,
+      "solutionCount": 218
+    },
+    "hard": {
+      "playerA": 8482146,
+      "playerB": 8477497,
+      "pathLength": 6,
+      "bestUniquenessScore": 0.0,
+      "solutionCount": 317
+    }
+  },
+  "2025-09-12": {
+    "easy": {
+      "playerA": 8459442,
+      "playerB": 8470616,
+      "pathLength": 3,
+      "bestUniquenessScore": 0.0,
+      "solutionCount": 285
+    },
+    "hard": {
+      "playerA": 8482074,
+      "playerB": 8477497,
+      "pathLength": 6,
+      "bestUniquenessScore": 0.0,
+      "solutionCount": 152
+    }
+  },
+  "2025-09-13": {
+    "easy": {
+      "playerA": 8479400,
+      "playerB": 8476389,
+      "pathLength": 3,
+      "bestUniquenessScore": 0.0,
+      "solutionCount": 639
+    },
+    "hard": {
+      "playerA": 8467899,
+      "playerB": 8475754,
+      "pathLength": 5,
+      "bestUniquenessScore": 0.0,
+      "solutionCount": 365
+    }
+  },
+  "2025-09-14": {
+    "easy": {
+      "playerA": 8477511,
+      "playerB": 8482078,
+      "pathLength": 3,
+      "bestUniquenessScore": 0.0,
+      "solutionCount": 63
+    },
+    "hard": {
+      "playerA": 8482074,
+      "playerB": 8477933,
+      "pathLength": 5,
+      "bestUniquenessScore": 0.0,
+      "solutionCount": 221
+    }
+  },
+  "2025-09-15": {
+    "easy": {
+      "playerA": 8482665,
+      "playerB": 8475170,
+      "pathLength": 3,
+      "bestUniquenessScore": 0.0,
+      "solutionCount": 237
+    },
+    "hard": {
+      "playerA": 8474053,
+      "playerB": 8480027,
+      "pathLength": 4,
+      "bestUniquenessScore": 0.0,
+      "solutionCount": 80
+    }
+  },
+  "2025-09-16": {
+    "easy": {
+      "playerA": 8479400,
+      "playerB": 8476389,
+      "pathLength": 3,
+      "bestUniquenessScore": 0.0,
+      "solutionCount": 639
+    },
+    "hard": {
+      "playerA": 8482089,
+      "playerB": 8481557,
+      "pathLength": 9,
+      "bestUniquenessScore": 0.0,
+      "solutionCount": 194
     }
   },
   "2025-09-17": {
     "easy": {
-      "playerA": 8482155,
-      "playerB": 8478550,
+      "playerA": 8482110,
+      "playerB": 8476881,
       "pathLength": 3,
       "bestUniquenessScore": 0.0,
-      "solutionCount": 140
+      "solutionCount": 224
     },
     "hard": {
-      "playerA": 8471220,
-      "playerB": 8475151,
-      "pathLength": 4,
+      "playerA": 8482109,
+      "playerB": 8478864,
+      "pathLength": 8,
+      "bestUniquenessScore": 0.0,
+      "solutionCount": 55
+    }
+  },
+  "2025-09-18": {
+    "easy": {
+      "playerA": 8470596,
+      "playerB": 8477956,
+      "pathLength": 3,
+      "bestUniquenessScore": 0.0,
+      "solutionCount": 58
+    },
+    "hard": {
+      "playerA": 8478099,
+      "playerB": 8478449,
+      "pathLength": 5,
+      "bestUniquenessScore": 0.0,
+      "solutionCount": 76
+    }
+  },
+  "2025-09-19": {
+    "easy": {
+      "playerA": 8479337,
+      "playerB": 8471214,
+      "pathLength": 3,
+      "bestUniquenessScore": 0.0,
+      "solutionCount": 309
+    },
+    "hard": {
+      "playerA": 8460542,
+      "playerB": 8476454,
+      "pathLength": 8,
+      "bestUniquenessScore": 0.0,
+      "solutionCount": 326
+    }
+  },
+  "2025-09-20": {
+    "easy": {
+      "playerA": 8477409,
+      "playerB": 8477496,
+      "pathLength": 3,
+      "bestUniquenessScore": 0.0,
+      "solutionCount": 201
+    },
+    "hard": {
+      "playerA": 8483445,
+      "playerB": 8476389,
+      "pathLength": 6,
+      "bestUniquenessScore": 0.0,
+      "solutionCount": 409
+    }
+  },
+  "2025-09-21": {
+    "easy": {
+      "playerA": 8457981,
+      "playerB": 8473412,
+      "pathLength": 3,
       "bestUniquenessScore": 0.8,
-      "solutionCount": 135
+      "solutionCount": 40
+    },
+    "hard": {
+      "playerA": 8466378,
+      "playerB": 8473563,
+      "pathLength": 9,
+      "bestUniquenessScore": 0.0,
+      "solutionCount": 285
+    }
+  },
+  "2025-09-22": {
+    "easy": {
+      "playerA": 8466139,
+      "playerB": 8478449,
+      "pathLength": 3,
+      "bestUniquenessScore": 0.0,
+      "solutionCount": 66
+    },
+    "hard": {
+      "playerA": 8473526,
+      "playerB": 8474150,
+      "pathLength": 6,
+      "bestUniquenessScore": 0.0,
+      "solutionCount": 332
+    }
+  },
+  "2025-09-23": {
+    "easy": {
+      "playerA": 8483445,
+      "playerB": 8474564,
+      "pathLength": 3,
+      "bestUniquenessScore": 0.5,
+      "solutionCount": 139
+    },
+    "hard": {
+      "playerA": 8476454,
+      "playerB": 8477939,
+      "pathLength": 5,
+      "bestUniquenessScore": 0.0,
+      "solutionCount": 180
+    }
+  },
+  "2025-09-24": {
+    "easy": {
+      "playerA": 8474150,
+      "playerB": 8477409,
+      "pathLength": 3,
+      "bestUniquenessScore": 0.0,
+      "solutionCount": 35
+    },
+    "hard": {
+      "playerA": 8474149,
+      "playerB": 8476346,
+      "pathLength": 5,
+      "bestUniquenessScore": 0.0,
+      "solutionCount": 175
+    }
+  },
+  "2025-09-25": {
+    "easy": {
+      "playerA": 8482665,
+      "playerB": 8475170,
+      "pathLength": 3,
+      "bestUniquenessScore": 0.0,
+      "solutionCount": 237
+    },
+    "hard": {
+      "playerA": 8482089,
+      "playerB": 8475744,
+      "pathLength": 14,
+      "bestUniquenessScore": 0.0,
+      "solutionCount": 536
+    }
+  },
+  "2025-09-26": {
+    "easy": {
+      "playerA": 8474573,
+      "playerB": 8477939,
+      "pathLength": 3,
+      "bestUniquenessScore": 0.0,
+      "solutionCount": 130
+    },
+    "hard": {
+      "playerA": 8473526,
+      "playerB": 8479314,
+      "pathLength": 5,
+      "bestUniquenessScore": 0.1,
+      "solutionCount": 89
+    }
+  },
+  "2025-09-27": {
+    "easy": {
+      "playerA": 8479385,
+      "playerB": 8476459,
+      "pathLength": 3,
+      "bestUniquenessScore": 0.0,
+      "solutionCount": 330
+    },
+    "hard": {
+      "playerA": 8483445,
+      "playerB": 8478550,
+      "pathLength": 5,
+      "bestUniquenessScore": 0.0,
+      "solutionCount": 185
+    }
+  },
+  "2025-09-28": {
+    "easy": {
+      "playerA": 8470153,
+      "playerB": 8466140,
+      "pathLength": 3,
+      "bestUniquenessScore": 0.0,
+      "solutionCount": 95
+    },
+    "hard": {
+      "playerA": 8481028,
+      "playerB": 8479314,
+      "pathLength": 5,
+      "bestUniquenessScore": 0.1,
+      "solutionCount": 87
+    }
+  },
+  "2025-09-29": {
+    "easy": {
+      "playerA": 8479318,
+      "playerB": 8477934,
+      "pathLength": 3,
+      "bestUniquenessScore": 0.0,
+      "solutionCount": 286
+    },
+    "hard": {
+      "playerA": 8477402,
+      "playerB": 8473544,
+      "pathLength": 6,
+      "bestUniquenessScore": 0.0,
+      "solutionCount": 165
+    }
+  },
+  "2025-09-30": {
+    "easy": {
+      "playerA": 8458529,
+      "playerB": 8477493,
+      "pathLength": 3,
+      "bestUniquenessScore": 0.0,
+      "solutionCount": 164
+    },
+    "hard": {
+      "playerA": 8478402,
+      "playerB": 8475754,
+      "pathLength": 6,
+      "bestUniquenessScore": 0.0,
+      "solutionCount": 282
+    }
+  },
+  "2025-10-01": {
+    "easy": {
+      "playerA": 8482089,
+      "playerB": 8475768,
+      "pathLength": 3,
+      "bestUniquenessScore": 0.0,
+      "solutionCount": 346
+    },
+    "hard": {
+      "playerA": 8474586,
+      "playerB": 8475786,
+      "pathLength": 4,
+      "bestUniquenessScore": 0.0,
+      "solutionCount": 128
+    }
+  },
+  "2025-10-02": {
+    "easy": {
+      "playerA": 8462042,
+      "playerB": 8477956,
+      "pathLength": 3,
+      "bestUniquenessScore": 0.0,
+      "solutionCount": 82
+    },
+    "hard": {
+      "playerA": 8482089,
+      "playerB": 8473563,
+      "pathLength": 12,
+      "bestUniquenessScore": 0.0,
+      "solutionCount": 411
+    }
+  },
+  "2025-10-03": {
+    "easy": {
+      "playerA": 8479385,
+      "playerB": 8476459,
+      "pathLength": 3,
+      "bestUniquenessScore": 0.0,
+      "solutionCount": 330
+    },
+    "hard": {
+      "playerA": 8475151,
+      "playerB": 8475166,
+      "pathLength": 4,
+      "bestUniquenessScore": 0.0,
+      "solutionCount": 174
+    }
+  },
+  "2025-10-04": {
+    "easy": {
+      "playerA": 8473544,
+      "playerB": 8478864,
+      "pathLength": 3,
+      "bestUniquenessScore": 0.0,
+      "solutionCount": 24
+    },
+    "hard": {
+      "playerA": 8476459,
+      "playerB": 8482079,
+      "pathLength": 8,
+      "bestUniquenessScore": 0.0,
+      "solutionCount": 44
+    }
+  },
+  "2025-10-05": {
+    "easy": {
+      "playerA": 8477409,
+      "playerB": 8478403,
+      "pathLength": 3,
+      "bestUniquenessScore": 0.0,
+      "solutionCount": 115
+    },
+    "hard": {
+      "playerA": 8458529,
+      "playerB": 8478403,
+      "pathLength": 5,
+      "bestUniquenessScore": 0.0,
+      "solutionCount": 260
+    }
+  },
+  "2025-10-06": {
+    "easy": {
+      "playerA": 8474190,
+      "playerB": 8475768,
+      "pathLength": 3,
+      "bestUniquenessScore": 0.0,
+      "solutionCount": 152
+    },
+    "hard": {
+      "playerA": 8448208,
+      "playerB": 8478403,
+      "pathLength": 4,
+      "bestUniquenessScore": 0.0,
+      "solutionCount": 117
+    }
+  },
+  "2025-10-07": {
+    "easy": {
+      "playerA": 8459492,
+      "playerB": 8476887,
+      "pathLength": 3,
+      "bestUniquenessScore": 1.2,
+      "solutionCount": 131
+    },
+    "hard": {
+      "playerA": 8460542,
+      "playerB": 8475314,
+      "pathLength": 5,
+      "bestUniquenessScore": 0.0,
+      "solutionCount": 127
+    }
+  },
+  "2025-10-08": {
+    "easy": {
+      "playerA": 8481656,
+      "playerB": 8474141,
+      "pathLength": 3,
+      "bestUniquenessScore": 0.0,
+      "solutionCount": 275
+    },
+    "hard": {
+      "playerA": 8448208,
+      "playerB": 8475754,
+      "pathLength": 4,
+      "bestUniquenessScore": 0.0,
+      "solutionCount": 679
+    }
+  },
+  "2025-10-09": {
+    "easy": {
+      "playerA": 8468504,
+      "playerB": 8477409,
+      "pathLength": 3,
+      "bestUniquenessScore": 0.0,
+      "solutionCount": 22
+    },
+    "hard": {
+      "playerA": 8460542,
+      "playerB": 8478402,
+      "pathLength": 9,
+      "bestUniquenessScore": 0.0,
+      "solutionCount": 314
+    }
+  },
+  "2025-10-10": {
+    "easy": {
+      "playerA": 8482665,
+      "playerB": 8478445,
+      "pathLength": 3,
+      "bestUniquenessScore": 0.0,
+      "solutionCount": 107
+    },
+    "hard": {
+      "playerA": 8466148,
+      "playerB": 8478440,
+      "pathLength": 5,
+      "bestUniquenessScore": 0.0,
+      "solutionCount": 145
+    }
+  },
+  "2025-10-11": {
+    "easy": {
+      "playerA": 8482665,
+      "playerB": 8476454,
+      "pathLength": 3,
+      "bestUniquenessScore": 0.0,
+      "solutionCount": 168
+    },
+    "hard": {
+      "playerA": 8483445,
+      "playerB": 8478010,
+      "pathLength": 5,
+      "bestUniquenessScore": 3.8,
+      "solutionCount": 33
+    }
+  },
+  "2025-10-12": {
+    "easy": {
+      "playerA": 8470655,
+      "playerB": 8473563,
+      "pathLength": 3,
+      "bestUniquenessScore": 0.0,
+      "solutionCount": 121
+    },
+    "hard": {
+      "playerA": 8479318,
+      "playerB": 8478445,
+      "pathLength": 5,
+      "bestUniquenessScore": 0.0,
+      "solutionCount": 149
     }
   }
 }

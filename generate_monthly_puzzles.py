@@ -13,6 +13,7 @@ from pathlib import Path
 # Import existing modules
 from find_valid_pairs import find_easy_pairs, find_hard_pairs
 from generate_game import get_all_solutions
+import prepare_web_data
 import random
 
 def generate_monthly_puzzles(days=60):
@@ -28,13 +29,18 @@ def generate_monthly_puzzles(days=60):
     puzzles_dir = docs_dir / "puzzles"
     puzzles_dir.mkdir(exist_ok=True)
     
+    # Regenerate web data files to ensure connections.json is up to date
+    print("🔄 Regenerating web data files...")
+    prepare_web_data.create_web_data()
+    print("✓ Web data files regenerated")
+    
     # Copy web_data directory structure
     web_data_dir = docs_dir / "web_data"
     if os.path.exists("web_data"):
         if web_data_dir.exists():
             shutil.rmtree(web_data_dir)
         shutil.copytree("web_data", web_data_dir)
-        print("✓ Copied web_data directory")
+        print("✓ Copied updated web_data directory")
     
     # Get easy and hard pairs separately
     print("🔍 Finding easy player pairs (path length 3)...")

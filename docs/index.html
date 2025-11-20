@@ -1,0 +1,1000 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Liney - Daily NHL Game</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⛓️</text></svg>"/>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html, body {
+            width: 100%;
+            height: 100%;
+            overflow-x: hidden;
+        }
+        
+        html {
+            background: #0f0f23;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 100%);
+            background-attachment: fixed;
+            background-size: cover;
+            background-position: center;
+            min-height: 100vh;
+            min-height: 100dvh;
+            min-height: calc(var(--vh, 1vh) * 100);
+            color: #e4e4e7;
+            padding: 20px;
+            margin: 0;
+            position: relative;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            min-height: calc(100vh - 40px);
+            min-height: calc(100dvh - 40px);
+            position: relative;
+            z-index: 1;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .title {
+            color: white;
+            font-size: 3.5rem;
+            font-weight: 900;
+            letter-spacing: 2px;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.5), 0 0 20px rgba(137, 180, 250, 0.3);
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        .subtitle {
+            color: rgba(255,255,255,0.9);
+            font-size: 1rem;
+            font-weight: 500;
+            margin-bottom: 15px;
+        }
+
+        .how-to-play {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            width: 24px;
+            height: 24px;
+            background: rgba(137, 180, 250, 0.2);
+            border: 1px solid #89b4fa;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: #89b4fa;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .how-to-play:hover {
+            background: rgba(137, 180, 250, 0.3);
+            transform: scale(1.1);
+        }
+
+        .how-to-play-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            display: none;
+            justify-content: center;
+            align-items: flex-start;
+            z-index: 3000;
+            padding: 20px;
+            padding-top: 60px;
+            overflow-y: auto;
+        }
+
+        .how-to-play-modal.show {
+            display: flex;
+        }
+
+        .how-to-play-content {
+            background: #1e1e2e;
+            border: 2px solid #45475a;
+            border-radius: 20px;
+            padding: 30px;
+            max-width: 500px;
+            width: 100%;
+            position: relative;
+            animation: modalSlideIn 0.3s ease-out;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+            margin: auto;
+        }
+
+        .how-to-play-close {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 24px;
+            color: #6c7086;
+            cursor: pointer;
+            transition: color 0.2s ease;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .how-to-play-close:hover {
+            color: #f38ba8;
+        }
+
+        .how-to-play-content h3 {
+            color: #89b4fa;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+
+        .how-to-play-content p {
+            color: #cdd6f4;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        .how-to-play-content ol {
+            color: #cdd6f4;
+            padding-left: 20px;
+            margin-bottom: 15px;
+        }
+
+        .how-to-play-content li {
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+        
+        .how-to-play-content ul {
+            list-style-type: disc;
+            padding-left: 25px;
+            margin-top: 5px;
+            margin-bottom: 5px;
+        }
+        
+        .how-to-play-content ul li {
+            margin-bottom: 5px;
+            font-size: 0.95em;
+            color: #a6adc8;
+        }
+        
+        .how-to-play-content > ul {
+            list-style-type: none;
+            padding-left: 0;
+            margin-top: 10px;
+        }
+        
+        .how-to-play-content > ul > li {
+            background: rgba(137, 180, 250, 0.1);
+            border-left: 3px solid #89b4fa;
+            padding: 10px 15px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            font-size: 1em;
+            color: #cdd6f4;
+        }
+
+        .linemates-link {
+            color: #89b4fa;
+            text-decoration: underline;
+            text-decoration-style: dotted;
+            cursor: help;
+            position: relative;
+            transition: color 0.2s ease;
+        }
+
+        .linemates-link:hover {
+            color: #cba6f7;
+        }
+
+        .linemates-tooltip {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            display: none;
+            justify-content: center;
+            align-items: flex-start;
+            z-index: 3000;
+            padding: 20px;
+        }
+
+        .linemates-tooltip.show {
+            display: flex;
+        }
+
+        .tooltip-content {
+            background: #1e1e2e;
+            border: 2px solid #45475a;
+            border-radius: 20px;
+            padding: 30px;
+            max-width: 500px;
+            width: 100%;
+            margin-top: 80px;
+            position: relative;
+            animation: tooltipSlideIn 0.3s ease-out;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+        }
+
+        @keyframes tooltipSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .tooltip-close {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 24px;
+            color: #6c7086;
+            cursor: pointer;
+            transition: color 0.2s ease;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .tooltip-close:hover {
+            color: #f38ba8;
+        }
+
+        .tooltip-content h3 {
+            color: #89b4fa;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+        .tooltip-content p {
+            color: #cdd6f4;
+            margin-bottom: 10px;
+            line-height: 1.5;
+        }
+
+        .tooltip-content ul {
+            list-style: none;
+            padding-left: 0;
+            color: #cdd6f4;
+        }
+
+        .tooltip-content li {
+            padding: 8px 0;
+            padding-left: 25px;
+            position: relative;
+            line-height: 1.5;
+        }
+
+        .tooltip-content li:before {
+            content: "•";
+            color: #89b4fa;
+            font-weight: bold;
+            position: absolute;
+            left: 8px;
+        }
+
+        /* Desktop-only hover tooltip */
+        @media (min-width: 768px) and (hover: hover) {
+            .linemates-tooltip.desktop-hover {
+                position: absolute;
+                width: auto;
+                height: auto;
+                background: none;
+                padding: 0;
+                display: block;
+                pointer-events: none;
+                z-index: 2000;
+            }
+
+            .linemates-tooltip.desktop-hover .tooltip-content {
+                margin-top: 0;
+                position: fixed;
+                left: 50%;
+                transform: translateX(-50%);
+                opacity: 0;
+                visibility: hidden;
+                transition: opacity 0.3s ease, visibility 0.3s ease;
+                pointer-events: auto;
+                min-width: 500px;
+                width: auto;
+                max-width: 650px;
+                white-space: normal;
+            }
+
+            .linemates-tooltip.desktop-hover.visible .tooltip-content {
+                opacity: 1;
+                visibility: visible;
+            }
+
+            .linemates-tooltip.desktop-hover .tooltip-close {
+                display: none;
+            }
+        }
+
+        .difficulty-toggle {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .difficulty-switch {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 8px;
+        }
+
+        .difficulty-label {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #6c7086;
+            transition: color 0.3s ease;
+        }
+
+        .difficulty-label.active {
+            color: #89b4fa;
+        }
+
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 24px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #45475a;
+            transition: 0.3s;
+            border-radius: 24px;
+            border: 2px solid #6c7086;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 16px;
+            width: 16px;
+            left: 2px;
+            bottom: 2px;
+            background-color: #cdd6f4;
+            transition: 0.3s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background-color: #89b4fa;
+            border-color: #89b4fa;
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(24px);
+        }
+
+        .difficulty-description {
+            font-size: 0.8rem;
+            color: #a6adc8;
+            font-style: italic;
+        }
+
+        .guess-counter {
+            margin-top: 15px;
+            padding: 8px 16px;
+            background: rgba(30, 30, 46, 0.8);
+            border: 1px solid #45475a;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            color: #cdd6f4;
+        }
+
+        .guess-count {
+            font-weight: bold;
+            color: #f38ba8;
+        }
+
+        .guess-count.danger {
+            color: #f38ba8;
+            animation: pulse 1s infinite;
+        }
+
+        .game-area {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            background: #1e1e2e;
+            border: 1px solid #313244;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+            padding: 30px;
+        }
+
+        .players-chain {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            min-height: 300px;
+        }
+
+        .player-card {
+            background: #313244;
+            border: 3px solid #45475a;
+            border-radius: 15px;
+            padding: 20px;
+            width: 100%;
+            max-width: 320px;
+            text-align: center;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #cdd6f4;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .player-card.target {
+            background: linear-gradient(135deg, #89b4fa 0%, #cba6f7 100%);
+            color: #11111b;
+            border-color: #89b4fa;
+        }
+
+        .player-card.linked {
+            background: linear-gradient(135deg, #a6e3a1 0%, #94e2d5 100%);
+            color: #11111b;
+            border-color: #a6e3a1;
+            animation: slideIn 0.5s ease-out;
+        }
+
+        .remove-button {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            border: 2px solid #11111b;
+            background: #f38ba8;
+            color: #11111b;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+            z-index: 10;
+        }
+
+        .remove-button:hover {
+            background: #eba0ac;
+            transform: scale(1.1);
+        }
+
+        .connection-line {
+            width: 3px;
+            height: 30px;
+            background: linear-gradient(to bottom, #89b4fa, #f38ba8);
+            border-radius: 2px;
+            animation: growLine 0.5s ease-out;
+        }
+
+        .question-mark {
+            width: 40px;
+            height: 40px;
+            background: #45475a;
+            border: 2px solid #6c7086;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #a6adc8;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.6; }
+            50% { opacity: 1; }
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes growLine {
+            from {
+                height: 0;
+            }
+            to {
+                height: 30px;
+            }
+        }
+
+        .input-section {
+            margin-top: 30px;
+        }
+
+        .search-container {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 15px 45px 15px 20px;
+            border: 2px solid #45475a;
+            border-radius: 25px;
+            font-size: 16px;
+            outline: none;
+            transition: border-color 0.3s ease;
+            background: #313244;
+            color: #cdd6f4;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+        }
+        
+        .search-clear {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: #45475a;
+            color: #cdd6f4;
+            border: none;
+            cursor: pointer;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: bold;
+            transition: all 0.2s ease;
+            padding: 0;
+            line-height: 1;
+        }
+        
+        .search-clear.show {
+            display: flex;
+        }
+        
+        .search-clear:hover {
+            background: #6c7086;
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .search-input:focus {
+            border-color: #89b4fa;
+        }
+
+        .search-input::placeholder {
+            color: #6c7086;
+        }
+
+        .suggestions {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: #313244;
+            border: 1px solid #45475a;
+            border-radius: 15px;
+            max-height: 200px;
+            overflow-y: auto;
+            z-index: 1000;
+            display: none;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .suggestion-item {
+            padding: 12px 20px;
+            cursor: pointer;
+            border-bottom: 1px solid #45475a;
+            transition: background-color 0.2s ease;
+            color: #cdd6f4;
+        }
+
+        .suggestion-item:hover {
+            background-color: #45475a;
+        }
+
+        .suggestion-item:last-child {
+            border-bottom: none;
+        }
+
+        .add-button {
+            width: 100%;
+            background: linear-gradient(135deg, #89b4fa 0%, #cba6f7 100%);
+            color: #11111b;
+            border: none;
+            border-radius: 25px;
+            padding: 15px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .add-button:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(137, 180, 250, 0.4);
+        }
+
+        .add-button:active {
+            transform: translateY(0);
+        }
+
+        .add-button:disabled {
+            background: #6c7086;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+            opacity: 0.6;
+        }
+
+        .error-message {
+            color: #f38ba8;
+            font-size: 0.9rem;
+            margin-top: 10px;
+            text-align: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            min-height: 20px;
+        }
+
+        .error-message.show {
+            opacity: 1;
+        }
+
+        .completion-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+        }
+
+        .modal-content {
+            background: #1e1e2e;
+            border: 1px solid #313244;
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            max-width: 400px;
+            margin: 20px;
+            animation: modalSlideIn 0.5s ease-out;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: scale(0.8) translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        .modal-title {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #a6e3a1;
+            margin-bottom: 20px;
+        }
+
+        .modal-score {
+            font-size: 1.1rem;
+            margin-bottom: 25px;
+            color: #cdd6f4;
+            line-height: 1.5;
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .share-button, .debug-button {
+            border: none;
+            border-radius: 25px;
+            padding: 12px 24px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+            min-width: 120px;
+        }
+
+        .share-button {
+            background: linear-gradient(135deg, #a6e3a1 0%, #94e2d5 100%);
+            color: #11111b;
+        }
+
+        .debug-button {
+            background: linear-gradient(135deg, #f38ba8 0%, #fab387 100%);
+            color: #11111b;
+            font-size: 0.9rem;
+            min-width: 160px;
+        }
+
+        .share-button:hover, .debug-button:hover {
+            transform: translateY(-2px);
+        }
+
+        .confetti {
+            position: fixed;
+            top: -10px;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1500;
+        }
+
+        .confetti-piece {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: #667eea;
+            animation: confettiFall 3s linear infinite;
+        }
+
+        @keyframes confettiFall {
+            to {
+                transform: translateY(calc(100vh + 50px)) rotate(360deg);
+            }
+        }
+
+        .loading {
+            text-align: center;
+            color: #6c7086;
+            font-style: italic;
+        }
+
+        .countdown-timer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 0.8rem;
+            color: #6c7086;
+            font-style: italic;
+        }
+
+        /* Mobile specific fixes */
+        @supports (-webkit-touch-callout: none) {
+            /* iOS specific */
+            body {
+                min-height: -webkit-fill-available;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
+            
+            .title {
+                font-size: 2.5rem;
+            }
+            
+            .how-to-play {
+                top: 10px;
+                right: 10px;
+            }
+            
+            .game-area {
+                padding: 20px;
+            }
+            
+            .player-card {
+                padding: 15px;
+                font-size: 1.1rem;
+            }
+
+            .modal-content {
+                padding: 30px 20px;
+            }
+
+            .modal-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .share-button {
+                width: 100%;
+                max-width: 200px;
+            }
+            
+            .tooltip-content {
+                margin-top: 20px;
+                max-width: calc(100vw - 40px);
+            }
+            
+            .how-to-play-modal {
+                padding-top: env(safe-area-inset-top, 60px);
+                padding-bottom: env(safe-area-inset-bottom, 20px);
+            }
+        }
+    </style>
+</head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3BLZRC4QGY"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-3BLZRC4QGY');
+</script>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="how-to-play" id="howToPlayBtn">i</div>
+            <h1 class="title">Liney</h1>
+            <p class="subtitle">Find the common <span class="linemates-link" id="linematesLink">linemates</span> between NHL players</p>
+            
+            <div class="difficulty-toggle">
+                <div class="difficulty-switch">
+                    <span class="difficulty-label easy-label">Easy</span>
+                    <label class="switch">
+                        <input type="checkbox" id="difficultyToggle">
+                        <span class="slider"></span>
+                    </label>
+                    <span class="difficulty-label hard-label">Hard</span>
+                </div>
+                <div class="difficulty-description">
+                    <span id="difficultyText">1 player connection</span>
+                </div>
+            </div>
+            
+            <div class="guess-counter" id="guessCounter">
+                <span class="guess-text">Attempts remaining: </span>
+                <span class="guess-count" id="guessCount">3</span>
+            </div>
+        </div>
+
+        <div class="game-area">
+            <div class="players-chain" id="playersChain">
+                <div class="loading">Loading game...</div>
+            </div>
+
+            <div class="input-section">
+                <div class="search-container">
+                    <input 
+                        type="text" 
+                        class="search-input" 
+                        id="searchInput" 
+                        placeholder="Search for a player..."
+                        autocomplete="off"
+                        disabled
+                    >
+                    <button class="search-clear" id="searchClear" aria-label="Clear search">×</button>
+                    <div class="suggestions" id="suggestions"></div>
+                </div>
+                <button class="add-button" id="addButton" disabled>Add Player</button>
+                <div class="error-message" id="errorMessage"></div>
+            </div>
+        </div>
+        
+        <div class="countdown-timer" id="countdownTimer">
+            New puzzle in X hours
+        </div>
+    </div>
+
+    <div class="completion-modal" id="completionModal">
+        <div class="modal-content">
+            <h2 class="modal-title">🎉 Puzzle Complete!</h2>
+            <div class="modal-score" id="modalScore"></div>
+            <div class="modal-buttons">
+                <button class="share-button" id="shareButton">Copy Score</button>
+                <!-- Debug button removed -->
+            </div>
+        </div>
+    </div>
+
+    <div class="confetti" id="confetti"></div>
+
+    <div class="linemates-tooltip" id="linematestooltip">
+        <div class="tooltip-content">
+            <div class="tooltip-close" id="tooltipClose">×</div>
+            <h3>What are linemates?</h3>
+            <p>2 players are considered linemates if they:</p>
+            <ul>
+                <li>Either player spent at least 4% of their TOI minutes with the other at <strong>any</strong> strength on the same team at the same time</li>
+                <li>Play the same position(i.e., forwards are not considered linemates with defensemen)</li>
+            </ul>
+            <p><strong>NOTE</strong>: NHL shift data only goes back to the <strong>2012-2013 season</strong> so there is a hard cutoff there.</p>
+        </div>
+    </div>
+
+    <div class="how-to-play-modal" id="howToPlayModal">
+        <div class="how-to-play-content">
+            <div class="how-to-play-close" id="howToPlayClose">×</div>
+            <h3>How to Play</h3>
+            <p><strong>Goal:</strong> Connect two NHL players through their common linemates.</p>
+            <p><strong>Rules:</strong></p>
+            <ol>
+                <li>You start with two players who need to be connected</li>
+                <li>Add players who were linemates with anyone already in the chain</li>
+                <li>Win when you create an unbroken chain between the two players</li>
+                <li>You have 3 wrong guesses before the game ends</li>
+            </ol>
+            <p><strong>Difficulty Modes:</strong></p>
+            <ul>
+                <li><strong>Easy:</strong> Can be solved with just 1 connecting player</li>
+                <li><strong>Hard:</strong> Requires 2 or more connecting players</li>
+            </ul>
+            <p>Use the toggle at the top to switch between Easy and Hard mode for today's puzzle!</p>
+            <p><strong>Uniqueness:</strong></p>   
+            <p>Uniqueness of an answer is calculated by using the combined TOI % spent together for each connection in the chain. The lowest TOI % allowed is 4% so if every player in the chain spent 4% of their time together, your uniqueness score would be 0. It climbs based on how common of a linemate that player was. The goal is to reward obscure picks. It is just a fun measurement and is still being tweaked</p>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>

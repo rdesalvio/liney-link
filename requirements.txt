@@ -1,0 +1,7 @@
+# Core dependencies for puzzle generation
+# Add any Python packages your scripts need here
+
+# Example dependencies (uncomment if needed):
+# requests>=2.31.0
+# pandas>=2.0.0
+# numpy>=1.24.0

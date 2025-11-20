@@ -2,7 +2,14 @@
   "permissions": {
     "defaultMode": "acceptEdits",
     "allow": [
-      "Bash(python3:*)"
-    ]
+      "Bash(curl:*)",
+      "Bash(grep:*)",
+      "Bash(node:*)",
+      "Bash(python3:*)",
+      "Bash(cat:*)",
+      "Bash(git merge:*)"
+    ],
+    "deny": [],
+    "ask": []
   }
 }

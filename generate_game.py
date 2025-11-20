@@ -1,7 +1,6 @@
 import os
 import random
 import json
-from collections import deque
 
 player_linkage_folder = "player_linkages"
 player_info_folder = "players"
@@ -35,67 +34,125 @@ def get_player_info(playerId):
 
     return player
 
-def find_all_paths(start_player, end_player, max_length=10, linkages=None):
+def find_all_paths(start_player, end_player, max_length=10, linkages=None, max_paths_per_length=200):
     """
-    Find all possible paths between two players.
-    Returns a list of paths sorted by length (longest first) with TOI percentages.
+    Find all possible paths between two players using iterative deepening.
+    Returns a list of paths sorted by length (shortest first) with TOI percentages.
+
+    Args:
+        start_player: Starting player ID
+        end_player: Ending player ID
+        max_length: Maximum path length to search
+        linkages: Pre-loaded linkage data (will load if None)
+        max_paths_per_length: Maximum number of paths to keep per length (prevents explosion)
+
+    Returns:
+        List of (path, percentages) tuples sorted by path length
     """
     if start_player == end_player:
-        return [[start_player]]
-    
+        return [([start_player], [])]
+
     # Load linkages if not provided
     if linkages is None:
         linkages = {}
         for filename in os.listdir(player_linkage_folder):
             if not filename.endswith('.json') or filename == 'summary.json':
                 continue
-            
+
             player_id = int(filename.split('.')[0])
             try:
                 with open(f"{player_linkage_folder}/{filename}") as f:
                     linkages[player_id] = json.load(f)
             except:
                 continue
-    
-    # Find all paths using BFS with path tracking
+
     all_paths = []
-    visited_at_length = {}  # Track at what path length we first visited each node
-    queue = deque([(start_player, [start_player], [])])  # Added percentages list
-    
-    while queue:
-        current, path, percentages = queue.popleft()
-        
-        # Skip if path is too long
-        if len(path) > max_length:
-            continue
-        
-        # Skip if we've seen this player at a shorter path length
-        if current in visited_at_length and visited_at_length[current] < len(path):
-            continue
-        visited_at_length[current] = len(path)
-        
+
+    # Use iterative deepening: search for paths of each specific length
+    # This ensures we find ALL paths without exponential explosion
+    for target_length in range(2, max_length + 1):
+        paths_at_length = _find_paths_of_length(
+            start_player, end_player, target_length, linkages, max_paths_per_length
+        )
+
+        if paths_at_length:
+            all_paths.extend(paths_at_length)
+            print(f"  Found {len(paths_at_length)} paths of length {target_length}")
+
+        # If we found paths at this length and haven't found any at previous lengths,
+        # we can optionally continue to find longer paths for variety
+        # (Don't break early - we want all paths for maximum variety)
+
+    # Paths are already sorted by length due to iterative deepening
+    return all_paths
+
+
+def _find_paths_of_length(start_player, end_player, target_length, linkages, max_paths):
+    """
+    Find all paths of exactly the specified length between two players.
+    Uses DFS with depth limiting to efficiently find paths of exact length.
+
+    Args:
+        start_player: Starting player ID
+        end_player: Ending player ID
+        target_length: Exact path length to find
+        linkages: Pre-loaded linkage data
+        max_paths: Maximum paths to return (prevents explosion)
+
+    Returns:
+        List of (path, percentages) tuples of exactly target_length
+    """
+    if target_length < 2:
+        return []
+
+    paths_found = []
+
+    def dfs(current, path, percentages, depth):
+        # Stop if we've found enough paths
+        if len(paths_found) >= max_paths:
+            return
+
+        # If we've reached target depth
+        if depth == target_length - 1:
+            # Check if we can reach the end from here
+            if current in linkages:
+                for connection in linkages[current].get('connections', []):
+                    if connection['playerId'] == end_player:
+                        final_path = path + [end_player]
+                        final_percentages = percentages + [connection.get('percentage_of_total', 0)]
+                        paths_found.append((final_path, final_percentages))
+
+                        if len(paths_found) >= max_paths:
+                            return
+            return
+
+        # Continue searching (not at target depth yet)
         if current not in linkages:
-            continue
-            
+            return
+
         for connection in linkages[current].get('connections', []):
             next_player = connection['playerId']
-            
-            # Avoid cycles within the current path
+
+            # Avoid cycles
             if next_player in path:
                 continue
-            
+
+            # Avoid the end player until we're at the right depth
+            if next_player == end_player:
+                continue
+
             new_path = path + [next_player]
             new_percentages = percentages + [connection.get('percentage_of_total', 0)]
-            
-            if next_player == end_player:
-                all_paths.append((new_path, new_percentages))
-            else:
-                queue.append((next_player, new_path, new_percentages))
-    
-    # Sort paths by length (shortest first)
-    all_paths.sort(key=lambda x: len(x[0]), reverse=False)
-    
-    return all_paths
+
+            dfs(next_player, new_path, new_percentages, depth + 1)
+
+            if len(paths_found) >= max_paths:
+                return
+
+    # Start DFS from the start player
+    dfs(start_player, [start_player], [], 0)
+
+    return paths_found
 
 def calculate_uniqueness_score(percentages):
     """
@@ -121,13 +178,21 @@ def calculate_uniqueness_score(percentages):
     
     return round(uniqueness_score, 1)
 
-def get_all_solutions(player_a_id, player_b_id, max_paths=None):
+def get_all_solutions(player_a_id, player_b_id, max_paths=None, max_length=10, max_paths_per_length=200):
     """
     Get all possible solutions (paths) between two players with TOI percentages and uniqueness scores.
-    Returns paths sorted by length (longest to shortest).
+    Returns paths sorted by length (shortest to longest).
+
+    Args:
+        player_a_id: First player ID
+        player_b_id: Second player ID
+        max_paths: Optional limit on total paths returned (for backward compatibility)
+        max_length: Maximum path length to search
+        max_paths_per_length: Maximum paths to find per length (prevents explosion)
     """
-    all_paths = find_all_paths(player_a_id, player_b_id)
-    
+    all_paths = find_all_paths(player_a_id, player_b_id, max_length=max_length,
+                                max_paths_per_length=max_paths_per_length)
+
     if max_paths:
         all_paths = all_paths[:max_paths]
     
@@ -202,7 +267,8 @@ if __name__ == "__main__":
     
     # Find all solutions
     print("Finding all possible solutions...")
-    solutions = get_all_solutions(player_a_id, player_b_id, max_paths=20)  # Limit to 20 solutions
+    # No longer limiting to 20 - find ALL paths for maximum variety
+    solutions = get_all_solutions(player_a_id, player_b_id)
     
     if solutions:
         print(f"\nFound {len(solutions)} solution(s):")

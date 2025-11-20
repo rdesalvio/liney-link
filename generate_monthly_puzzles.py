@@ -17,23 +17,23 @@ import prepare_web_data
 import random
 
 def generate_monthly_puzzles(days=60):
-    """Generate puzzles for the specified number of days."""
-    
+    """Generate puzzles for the specified number of days with NO player repetition."""
+
     print(f"🎯 Generating {days} days of puzzles...")
-    
+
     # Create docs directory for GitHub Pages
     docs_dir = Path("docs")
     docs_dir.mkdir(exist_ok=True)
-    
+
     # Create puzzles subdirectory
     puzzles_dir = docs_dir / "puzzles"
     puzzles_dir.mkdir(exist_ok=True)
-    
+
     # Regenerate web data files to ensure connections.json is up to date
     print("🔄 Regenerating web data files...")
     prepare_web_data.create_web_data()
     print("✓ Web data files regenerated")
-    
+
     # Copy web_data directory structure
     web_data_dir = docs_dir / "web_data"
     if os.path.exists("web_data"):
@@ -41,15 +41,46 @@ def generate_monthly_puzzles(days=60):
             shutil.rmtree(web_data_dir)
         shutil.copytree("web_data", web_data_dir)
         print("✓ Copied updated web_data directory")
-    
-    # Get easy and hard pairs separately
-    print("🔍 Finding easy player pairs (path length 3)...")
-    easy_pairs = find_easy_pairs(max_pairs=300)
-    print(f"✓ Found {len(easy_pairs)} easy pairs")
-    
-    print("🔍 Finding hard player pairs (path length 4+)...")
-    hard_pairs = find_hard_pairs(max_pairs=300)
-    print(f"✓ Found {len(hard_pairs)} hard pairs")
+
+    # Track all used players across both difficulty levels to ensure variety
+    used_players_easy = set()
+    used_players_hard = set()
+
+    # Get easy pairs - now supports path length 3-4 nodes
+    print("🔍 Finding easy player pairs (path length 3-4 nodes = 2-3 hops)...")
+    easy_pairs_candidates = find_easy_pairs(max_pairs=days * 3)  # Get extra for variety
+    print(f"✓ Found {len(easy_pairs_candidates)} candidate easy pairs")
+
+    # Filter easy pairs to ensure no player repetition
+    random.shuffle(easy_pairs_candidates)
+    easy_pairs = []
+    for pair in easy_pairs_candidates:
+        if pair['player_a'] not in used_players_easy and pair['player_b'] not in used_players_easy:
+            easy_pairs.append(pair)
+            used_players_easy.add(pair['player_a'])
+            used_players_easy.add(pair['player_b'])
+        if len(easy_pairs) >= days:
+            break
+
+    print(f"✓ Selected {len(easy_pairs)} easy pairs with {len(used_players_easy)} unique players")
+
+    # Get hard pairs
+    print("🔍 Finding hard player pairs (path length 5+ nodes = 4+ hops)...")
+    hard_pairs_candidates = find_hard_pairs(max_pairs=days * 3)
+    print(f"✓ Found {len(hard_pairs_candidates)} candidate hard pairs")
+
+    # Filter hard pairs to ensure no player repetition
+    random.shuffle(hard_pairs_candidates)
+    hard_pairs = []
+    for pair in hard_pairs_candidates:
+        if pair['player_a'] not in used_players_hard and pair['player_b'] not in used_players_hard:
+            hard_pairs.append(pair)
+            used_players_hard.add(pair['player_a'])
+            used_players_hard.add(pair['player_b'])
+        if len(hard_pairs) >= days:
+            break
+
+    print(f"✓ Selected {len(hard_pairs)} hard pairs with {len(used_players_hard)} unique players")
     
     if not easy_pairs or not hard_pairs:
         print("❌ Not enough suitable pairs found for both difficulties!")

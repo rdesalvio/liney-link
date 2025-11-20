@@ -111,14 +111,17 @@ def is_relevant_player(player_id, verbose=False):
     except:
         return False
 
-def find_interesting_pairs(max_pairs=100, difficulty="mixed"):
+def find_interesting_pairs(max_pairs=100, difficulty="mixed", used_players=None):
     """Find pairs of players who were never teammates but are connected
-    
+
     Args:
         max_pairs: Maximum number of pairs to find
-        difficulty: "easy" (path length 3), "hard" (path length 4+), or "mixed"
+        difficulty: "easy" (path length 3-4), "hard" (path length 5+), or "mixed"
+        used_players: Set of player IDs to avoid (for preventing repetition)
     """
-    
+    if used_players is None:
+        used_players = set()
+
     print("Loading all player team histories...")
     player_teams = load_all_player_teams()
     
@@ -153,16 +156,22 @@ def find_interesting_pairs(max_pairs=100, difficulty="mixed"):
     
     print("Finding valid pairs...")
     attempts = 0
-    max_attempts = 100000
-    
+    max_attempts = 500000  # Increased from 100k to find more variety
+
+    # Filter out already-used players if specified
+    available_players = [p for p in players if p not in used_players]
+    if len(available_players) < 2:
+        print(f"Warning: Only {len(available_players)} players not in used set, using all players")
+        available_players = players
+
     while len(valid_pairs) < max_pairs and attempts < max_attempts:
         attempts += 1
-        
+
         # Pick two random players
-        if len(players) < 2:
+        if len(available_players) < 2:
             break
-            
-        player_a, player_b = random.sample(players, 2)
+
+        player_a, player_b = random.sample(available_players, 2)
         
         # Check if they have team history
         if player_a not in player_teams or player_b not in player_teams:
@@ -183,12 +192,16 @@ def find_interesting_pairs(max_pairs=100, difficulty="mixed"):
             continue
             
         # Check path length based on difficulty (using the quality path)
+        # Note: path length is number of nodes, so length 3 = 2 hops (3 players total)
         valid_path = False
-        if difficulty == "easy" and quality_path and len(quality_path) == 3:
+        if difficulty == "easy" and quality_path and 3 <= len(quality_path) <= 4:
+            # Easy: 3-4 nodes (2-3 hops) - previously was only length 3 which had 0 results
             valid_path = True
-        elif difficulty == "hard" and quality_path and len(quality_path) >= 4:
+        elif difficulty == "hard" and quality_path and len(quality_path) >= 5:
+            # Hard: 5+ nodes (4+ hops)
             valid_path = True
-        elif difficulty == "mixed" and quality_path and 2 <= len(quality_path) <= 4:
+        elif difficulty == "mixed" and quality_path and 3 <= len(quality_path) <= 6:
+            # Mixed: 3-6 nodes (2-5 hops)
             valid_path = True
             
         if valid_path:
@@ -212,11 +225,11 @@ def find_interesting_pairs(max_pairs=100, difficulty="mixed"):
     return valid_pairs
 
 def find_easy_pairs(max_pairs=50):
-    """Find easy puzzle pairs (path length exactly 3)"""
+    """Find easy puzzle pairs (path length 3-4 nodes = 2-3 hops)"""
     return find_interesting_pairs(max_pairs=max_pairs, difficulty="easy")
 
 def find_hard_pairs(max_pairs=50):
-    """Find hard puzzle pairs (path length 4 or more)"""
+    """Find hard puzzle pairs (path length 5+ nodes = 4+ hops)"""
     return find_interesting_pairs(max_pairs=max_pairs, difficulty="hard")
 
 def get_player_name(player_id):

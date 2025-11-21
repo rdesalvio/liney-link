@@ -9,7 +9,9 @@ on:
 jobs:
   update-puzzles:
     runs-on: ubuntu-latest
-    
+    permissions:
+      contents: write  # Allow the workflow to push commits
+
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4

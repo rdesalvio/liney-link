@@ -9,7 +9,9 @@ on:
 jobs:
   update-puzzles:
     runs-on: ubuntu-latest
-    
+    permissions:
+      contents: write  # Allow the workflow to push commits
+
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
@@ -28,50 +30,60 @@ jobs:
       run: |
         echo "📥 Downloading player data from GitHub releases..."
 
-        # Download players.tar.gz from latest release
-        if gh release download latest --pattern "players.tar.gz" --dir . 2>/dev/null; then
-          echo "✅ Downloaded players.tar.gz"
-          tar -xzf players.tar.gz
-          rm players.tar.gz
-          echo "📦 Extracted players/ folder"
-        else
-          echo "⚠️  No players.tar.gz in release 'latest'"
+        # Get the latest release tag (the one marked as "Latest")
+        LATEST_TAG=$(gh release list --limit 1 --json tagName,isLatest --jq '.[] | select(.isLatest == true) | .tagName')
+
+        if [ -z "$LATEST_TAG" ]; then
+          echo "⚠️  No releases found marked as 'Latest'"
           echo ""
           echo "ERROR: Cannot generate puzzles without player data!"
           echo ""
           echo "Please create an initial data release first:"
           echo "1. Go to Actions → Update Player Data Cache"
           echo "2. Click 'Run workflow'"
-          echo "3. Wait for it to complete"
+          echo "3. Wait for it to complete (~10-20 minutes)"
           echo "4. Then retry this workflow"
           echo ""
           echo "Or run locally: ./create_data_release.sh"
           exit 1
         fi
 
+        echo "📦 Found latest release: ${LATEST_TAG}"
+
+        # Download players.tar.gz from latest release
+        if gh release download "${LATEST_TAG}" --pattern "players.tar.gz" --dir . 2>/dev/null; then
+          echo "✅ Downloaded players.tar.gz"
+          tar -xzf players.tar.gz
+          rm players.tar.gz
+          echo "📦 Extracted players/ folder"
+        else
+          echo "⚠️  No players.tar.gz in release '${LATEST_TAG}'"
+          echo ""
+          echo "ERROR: Release exists but doesn't contain player data!"
+          echo ""
+          echo "Please re-run the data update workflow:"
+          echo "  gh workflow run update-player-data.yml"
+          exit 1
+        fi
+
         # Download player_linkages.tar.gz from latest release
-        if gh release download latest --pattern "player_linkages.tar.gz" --dir . 2>/dev/null; then
+        if gh release download "${LATEST_TAG}" --pattern "player_linkages.tar.gz" --dir . 2>/dev/null; then
           echo "✅ Downloaded player_linkages.tar.gz"
           tar -xzf player_linkages.tar.gz
           rm player_linkages.tar.gz
           echo "📦 Extracted player_linkages/ folder"
         else
-          echo "⚠️  No player_linkages.tar.gz in release 'latest'"
+          echo "⚠️  No player_linkages.tar.gz in release '${LATEST_TAG}'"
           echo ""
-          echo "ERROR: Cannot generate puzzles without linkage data!"
+          echo "ERROR: Release exists but doesn't contain linkage data!"
           echo ""
-          echo "Please create an initial data release first:"
-          echo "1. Go to Actions → Update Player Data Cache"
-          echo "2. Click 'Run workflow'"
-          echo "3. Wait for it to complete"
-          echo "4. Then retry this workflow"
-          echo ""
-          echo "Or run locally: ./create_data_release.sh"
+          echo "Please re-run the data update workflow:"
+          echo "  gh workflow run update-player-data.yml"
           exit 1
         fi
 
         echo ""
-        echo "✅ Player data ready"
+        echo "✅ Player data ready from release: ${LATEST_TAG}"
         echo "   Players: $(find players -name '*.json' | wc -l) files"
         echo "   Linkages: $(find player_linkages -name '*.json' -not -name 'summary.json' | wc -l) files"
       env:

@@ -23,7 +23,46 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-        
+
+    - name: Download player data from release
+      run: |
+        echo "📥 Downloading player data from GitHub releases..."
+
+        # Download players.tar.gz from latest release
+        gh release download latest \
+          --pattern "players.tar.gz" \
+          --dir . || {
+            echo "⚠️ No release found, trying to fetch from NHL API..."
+            python3 pull_players.py
+          }
+
+        # Extract if downloaded
+        if [ -f players.tar.gz ]; then
+          echo "📦 Extracting players data..."
+          tar -xzf players.tar.gz
+          rm players.tar.gz
+        fi
+
+        # Download player_linkages.tar.gz from latest release
+        gh release download latest \
+          --pattern "player_linkages.tar.gz" \
+          --dir . || {
+            echo "⚠️ No linkages found, generating from scratch..."
+            python3 pull_shifts.py
+            python3 player_linkages.py
+          }
+
+        # Extract if downloaded
+        if [ -f player_linkages.tar.gz ]; then
+          echo "📦 Extracting player linkages..."
+          tar -xzf player_linkages.tar.gz
+          rm player_linkages.tar.gz
+        fi
+
+        echo "✅ Player data ready"
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
     - name: Generate new puzzles
       run: |
         # Generate puzzles for next 30 days to ensure we're always ahead

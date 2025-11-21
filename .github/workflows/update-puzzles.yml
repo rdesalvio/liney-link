@@ -29,37 +29,51 @@ jobs:
         echo "📥 Downloading player data from GitHub releases..."
 
         # Download players.tar.gz from latest release
-        gh release download latest \
-          --pattern "players.tar.gz" \
-          --dir . || {
-            echo "⚠️ No release found, trying to fetch from NHL API..."
-            python3 pull_players.py
-          }
-
-        # Extract if downloaded
-        if [ -f players.tar.gz ]; then
-          echo "📦 Extracting players data..."
+        if gh release download latest --pattern "players.tar.gz" --dir . 2>/dev/null; then
+          echo "✅ Downloaded players.tar.gz"
           tar -xzf players.tar.gz
           rm players.tar.gz
+          echo "📦 Extracted players/ folder"
+        else
+          echo "⚠️  No players.tar.gz in release 'latest'"
+          echo ""
+          echo "ERROR: Cannot generate puzzles without player data!"
+          echo ""
+          echo "Please create an initial data release first:"
+          echo "1. Go to Actions → Update Player Data Cache"
+          echo "2. Click 'Run workflow'"
+          echo "3. Wait for it to complete"
+          echo "4. Then retry this workflow"
+          echo ""
+          echo "Or run locally: ./create_data_release.sh"
+          exit 1
         fi
 
         # Download player_linkages.tar.gz from latest release
-        gh release download latest \
-          --pattern "player_linkages.tar.gz" \
-          --dir . || {
-            echo "⚠️ No linkages found, generating from scratch..."
-            python3 pull_shifts.py
-            python3 player_linkages.py
-          }
-
-        # Extract if downloaded
-        if [ -f player_linkages.tar.gz ]; then
-          echo "📦 Extracting player linkages..."
+        if gh release download latest --pattern "player_linkages.tar.gz" --dir . 2>/dev/null; then
+          echo "✅ Downloaded player_linkages.tar.gz"
           tar -xzf player_linkages.tar.gz
           rm player_linkages.tar.gz
+          echo "📦 Extracted player_linkages/ folder"
+        else
+          echo "⚠️  No player_linkages.tar.gz in release 'latest'"
+          echo ""
+          echo "ERROR: Cannot generate puzzles without linkage data!"
+          echo ""
+          echo "Please create an initial data release first:"
+          echo "1. Go to Actions → Update Player Data Cache"
+          echo "2. Click 'Run workflow'"
+          echo "3. Wait for it to complete"
+          echo "4. Then retry this workflow"
+          echo ""
+          echo "Or run locally: ./create_data_release.sh"
+          exit 1
         fi
 
+        echo ""
         echo "✅ Player data ready"
+        echo "   Players: $(find players -name '*.json' | wc -l) files"
+        echo "   Linkages: $(find player_linkages -name '*.json' -not -name 'summary.json' | wc -l) files"
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 

@@ -14,28 +14,45 @@ This game is set up for easy deployment on GitHub Pages with pre-generated puzzl
 
 ### Quick Setup
 
-1. **Clone and Generate Puzzles**
+1. **Clone Repository**
    ```bash
    git clone <your-repo-url>
    cd liney-link
+   ```
+
+2. **Download Player Data** (required for puzzle generation)
+   ```bash
+   # Quick setup - downloads data from GitHub releases
+   ./setup_data.sh
+
+   # Or manually:
+   gh release download latest --pattern "*.tar.gz"
+   tar -xzf players.tar.gz
+   tar -xzf player_linkages.tar.gz
+   ```
+
+   > **Note:** The `players/` and `player_linkages/` folders (~100MB) are stored in GitHub Releases, not in the repository. See [DATA_MANAGEMENT.md](DATA_MANAGEMENT.md) for details.
+
+3. **Generate Puzzles**
+   ```bash
    python3 generate_monthly_puzzles.py
    ```
 
-2. **Push to GitHub**
+4. **Push to GitHub**
    ```bash
    git add .
    git commit -m "Initial setup with generated puzzles"
    git push origin main
    ```
 
-3. **Enable GitHub Pages**
+5. **Enable GitHub Pages**
    - Go to your repository settings
    - Navigate to "Pages" section
    - Set source to "Deploy from a branch"
    - Select "main" branch and "/docs" folder
    - Save settings
 
-4. **Your site will be available at:**
+6. **Your site will be available at:**
    `https://yourusername.github.io/repository-name`
 
 ### Automatic Updates

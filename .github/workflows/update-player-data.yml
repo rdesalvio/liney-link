@@ -1,0 +1,116 @@
+name: Update Player Data Cache
+
+# This workflow refreshes the player data cache
+# Run this:
+# - At the start of each NHL season
+# - When you want to refresh the data
+# - Manually via workflow_dispatch
+
+on:
+  schedule:
+    # Run monthly on the 1st at 3 AM UTC
+    - cron: '0 3 1 * *'
+  workflow_dispatch:  # Allow manual trigger
+
+jobs:
+  update-cache:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+
+    - name: Pull player data from NHL API
+      run: |
+        echo "📥 Fetching player data from NHL API..."
+        python3 pull_players.py
+
+        PLAYER_COUNT=$(find players -name "*.json" | wc -l)
+        echo "✅ Fetched $PLAYER_COUNT players"
+
+    - name: Pull shift data from NHL API
+      run: |
+        echo "📥 Fetching shift data from NHL API..."
+        python3 pull_shifts.py
+
+        SHIFT_FILES=$(find shift_charts -name "*.json" 2>/dev/null | wc -l)
+        echo "✅ Fetched $SHIFT_FILES shift chart files"
+
+    - name: Generate player linkages
+      run: |
+        echo "🔗 Computing player linkages..."
+        python3 player_linkages.py
+
+        LINKAGE_COUNT=$(find player_linkages -name "*.json" -not -name "summary.json" | wc -l)
+        echo "✅ Generated linkages for $LINKAGE_COUNT players"
+
+    - name: Create data archives
+      run: |
+        echo "📦 Creating data archives..."
+        tar -czf players.tar.gz players/
+        tar -czf player_linkages.tar.gz player_linkages/
+
+        PLAYERS_SIZE=$(du -h players.tar.gz | cut -f1)
+        LINKAGES_SIZE=$(du -h player_linkages.tar.gz | cut -f1)
+
+        echo "✅ Created archives:"
+        echo "   players.tar.gz: $PLAYERS_SIZE"
+        echo "   player_linkages.tar.gz: $LINKAGES_SIZE"
+
+    - name: Upload as artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: player-data
+        path: |
+          players.tar.gz
+          player_linkages.tar.gz
+        retention-days: 90
+
+    - name: Create GitHub Release
+      run: |
+        RELEASE_TAG="data-$(date +'%Y-%m-%d')"
+        RELEASE_NAME="Player Data - $(date +'%Y-%m-%d')"
+
+        # Create release notes
+        cat > notes.md <<EOF
+        # Player Data Release
+
+        Updated player data for Liney Link puzzle generation.
+
+        **Generated:** $(date +'%Y-%m-%d %H:%M:%S UTC')
+        **Players:** $(find players -name "*.json" | wc -l)
+        **Linkages:** $(find player_linkages -name "*.json" -not -name "summary.json" | wc -l)
+
+        Download and extract:
+        \`\`\`bash
+        gh release download ${RELEASE_TAG} --pattern "*.tar.gz"
+        tar -xzf players.tar.gz
+        tar -xzf player_linkages.tar.gz
+        \`\`\`
+        EOF
+
+        # Delete old release if exists
+        gh release delete latest --yes 2>/dev/null || true
+        gh release delete "${RELEASE_TAG}" --yes 2>/dev/null || true
+
+        # Create new release
+        gh release create "${RELEASE_TAG}" \
+          --title "${RELEASE_NAME}" \
+          --notes-file notes.md \
+          --latest \
+          players.tar.gz \
+          player_linkages.tar.gz
+
+        echo "✅ Created release: ${RELEASE_TAG}"
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

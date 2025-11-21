@@ -1,15 +1,16 @@
 {
   "permissions": {
-    "defaultMode": "acceptEdits",
     "allow": [
       "Bash(curl:*)",
       "Bash(grep:*)",
       "Bash(node:*)",
       "Bash(python3:*)",
       "Bash(cat:*)",
-      "Bash(git merge:*)"
+      "Bash(git merge:*)",
+      "Bash(./setup_data.sh:*)"
     ],
     "deny": [],
-    "ask": []
+    "ask": [],
+    "defaultMode": "acceptEdits"
   }
 }

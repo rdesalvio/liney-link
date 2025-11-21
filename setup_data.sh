@@ -32,13 +32,12 @@ fi
 echo "📥 Downloading player data from latest release..."
 echo ""
 
-# Download from latest release
-if gh release download latest --pattern "*.tar.gz" 2>/dev/null; then
+# Get the latest release tag (the one marked as "Latest")
+LATEST_TAG=$(gh release list --limit 1 --json tagName,isLatest --jq '.[] | select(.isLatest == true) | .tagName' 2>/dev/null)
+
+if [ -z "$LATEST_TAG" ]; then
     echo ""
-    echo "✅ Downloaded successfully"
-else
-    echo ""
-    echo "⚠️  No release found with name 'latest'"
+    echo "⚠️  No releases found marked as 'Latest'"
     echo ""
     echo "Options:"
     echo "1. Run the data update workflow to create a release:"
@@ -48,6 +47,24 @@ else
     echo "   python3 pull_players.py"
     echo "   python3 pull_shifts.py"
     echo "   python3 player_linkages.py"
+    echo ""
+    exit 1
+fi
+
+echo "📦 Found latest release: ${LATEST_TAG}"
+
+# Download from latest release
+if gh release download "${LATEST_TAG}" --pattern "*.tar.gz" 2>/dev/null; then
+    echo ""
+    echo "✅ Downloaded successfully"
+else
+    echo ""
+    echo "⚠️  Failed to download from release '${LATEST_TAG}'"
+    echo ""
+    echo "Please check:"
+    echo "1. The release exists: gh release view ${LATEST_TAG}"
+    echo "2. You have access to the repository"
+    echo "3. The release contains .tar.gz files"
     echo ""
     exit 1
 fi
